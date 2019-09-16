@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "Jogue Limpo",
+    "slug": "JogueLimpo",
+    "privacy": "public",
+    "sdkVersion": "33.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#446D44"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "packagerOpts": {
+      "sourceExts": [ "js", "json", "ts", "tsx", "jsx" ]
+    },
+    "androidStatusBar": {
+      "backgroundColor": "#446D44"
+    }
+  }
+}
