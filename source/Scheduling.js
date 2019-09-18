@@ -46,31 +46,19 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 15
-  },
-  pickerIosListItemContainer: {
-    flex: 1,
-    height: 60,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  pickerIosListItemText: {
-    fontSize: 16,
-  },
-  internalPickerContainer: {
-    flex: Platform.OS === 'ios' ? 1 : null,
-    width: Platform.OS === 'ios' ? undefined : 120,
-  },
+  }
 });
 
-const options = [ "Selecione uma opção", "Lixo irregular", "Descarte de materiais incorreto", "Lâmpadas de mercúrio" ];
-
-export default function Complaints() {
+export default function Scheduling() {
   const navigation = useNavigation();
   const { navigate } = useNavigation();
-  const [ text, setText ] = useState('');
+  const [ name, setName ] = useState('');
+  const [ item, setItem ] = useState('');
+  const [ address, setAddress ] = useState('');
+  const [ district, setDistrict ] = useState('');
   const [ inputError, setInputError ] = useState(false);
-  const [ selected, setSelected ] = useState("0");
 
+  
   return (
     <Container>
       <Header style={styles.anatomy} androidStatusBarColor="#529C52">
@@ -80,53 +68,27 @@ export default function Complaints() {
           </Button>
         </Left>
         <Body>
-          <Title>Denúncias</Title>
+          <Title>Agendamento</Title>
         </Body>
-        <Right>
-          <Button transparent onPress={() => { navigate('ComplaintsHelp') }}>
-            <Icon name='help' />
-          </Button>
-        </Right>
+        <Right />
       </Header>
       <Content padder>
         <View style={styles.container}>
           <Form>
-            <Text style={styles.title}>Dados do Usuário</Text>
+            <Text style={styles.title}>Agende a busca!</Text>
             <Item error={inputError} style={styles.inputs}>
               <Icon active name="person"/>
-              <Input placeholder="Nome"/>
+              <Input placeholder="Nome" value={name} onChangeText={(text) => { setName(text) }} />
             </Item>
-            <Item error={inputError} style={styles.inputs}>
-              <Icon active name="mail"/>
-              <Input placeholder="E-mail"/>
-            </Item>
-            <Text style={styles.title}> Dados da Denúncia</Text>
             <Item error={inputError} style={styles.inputs}>
               <Icon active name="pin"/>
-              <Input placeholder="Endereço e número"/>
+              <Input placeholder="Endereço e número" value={address} onChangeText={(text) => { setAddress(text) }} />
             </Item>
             <Item error={inputError} style={styles.inputs}>
               <Icon active name="map"/>
-              <Input placeholder="Bairro"/>
+              <Input placeholder="Bairro" value={district} onChangeText={(text) => { setDistrict(text) }} />
             </Item>
-            <View style={styles.pickerContainer}>
-              <Icon name="clipboard"/> 
-              <Text style={{ paddingBottom: 1.5, paddingStart: 5 }}> Qual o tipo da denúncia?</Text>
-              <Picker
-                mode="dropdown"
-                iosIcon={<Icon name="arrow-down" />}
-                style={styles.internalPickerContainer}
-                selectedValue={selected}
-                onValueChange={(itemValue, itemIndex) => setSelected(itemValue)}
-                itemStyle={styles.pickerIosListItemContainer}
-                itemTextStyle={styles.pickerIosListItemText}
-              >
-                {options.map((item, index) => {
-                  return (<Picker.Item label={item} value={index} key={index} />) 
-                })}
-              </Picker>
-            </View>
-            <Textarea style={styles.textarea} rowSpan={3} bordered placeholder="Descreva sua denúncia" />
+            <Textarea style={styles.textarea} rowSpan={3} bordered placeholder="Descreva o item" value={item} onChangeText={(text) => { setItem(text) }}/>
           </Form>
         </View>
       </Content>
@@ -134,7 +96,7 @@ export default function Complaints() {
         <FooterTab style={styles.anatomy}>
           <Button full style={styles.button}>
             <Text style={styles.buttonText}>
-              <Icon style={styles.buttonText} name='megaphone' />  Denuncie
+              <Icon style={styles.buttonText} name='calendar' />  Agende agora!
             </Text>
           </Button>
         </FooterTab>

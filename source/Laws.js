@@ -43,7 +43,7 @@ export default function Laws() {
 
   return (
     <Container>
-      <Header hasTabs style={{backgroundColor: '#5cb85c'}} androidStatusBarColor="#5CB85C">
+      <Header hasTabs style={{backgroundColor: '#5cb85c'}} androidStatusBarColor="#529C52">
         <Left>
           <Button transparent onPress={() => { navigation.goBack() }}>
             <Icon name='arrow-back' />

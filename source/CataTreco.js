@@ -45,10 +45,11 @@ const styles = StyleSheet.create({
 
 export default function CataTreco() { 
   const navigation = useNavigation();
+  const { navigate } = useNavigation();
 
   return (
     <Container>
-      <Header style={styles.anatomy} androidStatusBarColor="#5CB85C">
+      <Header style={styles.anatomy} androidStatusBarColor="#529C52">
         <Left>
           <Button transparent onPress={() => { navigation.goBack() }}>
             <Icon name='arrow-back' />
@@ -68,7 +69,7 @@ export default function CataTreco() {
       </Content>
       <Footer>
         <FooterTab style={styles.anatomy}>
-          <Button full style={styles.button}>
+          <Button full style={styles.button} onPress={() => { navigate('Scheduling') }}>
             <Text style={styles.buttonText}>
               <Icon style={styles.buttonText} name='calendar' />   Agendamento
             </Text>

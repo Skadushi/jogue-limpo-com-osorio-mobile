@@ -12,6 +12,7 @@ import Destination from '../Destination';
 import Complaints from '../Complaints';
 import Mural from '../Mural';
 import ComplaintsHelp from '../ComplaintsHelp';
+import Scheduling from '../Scheduling';
 
 const Drawer = createDrawerNavigator(
   {
@@ -21,7 +22,8 @@ const Drawer = createDrawerNavigator(
     Laws: { screen: Laws },
     Destination: { screen: Destination },
     Complaints: { screen: Complaints },
-    Mural: { screen: Mural }
+    Mural: { screen: Mural },
+    Scheduling: { screen: Scheduling }
   },
   {
     initialRouteName: "Home",
@@ -42,7 +44,8 @@ const RootStack = createStackNavigator(
     Destination: { screen: Destination },
     Complaints: { screen: Complaints },
     ComplaintsHelp: { screen: ComplaintsHelp },
-    Mural: { screen: Mural }
+    Mural: { screen: Mural },
+    Scheduling: { screen: Scheduling }
   },
   {
     initialRouteName: "Drawer",

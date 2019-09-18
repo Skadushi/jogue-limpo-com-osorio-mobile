@@ -50,7 +50,7 @@ export default function Home() {
 
   return (
     <Container>
-      <Header style={{backgroundColor: '#5CB85C'}} androidStatusBarColor="#5CB85C">
+      <Header style={{backgroundColor: '#5CB85C'}} androidStatusBarColor="#529C52">
         <Left>
           <Button transparent onPress={() => { navigation.openDrawer() }}>
             <Icon name='menu' />

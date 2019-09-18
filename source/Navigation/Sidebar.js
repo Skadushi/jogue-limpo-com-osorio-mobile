@@ -71,8 +71,9 @@ class SideBar extends React.Component {
           
           <List
             dataArray={datas}
-            renderRow={data =>
+            renderRow={(data, index) =>
               <ListItem
+                key={index}
                 button
                 noBorder
                 onPress={() => this.props.navigation.navigate(data.route)}

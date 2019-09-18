@@ -27,7 +27,7 @@ export default function ComplaintsHelp() {
   
   return (
     <Container>
-      <Header style={{backgroundColor: '#5cb85c'}} androidStatusBarColor='#5CB85C'>
+      <Header style={{backgroundColor: '#5cb85c'}} androidStatusBarColor="#529C52">
         <Left>
           <Button transparent onPress={() => { navigation.pop() }}>
             <Icon name='arrow-back' />

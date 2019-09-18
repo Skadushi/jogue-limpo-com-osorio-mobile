@@ -56,7 +56,7 @@ export default function About() {
   
   return (
     <Container>
-      <Header style={{backgroundColor: '#5CB85C'}} androidStatusBarColor="#5CB85C">
+      <Header style={{backgroundColor: '#5CB85C'}} androidStatusBarColor="#529C52">
         <Left>
           <Button transparent onPress={() => { navigation.goBack() }}>
             <Icon name='arrow-back' />
