@@ -73,7 +73,7 @@ export default function Complaints() {
 
   return (
     <Container>
-      <Header style={styles.anatomy} androidStatusBarColor="#529C52">
+      <Header style={styles.anatomy} androidStatusBarColor='#529C52'>
         <Left>
           <Button transparent onPress={() => { navigation.goBack(); }}>
             <Icon name='arrow-back' />
@@ -93,28 +93,28 @@ export default function Complaints() {
           <Form>
             <Text style={styles.title}>Dados do Usuário</Text>
             <Item error={inputError} style={styles.inputs}>
-              <Icon active name="person"/>
-              <Input placeholder="Nome"/>
+              <Icon active name='person'/>
+              <Input placeholder='Nome'/>
             </Item>
             <Item error={inputError} style={styles.inputs}>
-              <Icon active name="mail"/>
-              <Input placeholder="E-mail"/>
+              <Icon active name='mail'/>
+              <Input placeholder='E-mail'/>
             </Item>
             <Text style={styles.title}> Dados da Denúncia</Text>
             <Item error={inputError} style={styles.inputs}>
-              <Icon active name="pin"/>
-              <Input placeholder="Endereço e número"/>
+              <Icon active name='pin'/>
+              <Input placeholder='Endereço e número'/>
             </Item>
             <Item error={inputError} style={styles.inputs}>
-              <Icon active name="map"/>
-              <Input placeholder="Bairro"/>
+              <Icon active name='map'/>
+              <Input placeholder='Bairro'/>
             </Item>
             <View style={styles.pickerContainer}>
-              <Icon name="clipboard"/> 
+              <Icon name='clipboard'/> 
               <Text style={{ paddingBottom: 1.5, paddingStart: 5 }}> Qual o tipo da denúncia?</Text>
               <Picker
-                mode="dropdown"
-                iosIcon={<Icon name="arrow-down" />}
+                mode='dropdown'
+                iosIcon={<Icon name='arrow-down' />}
                 style={styles.internalPickerContainer}
                 selectedValue={selected}
                 onValueChange={(itemValue, itemIndex) => setSelected(itemValue)}
@@ -126,7 +126,7 @@ export default function Complaints() {
                 })}
               </Picker>
             </View>
-            <Textarea style={styles.textarea} rowSpan={3} bordered placeholder="Descreva sua denúncia" />
+            <Textarea style={styles.textarea} rowSpan={3} bordered placeholder='Descreva sua denúncia' />
           </Form>
         </View>
       </Content>

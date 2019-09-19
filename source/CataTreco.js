@@ -4,14 +4,6 @@ import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Title, H1, Left, Right, Body, Icon, Text } from 'native-base';
 
 const styles = StyleSheet.create({
-  statusBarAndroid: {
-    flex: 1,
-    ...Platform.select({
-      android: {
-          marginTop: StatusBar.currentHeight
-      }
-    })
-  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -49,7 +41,7 @@ export default function CataTreco() {
 
   return (
     <Container>
-      <Header style={styles.anatomy} androidStatusBarColor="#529C52">
+      <Header style={styles.anatomy} androidStatusBarColor='#529C52'>
         <Left>
           <Button transparent onPress={() => { navigation.goBack() }}>
             <Icon name='arrow-back' />

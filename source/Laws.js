@@ -1,12 +1,12 @@
 import React from 'react';
 import { AppLoading } from 'expo';
+import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
 import { Container, Header, Content, Tabs, Tab, ScrollableTab, Button, Title, Left, Right, Body, Icon, Text } from 'native-base';
 
+import City from './LawTabs/City';
 import State from './LawTabs/State';
 import Federal from './LawTabs/Federal';
-import City from './LawTabs/City';
-import { useNavigation } from 'react-navigation-hooks';
 
 const styles = StyleSheet.create({
   statusBarAndroid: {
@@ -43,7 +43,7 @@ export default function Laws() {
 
   return (
     <Container>
-      <Header hasTabs style={{backgroundColor: '#5cb85c'}} androidStatusBarColor="#529C52">
+      <Header hasTabs style={{backgroundColor: '#5cb85c'}} androidStatusBarColor='#529C52'>
         <Left>
           <Button transparent onPress={() => { navigation.goBack() }}>
             <Icon name='arrow-back' />
@@ -55,13 +55,13 @@ export default function Laws() {
         <Right />
       </Header>
       <Tabs tabBarUnderlineStyle={styles.tabs} renderTabBar={() => <ScrollableTab style={styles.tab}/>}>
-        <Tab heading="Municipal" textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
+        <Tab heading='Municipal' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
           <City />
         </Tab>
-        <Tab heading="Estadual" textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
+        <Tab heading='Estadual' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
           <State />
         </Tab>
-        <Tab heading="Federal" textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
+        <Tab heading='Federal' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
           <Federal />
         </Tab>
       </Tabs>

@@ -26,9 +26,9 @@ const Drawer = createDrawerNavigator(
     Scheduling: { screen: Scheduling }
   },
   {
-    initialRouteName: "Home",
+    initialRouteName: 'Home',
     contentOptions: {
-      activeTintColor: "#5CB85C"
+      activeTintColor: '#5CB85C'
     },
     contentComponent: props => <SideBar {...props} />
   }
@@ -48,8 +48,8 @@ const RootStack = createStackNavigator(
     Scheduling: { screen: Scheduling }
   },
   {
-    initialRouteName: "Drawer",
-    headerMode: "none",
+    initialRouteName: 'Drawer',
+    headerMode: 'none',
     navigationOptions: {
      header: null
     },

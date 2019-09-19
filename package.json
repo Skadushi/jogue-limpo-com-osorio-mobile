@@ -13,6 +13,7 @@
     "native-base": "^2.13.8",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
+    "react-hook-form": "^3.23.9",
     "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
     "react-native-image-zoom-viewer": "^2.2.26",
     "react-native-web": "^0.11.4",

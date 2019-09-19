@@ -3,19 +3,11 @@ import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
 import { Container, Header, Content, Tabs, Tab, ScrollableTab, Button, Title, Left, Right, Body, Icon, Text } from 'native-base';
 
-import Transhipment from './DestinationTabs/Transhipment';
-import Electronic from './DestinationTabs/Electronic';
 import Mercury from './DestinationTabs/Mercury';
+import Electronic from './DestinationTabs/Electronic';
+import Transhipment from './DestinationTabs/Transhipment';
 
 const styles = StyleSheet.create({
-  statusBarAndroid: {
-    flex: 1,
-    ...Platform.select({
-      android: {
-          marginTop: StatusBar.currentHeight
-      }
-    })
-  },
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -42,7 +34,7 @@ export default function Destination() {
 
   return (
     <Container>
-      <Header hasTabs style={{backgroundColor: '#5cb85c'}} androidStatusBarColor="#529C52">
+      <Header hasTabs style={{backgroundColor: '#5cb85c'}} androidStatusBarColor='#529C52'>
         <Left>
           <Button transparent onPress={() => { navigation.goBack() }}>
             <Icon name='arrow-back' />
@@ -54,13 +46,13 @@ export default function Destination() {
         <Right />
       </Header>
       <Tabs tabBarUnderlineStyle={styles.tabs} renderTabBar={() => <ScrollableTab style={styles.tab}/>}>
-        <Tab heading="Transbordo" textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
+        <Tab heading='Transbordo' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
           <Transhipment />
         </Tab>
-        <Tab heading="Lixo Eletrônico" textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
+        <Tab heading='Lixo Eletrônico' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
           <Electronic />
         </Tab>
-        <Tab heading="Lâmpadas de Mercúrio" textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
+        <Tab heading='Lâmpadas de Mercúrio' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
           <Mercury />
         </Tab>
       </Tabs>

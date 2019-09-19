@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Content, Accordion, H1, Text } from "native-base";
+import { Content, Accordion, H1, Text } from 'native-base';
 
 const styles = StyleSheet.create({
   container: {

@@ -1,10 +1,10 @@
-import React from "react";
-import { Image, TouchableOpacity } from "react-native";
-import { Content, Text, List, ListItem, Icon, Container, Left, Right, Badge } from "native-base";
-import styles from "./style";
+import React from 'react';
+import { Image, TouchableOpacity } from 'react-native';
+import { Content, Text, List, ListItem, Icon, Container, Left, Right, Badge } from 'native-base';
+import styles from './style';
 
-const drawerCover = require("../../assets/drawerBackground.png");
-const datas = [
+const drawerCover = require('../../assets/drawerBackground.png');
+const buttons = [
   {
     name: "Calendário",
     route: "CataTreco",
@@ -64,13 +64,13 @@ class SideBar extends React.Component {
   render() {
     return (
       <Container>
-        <Content bounces={false} style={{ flex: 1, backgroundColor: "#fff", top: -1 }}>
+        <Content bounces={false} style={{ flex: 1, backgroundColor: '#fff', top: -1 }}>
           <TouchableOpacity activeOpacity={.7} onPress={() => this.props.navigation.navigate('Home')}>
             <Image source={drawerCover} style={styles.drawerCover} />
           </TouchableOpacity>
           
           <List
-            dataArray={datas}
+            dataArray={buttons}
             renderRow={(data, index) =>
               <ListItem
                 key={index}

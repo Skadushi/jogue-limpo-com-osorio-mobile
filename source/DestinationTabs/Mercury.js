@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
 });
 
 const mercuryLaws = [
-  { title: "Lei Federal nº 12305/2010", content: "Lei Federal nº 12305/2010" },
-  { title: "Lei Estadual nº 14528/2014", content: "Lei Estadual nº 14528/2014" },
-  { title: "Diretriz Técnica FEPAM nº 02/2015", content: "Diretriz Técnica FEPAM nº 02/2015" }
+  { title: 'Lei Federal nº 12305/2010', content: 'Lei Federal nº 12305/2010' },
+  { title: 'Lei Estadual nº 14528/2014', content: 'Lei Estadual nº 14528/2014' },
+  { title: 'Diretriz Técnica FEPAM nº 02/2015', content: 'Diretriz Técnica FEPAM nº 02/2015' }
 ];
 
 export default function Mercury() {

@@ -50,7 +50,7 @@ export default function Home() {
 
   return (
     <Container>
-      <Header style={{backgroundColor: '#5CB85C'}} androidStatusBarColor="#529C52">
+      <Header style={{backgroundColor: '#5CB85C'}} androidStatusBarColor='#529C52'>
         <Left>
           <Button transparent onPress={() => { navigation.openDrawer() }}>
             <Icon name='menu' />
@@ -64,7 +64,7 @@ export default function Home() {
       <Container style={styles.containerColumn}>
         <View>
           <TouchableOpacity activeOpacity={.7} style={{ marginBottom: 15 }} onPress={() => { navigate('About') }}>
-            <Image source={require('../assets/logo.png')} style={styles.image} resizeMode="center"/>  
+            <Image source={require('../assets/logo.png')} style={styles.image} resizeMode='center'/>  
           </TouchableOpacity>
           <Button iconLeft success style={styles.button} onPress={() => { navigate('CataTreco') }}>
             <Icon name='cart'/>  
