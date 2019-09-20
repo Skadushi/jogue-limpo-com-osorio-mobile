@@ -7,7 +7,7 @@ const drawerCover = require('../../assets/drawerBackground.png');
 const buttons = [
   {
     name: "Calendário",
-    route: "CataTreco",
+    route: "Calendar",
     icon: "calendar"
   },
   {

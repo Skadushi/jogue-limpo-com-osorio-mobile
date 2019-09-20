@@ -24,7 +24,11 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.osorio.joguelimpo",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.yourcompany.yourappname"
     },
     "packagerOpts": {
       "sourceExts": [ "js", "json", "ts", "tsx", "jsx" ]

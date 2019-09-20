@@ -56,7 +56,6 @@ export default function Scheduling() {
   const [ item, setItem ] = useState('');
   const [ address, setAddress ] = useState('');
   const [ district, setDistrict ] = useState('');
-  const [ inputError, setInputError ] = useState(false);
   const [ done, setDone ] = useState(false);
 
   useEffect(function handleInput(){
@@ -65,14 +64,13 @@ export default function Scheduling() {
         'Enviar com esses dados:',
         name + ' ' + address + ' ' + district + ' ' + item, 
         [
-          {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
           {
             text: 'Cancel',
             onPress: () => {console.log('Cancel Pressed'); setDone(false)},
             style: 'cancel',
           },
           {text: 'OK', onPress: () => {
-            console.log('OK Pressed')
+            console.log('OK Pressed');
             setDone(false);
             setName('');
             setAddress('');
@@ -104,15 +102,15 @@ export default function Scheduling() {
         <View style={styles.container}>
           <Form>
             <Text style={styles.title}>Agende a busca!</Text>
-            <Item error={inputError} style={styles.inputs}>
+            <Item style={styles.inputs}>
               <Icon active name='person'/>
               <Input placeholder='Nome' value={name} onChangeText={(text) => { setName(text) }} />
             </Item>
-            <Item error={inputError} style={styles.inputs}>
+            <Item style={styles.inputs}>
               <Icon active name='pin'/>
               <Input placeholder='Endereço e número' value={address} onChangeText={(text) => { setAddress(text) }} />
             </Item>
-            <Item error={inputError} style={styles.inputs}>
+            <Item style={styles.inputs}>
               <Icon active name='map'/>
               <Input placeholder='Bairro' value={district} onChangeText={(text) => { setDistrict(text) }} />
             </Item>
@@ -124,7 +122,7 @@ export default function Scheduling() {
         <FooterTab style={styles.anatomy}>
           <Button full style={styles.button} onPress={() => {setDone(true)}} >
             <Text style={styles.buttonText}>
-              <Icon style={styles.buttonText} name='calendar' />  Agende agora!
+              <Icon style={styles.buttonText} name='calendar' /> Agende agora!
             </Text>
           </Button>
         </FooterTab>
