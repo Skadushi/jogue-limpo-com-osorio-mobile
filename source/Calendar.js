@@ -86,7 +86,7 @@ export default function Calendar() {
             <List
               dataArray={monthEvents}
               renderRow={(data) =>
-                <ListItem itemDivider key={key++}>
+                <ListItem itemDivider>
                   <View>
                     <H3>{data.title}</H3>
                     <Text>{data.description}</Text>
