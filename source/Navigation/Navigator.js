@@ -14,6 +14,7 @@ import Mural from '../Mural';
 import ComplaintsHelp from '../ComplaintsHelp';
 import Scheduling from '../Scheduling';
 import Calendar from '../Calendar';
+import Gathering from '../Gathering';
 
 const Drawer = createDrawerNavigator(
   {
@@ -26,6 +27,7 @@ const Drawer = createDrawerNavigator(
     Mural: { screen: Mural },
     Scheduling: { screen: Scheduling },
     Calendar: { screen: Calendar },
+    Gathering: { screen: Gathering },
   },
   {
     initialRouteName: 'Home',
@@ -49,6 +51,7 @@ const RootStack = createStackNavigator(
     Mural: { screen: Mural },
     Scheduling: { screen: Scheduling },
     Calendar: { screen: Calendar },
+    Gathering: { screen: Gathering }
   },
   {
     initialRouteName: 'Drawer',

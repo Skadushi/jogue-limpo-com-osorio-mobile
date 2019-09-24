@@ -134,7 +134,7 @@ export default function Complaints() {
         <FooterTab style={styles.anatomy}>
           <Button full style={styles.button}>
             <Text style={styles.buttonText}>
-              <Icon style={styles.buttonText} name='megaphone' />  Denuncie
+              <Icon style={styles.buttonText} name='megaphone' /> Denuncie
             </Text>
           </Button>
         </FooterTab>

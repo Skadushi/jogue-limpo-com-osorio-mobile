@@ -17,7 +17,7 @@ const buttons = [
   },
   {
     name: "Coleta",
-    route: "CataTreco",
+    route: "Gathering",
     icon: "trash"
   },
   {

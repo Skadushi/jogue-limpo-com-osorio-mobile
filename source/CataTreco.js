@@ -63,7 +63,7 @@ export default function CataTreco() {
         <FooterTab style={styles.anatomy}>
           <Button full style={styles.button} onPress={() => { navigate('Scheduling') }}>
             <Text style={styles.buttonText}>
-              <Icon style={styles.buttonText} name='calendar' />   Agendamento
+              <Icon style={styles.buttonText} name='calendar' /> Agendamento
             </Text>
           </Button>
         </FooterTab>

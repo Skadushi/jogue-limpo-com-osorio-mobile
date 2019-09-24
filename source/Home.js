@@ -70,7 +70,7 @@ export default function Home() {
             <Icon name='cart'/>  
             <Text style={styles.buttonText}>Cata-Treco</Text>
           </Button>
-          <Button iconLeft success style={styles.button} onPress={() => { navigate('CataTreco') }}>
+          <Button iconLeft success style={styles.button} onPress={() => { navigate('Gathering') }}>
             <Icon name='trash'/>
             <Text style={styles.buttonText}>Coleta</Text>
           </Button>
