@@ -8,23 +8,24 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "^33.0.0",
-    "expo-font": "~5.0.1",
+    "expo": "^35.0.0",
+    "expo-font": "~7.0.0",
     "native-base": "^2.13.8",
     "react": "16.8.3",
-    "react-dom": "^16.8.6",
-    "react-hook-form": "^3.23.9",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-33.0.0.tar.gz",
+    "react-dom": "16.8.3",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
+    "react-native-gesture-handler": "^1.4.1",
     "react-native-image-zoom-viewer": "^2.2.26",
     "react-native-maps": "^0.25.0",
-    "react-native-web": "^0.11.4",
-    "react-navigation": "^4.0.3",
-    "react-navigation-drawer": "^2.1.2",
+    "react-native-reanimated": "^1.2.0",
+    "react-native-web": "^0.11.7",
+    "react-navigation": "^4.0.10",
+    "react-navigation-drawer": "^2.2.2",
     "react-navigation-hooks": "^1.0.3",
-    "react-navigation-stack": "^1.5.5"
+    "react-navigation-stack": "^1.9.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.1.1"
+    "babel-preset-expo": "^7.0.0"
   },
   "private": true
 }

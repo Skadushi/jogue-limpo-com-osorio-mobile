@@ -70,11 +70,11 @@ export default function Calendar() {
       <Header style={{backgroundColor: '#5cb85c'}} androidStatusBarColor='#529C52'>
         <Left>
           <Button transparent onPress={() => { navigation.goBack() }}>
-            <Icon name='arrow-back' />
+            <Icon name='arrow-back' color='white'/>
           </Button>
         </Left>
         <Body>
-          <Title>Calendário</Title>
+          <Title color='white'>Calendário</Title>
         </Body>
         <Right />
       </Header>

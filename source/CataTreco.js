@@ -44,11 +44,11 @@ export default function CataTreco() {
       <Header style={styles.anatomy} androidStatusBarColor='#529C52'>
         <Left>
           <Button transparent onPress={() => { navigation.goBack() }}>
-            <Icon name='arrow-back' />
+            <Icon name='arrow-back' color='white'/>
           </Button>
         </Left>
         <Body>
-          <Title>Cata-Treco</Title>
+          <Title color='white'>Cata-Treco</Title>
         </Body>
         <Right />
       </Header>
