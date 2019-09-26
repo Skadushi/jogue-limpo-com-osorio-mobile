@@ -9,10 +9,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingTop: 10,
   },
-  texts: {
-    fontSize: 18,
-    marginTop: 20,
-  },
   title: {
     fontSize: 22,
     alignSelf: 'center',
@@ -74,17 +70,20 @@ export default function Complaints() {
   return (
     <Container>
       <Header style={styles.anatomy} androidStatusBarColor='#529C52'>
-        <Left>
-          <Button transparent onPress={() => { navigation.goBack(); }}>
-            <Icon name='arrow-back' />
+        <Left style={{flex: 0}}>
+          <Button transparent onPress={() => { navigation.goBack() }}>
+            <Icon name='arrow-back' style={{color: 'white'}} />
           </Button>
         </Left>
-        <Body>
-          <Title>Denúncias</Title>
+        <Body style={{flex: 1, alignItems: 'center', paddingStart: 30}}>
+          <Title style={{color: 'white'}}>Denúncias</Title>
         </Body>
-        <Right>
+        <Right style={{flex: 0}}>
           <Button transparent onPress={() => { navigate('ComplaintsHelp') }}>
-            <Icon name='help' />
+            <Icon name='help' style={{color: 'white'}} />
+          </Button>
+          <Button transparent onPress={() => { navigation.openDrawer() }}>
+            <Icon name='menu' style={{color: 'white'}} />
           </Button>
         </Right>
       </Header>

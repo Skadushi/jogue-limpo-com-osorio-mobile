@@ -8,11 +8,6 @@ import Electronic from './DestinationTabs/Electronic';
 import Transhipment from './DestinationTabs/Transhipment';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   tab: {
     backgroundColor: '#5CB85C',
   },
@@ -22,7 +17,8 @@ const styles = StyleSheet.create({
   },
   tabs: {
     borderBottomWidth: 2,
-    borderBottomColor: '#5CB85C'
+    borderBottomColor: '#5CB85C',
+    backgroundColor: 'white',
   },
   tabsText: {
       color: 'white'
@@ -35,15 +31,19 @@ export default function Destination() {
   return (
     <Container>
       <Header hasTabs style={{backgroundColor: '#5cb85c'}} androidStatusBarColor='#529C52'>
-        <Left>
+        <Left style={{flex: 0}}>
           <Button transparent onPress={() => { navigation.goBack() }}>
-            <Icon name='arrow-back' />
+            <Icon name='arrow-back' style={{color: 'white'}} />
           </Button>
         </Left>
-        <Body>
-          <Title>Destinação de Resíduos</Title>
+        <Body style={{flex: 1, alignItems: 'center'}}>
+          <Title style={{color: 'white'}}>Destinação de Resíduos</Title>
         </Body>
-        <Right />
+        <Right style={{flex: 0}}>
+          <Button transparent onPress={() => { navigation.openDrawer() }}>
+            <Icon name='menu' style={{color: 'white'}} />
+          </Button>
+        </Right>
       </Header>
       <Tabs tabBarUnderlineStyle={styles.tabs} renderTabBar={() => <ScrollableTab style={styles.tab}/>}>
         <Tab heading='Transbordo' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>

@@ -9,19 +9,6 @@ import State from './LawTabs/State';
 import Federal from './LawTabs/Federal';
 
 const styles = StyleSheet.create({
-  statusBarAndroid: {
-    flex: 1,
-    ...Platform.select({
-      android: {
-          marginTop: StatusBar.currentHeight
-      }
-    })
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   tab: {
     backgroundColor: '#5CB85C',
   },
@@ -31,7 +18,8 @@ const styles = StyleSheet.create({
   },
   tabs: {
     borderBottomWidth: 2,
-    borderBottomColor: '#5CB85C'
+    borderBottomColor: '#5CB85C',
+    backgroundColor: 'white',
   },
   tabsText: {
       color: 'white'
@@ -44,15 +32,19 @@ export default function Laws() {
   return (
     <Container>
       <Header hasTabs style={{backgroundColor: '#5cb85c'}} androidStatusBarColor='#529C52'>
-        <Left>
+        <Left style={{flex: 0}}>
           <Button transparent onPress={() => { navigation.goBack() }}>
-            <Icon name='arrow-back' />
+            <Icon name='arrow-back' style={{color: 'white'}} />
           </Button>
         </Left>
-        <Body>
-          <Title>Leis</Title>
+        <Body style={{flex: 1, alignItems: 'center'}}>
+          <Title style={{color: 'white'}}>Leis</Title>
         </Body>
-        <Right />
+        <Right style={{flex: 0}}>
+          <Button transparent onPress={() => { navigation.openDrawer() }}>
+            <Icon name='menu' style={{color: 'white'}} />
+          </Button>
+        </Right>
       </Header>
       <Tabs tabBarUnderlineStyle={styles.tabs} renderTabBar={() => <ScrollableTab style={styles.tab}/>}>
         <Tab heading='Municipal' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>

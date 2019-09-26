@@ -11,20 +11,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 15,
   },
-  title: {
-    margin: 10,
-  },
-  photoContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 15,
-  },
-  texts: {
-    fontSize: 18,
-    marginTop: 20,
-  },
   button: {
     width: 300,
     height: 40,
@@ -57,15 +43,20 @@ export default function About() {
   return (
     <Container>
       <Header style={{backgroundColor: '#5CB85C'}} androidStatusBarColor='#529C52'>
-        <Left>
+        
+      <Left style={{flex: 0}}>
           <Button transparent onPress={() => { navigation.goBack() }}>
-            <Icon name='arrow-back' />
+            <Icon name='arrow-back' style={{color: 'white'}} />
           </Button>
         </Left>
-        <Body>
-          <Title>Mural de fotos</Title>
+        <Body style={{flex: 1, alignItems: 'center'}}>
+          <Title style={{color: 'white'}}>Mural de Fotos</Title>
         </Body>
-        <Right />
+        <Right style={{flex: 0}}>
+          <Button transparent onPress={() => { navigation.openDrawer() }}>
+            <Icon name='menu' style={{color: 'white'}} />
+          </Button>
+        </Right>
       </Header>
       <Content>
         <View style={styles.container}>

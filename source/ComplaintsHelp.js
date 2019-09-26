@@ -28,15 +28,15 @@ export default function ComplaintsHelp() {
   return (
     <Container>
       <Header style={{backgroundColor: '#5cb85c'}} androidStatusBarColor='#529C52'>
-        <Left>
+        <Left style={{flex: 0}}>
           <Button transparent onPress={() => { navigation.pop() }}>
-            <Icon name='arrow-back' />
+            <Icon name='arrow-back' style={{color: 'white'}} />
           </Button>
         </Left>
-        <Body>
-          <Title>Ajuda</Title>
+        <Body style={{flex: 1, alignItems: 'center', paddingEnd: 30}}>
+          <Title style={{color: 'white'}}>Ajuda</Title>
         </Body>
-        <Right />
+        <Right style={{flex: 0}} />
       </Header>
       <Content>
         <View style={styles.container}>

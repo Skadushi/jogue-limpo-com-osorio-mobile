@@ -28,11 +28,6 @@ const styles = StyleSheet.create({
     margin: 3,
     fontSize: 16
   },
-  icon: {
-    color: 'white',
-    margin: 3,
-    fontSize: 16
-  }
 });
 
 export default function CataTreco() { 
@@ -42,15 +37,19 @@ export default function CataTreco() {
   return (
     <Container>
       <Header style={styles.anatomy} androidStatusBarColor='#529C52'>
-        <Left>
+        <Left style={{flex: 0}}>
           <Button transparent onPress={() => { navigation.goBack() }}>
-            <Icon name='arrow-back' color='white'/>
+            <Icon name='arrow-back' style={{color: 'white'}} />
           </Button>
         </Left>
-        <Body>
-          <Title color='white'>Cata-Treco</Title>
+        <Body style={{flex: 1, alignItems: 'center'}}>
+          <Title style={{color: 'white'}}>Cata-Treco</Title>
         </Body>
-        <Right />
+        <Right style={{flex: 0}}>
+          <Button transparent onPress={() => { navigation.openDrawer() }}>
+            <Icon name='menu' style={{color: 'white'}} />
+          </Button>
+        </Right>
       </Header>
       <Content>
         <View style={styles.container}>

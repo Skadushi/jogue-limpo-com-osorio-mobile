@@ -17,19 +17,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#5CB85C',
     padding: 0,
   },
-  image: {
-    width: 90,
-    height: 90,
-    alignSelf: 'center',
-    margin: 10,
-  },
-  photoContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 15,
-  },
   button: {
     backgroundColor: '#5CB85C',
     padding: 0
@@ -37,10 +24,6 @@ const styles = StyleSheet.create({
   buttonActive: {
     color: 'white',
     fontSize: 16
-  },
-  buttonInactive: {
-    color: 'white',
-    fontSize: 13
   },
   title: {
     margin: 15,
@@ -68,15 +51,19 @@ export default function Calendar() {
   return (
     <Container>
       <Header style={{backgroundColor: '#5cb85c'}} androidStatusBarColor='#529C52'>
-        <Left>
+        <Left style={{flex: 0}}>
           <Button transparent onPress={() => { navigation.goBack() }}>
-            <Icon name='arrow-back' color='white'/>
+            <Icon name='arrow-back' style={{color: 'white'}} />
           </Button>
         </Left>
-        <Body>
-          <Title color='white'>Calendário</Title>
+        <Body style={{flex: 1, alignItems: 'center'}}>
+          <Title style={{color: 'white'}}>Calendário</Title>
         </Body>
-        <Right />
+        <Right style={{flex: 0}}>
+          <Button transparent onPress={() => { navigation.openDrawer() }}>
+            <Icon name='menu' style={{color: 'white'}} />
+          </Button>
+        </Right>
       </Header>
       <Content>
         <View style={styles.container}>

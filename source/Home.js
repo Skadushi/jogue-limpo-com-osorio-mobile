@@ -4,19 +4,6 @@ import { StyleSheet, View, TouchableOpacity, Image, Platform, StatusBar } from '
 import { Container, Header, Title, Content, Button, Left, Right, Body, Icon, Text } from 'native-base';
 
 const styles = StyleSheet.create({
-  statusBarAndroid: {
-    flex: 1,
-    ...Platform.select({
-      android: {
-          marginTop: StatusBar.currentHeight
-      }
-    })
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
   containerColumn: {
     flex: 1,
     flexDirection: 'column',
@@ -51,15 +38,19 @@ export default function Home() {
   return (
     <Container>
       <Header style={{backgroundColor: '#5CB85C'}} androidStatusBarColor='#529C52'>
-        <Left>
+        <Left style={{flex: 0}}>
           <Button transparent onPress={() => { navigation.openDrawer() }}>
             <Icon name='menu' />
           </Button>
         </Left>
-        <Body>
+        <Body style={{flex: 1, alignItems: 'center'}}>
           <Title>Jogue Limpo</Title>
         </Body>
-        <Right />
+        <Right style={{flex: 0}}>
+          <Button transparent onPress={() => { navigation.openDrawer() }}>
+            <Icon name='planet' style={{color: '#5CB84C'}}/>
+          </Button>
+        </Right>
       </Header>
       <Container style={styles.containerColumn}>
         <View>

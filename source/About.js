@@ -34,16 +34,20 @@ export default function About() {
   
   return (
     <Container>
-      <Header style={{backgroundColor: '#5cb85c'}} androidStatusBarColor='#529C52'>
-        <Left>
+      <Header style={{backgroundColor: '#5CB85C'}} androidStatusBarColor='#529C52'>
+        <Left style={{flex: 0}}>
           <Button transparent onPress={() => { navigation.goBack() }}>
-            <Icon name='arrow-back' color='white' />
+            <Icon name='arrow-back' style={{color: 'white'}} />
           </Button>
         </Left>
-        <Body>
-          <Title color='white'>Sobre o Programa</Title>
+        <Body style={{flex: 1, alignItems: 'center'}}>
+          <Title style={{color: 'white'}}>Sobre o Programa</Title>
         </Body>
-        <Right />
+        <Right style={{flex: 0}}>
+          <Button transparent onPress={() => { navigation.openDrawer() }}>
+            <Icon name='menu' style={{color: 'white'}} />
+          </Button>
+        </Right>
       </Header>
       <Content>
         <View style={styles.container}>

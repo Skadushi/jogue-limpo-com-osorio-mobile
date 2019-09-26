@@ -9,10 +9,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingTop: 10,
   },
-  texts: {
-    fontSize: 18,
-    marginTop: 20,
-  },
   title: {
     fontSize: 22,
     alignSelf: 'center',
@@ -40,13 +36,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 5,
   },
-  pickerContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 15
-  }
 });
 
 export default function Scheduling() {
@@ -88,15 +77,19 @@ export default function Scheduling() {
   return (
     <Container>
       <Header style={styles.anatomy} androidStatusBarColor='#529C52'>
-        <Left>
-          <Button transparent onPress={() => { navigation.goBack(); }}>
-            <Icon name='arrow-back' />
+        <Left style={{flex: 0}}>
+          <Button transparent onPress={() => { navigation.goBack() }}>
+            <Icon name='arrow-back' style={{color: 'white'}} />
           </Button>
         </Left>
-        <Body>
-          <Title>Agendamento</Title>
+        <Body style={{flex: 1, alignItems: 'center'}}>
+          <Title style={{color: 'white'}}>Agentamento</Title>
         </Body>
-        <Right />
+        <Right style={{flex: 0}}>
+          <Button transparent onPress={() => { navigation.openDrawer() }}>
+            <Icon name='menu' style={{color: 'white'}} />
+          </Button>
+        </Right>
       </Header>
       <Content padder>
         <View style={styles.container}>
