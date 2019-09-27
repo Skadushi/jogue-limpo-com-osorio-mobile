@@ -1,5 +1,7 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import { Content, Accordion } from 'native-base';
+import styles from '../styles';
 
 const stateLaws = [
   { title: 'Código Florestal - RS', content: 'Lei Estadual nº 9519/2000 – Dispõe sobre o Código Florestal do Estado do Rio Grande do Sul' },
@@ -8,8 +10,8 @@ const stateLaws = [
 
 export default function State() {
   return (
-    <Content padder style={{ marginTop: 0 }}>
-      <Accordion dataArray={stateLaws} />
+    <Content padder style={styles.accordionContainer}>
+      <Accordion dataArray={stateLaws} headerStyle={styles.accordionHeader} contentStyle={styles.accordionContent}/>
     </Content>
     );
 }

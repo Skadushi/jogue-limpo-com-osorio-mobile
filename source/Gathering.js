@@ -2,38 +2,10 @@ import React from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
 import { Container, Header, Content, Tabs, Tab, ScrollableTab, Footer, FooterTab, Button, Title, Left, Right, Body, Icon, Text } from 'native-base';
+import styles from './styles';
 
-const styles = StyleSheet.create({
-  tab: {
-    backgroundColor: '#5CB85C',
-  },
-  activeTab: {
-    backgroundColor: '#5CB85C',
-    fontStyle: 'italic',
-  },
-  tabs: {
-    borderBottomWidth: 2,
-    borderBottomColor: '#5CB85C',
-    backgroundColor: 'white',
-  },
-  tabsText: {
-      color: 'white'
-  },
-  anatomy: {
-    margin: 0,
-    backgroundColor: '#5CB85C',
-    padding: 0,
-  },
-  button: {
-    backgroundColor: '#5CB85C',
-    padding: 0
-  },
-  buttonText: {
-    color: 'white',
-    margin: 3,
-    fontSize: 16
-  },
-});
+import Selective from './GatheringTabs/Selective';
+import Organic from './GatheringTabs/Organic';
 
 export default function Gathering() {
   const navigation = useNavigation();
@@ -41,32 +13,34 @@ export default function Gathering() {
 
   return (
     <Container>
-      <Header hasTabs style={{backgroundColor: '#5cb85c'}} androidStatusBarColor='#529C52'>
-        <Left style={{flex: 0}}>
+      <Header hasTabs style={styles.anatomy} androidStatusBarColor='#529C52'>
+        <Left style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.goBack() }}>
-            <Icon name='arrow-back' style={{color: 'white'}} />
+            <Icon name='arrow-back' style={styles.whiteButtons} />
           </Button>
         </Left>
-        <Body style={{flex: 1, alignItems: 'center'}}>
-          <Title style={{color: 'white'}}>Coleta de Lixo</Title>
+        <Body style={styles.headerBody}>
+          <Title style={styles.whiteButtons}>Coleta de Lixo</Title>
         </Body>
-        <Right style={{flex: 0}}>
+        <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.openDrawer() }}>
-            <Icon name='menu' style={{color: 'white'}} />
+            <Icon name='menu' style={styles.whiteButtons} />
           </Button>
         </Right>
       </Header>
       <Tabs tabBarUnderlineStyle={styles.tabs} renderTabBar={() => <ScrollableTab style={styles.tab}/>}>
         <Tab heading='Orgânica' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
+          <Organic />
         </Tab>
         <Tab heading='Seletiva' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
+          <Selective />
         </Tab>
       </Tabs>
       <Footer>
-      <FooterTab style={styles.anatomy}>
-          <Button full style={styles.button} onPress={() => { navigate('Scheduling') }}>
-            <Text style={styles.buttonText}>
-              <Icon style={styles.buttonText} name='trash' /> Onde os caminhões estão?
+        <FooterTab style={styles.anatomy}>
+          <Button full style={styles.footerButton} onPress={() => { navigate('Scheduling') }}>
+            <Text style={styles.footerButtonText}>
+              <Icon style={styles.footerButtonText} name='navigate' /> Caminhões
             </Text>
           </Button>
         </FooterTab>

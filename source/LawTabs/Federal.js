@@ -1,5 +1,7 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import { Content, Accordion } from 'native-base';
+import styles from '../styles';
 
 const federalLaws = [
   { title: 'Novo Código Florestal Brasileiro', content: 'Lei Federal nº 12651/2012 – Dispõe sobre o Novo Código Florestal Brasileiro' },
@@ -12,8 +14,8 @@ const federalLaws = [
 
 export default function Federal(){
   return (
-    <Content padder style={{ marginTop: 0 }}>
-      <Accordion dataArray={federalLaws} />
+    <Content padder style={styles.accordionContainer}>
+      <Accordion dataArray={federalLaws} headerStyle={styles.accordionHeader} contentStyle={styles.accordionContent}/>
     </Content>
   );
 }

@@ -1,62 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem } from 'native-base';
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingTop: 10,
-  },
-  title: {
-    fontSize: 22,
-    alignSelf: 'center',
-    marginTop: 5,
-  },
-  anatomy: {
-    margin: 0,
-    backgroundColor: '#5CB85C',
-    padding: 0,
-  },
-  button: {
-    backgroundColor: '#5CB85C',
-    padding: 0
-  },
-  buttonText: {
-    color: 'white',
-    margin: 3,
-    fontSize: 16
-  },
-  textarea: {
-    marginTop: 10,
-    marginStart: 15
-  },
-  inputs: {
-    marginTop: 5,
-    marginBottom: 5,
-  },
-  pickerContainer: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 15
-  },
-  pickerIosListItemContainer: {
-    flex: 1,
-    height: 60,
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  pickerIosListItemText: {
-    fontSize: 16,
-  },
-  internalPickerContainer: {
-    flex: Platform.OS === 'ios' ? 1 : null,
-    width: Platform.OS === 'ios' ? undefined : 120,
-  },
-});
+import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H1, H2 } from 'native-base';
+import styles from './styles';
 
 const options = [ "Selecione uma opção", "Lixo irregular", "Descarte de materiais incorreto", "Lâmpadas de mercúrio" ];
 
@@ -70,27 +16,27 @@ export default function Complaints() {
   return (
     <Container>
       <Header style={styles.anatomy} androidStatusBarColor='#529C52'>
-        <Left style={{flex: 0}}>
+        <Left style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.goBack() }}>
-            <Icon name='arrow-back' style={{color: 'white'}} />
+            <Icon name='arrow-back' style={styles.whiteButtons} />
           </Button>
         </Left>
         <Body style={{flex: 1, alignItems: 'center', paddingStart: 30}}>
-          <Title style={{color: 'white'}}>Denúncias</Title>
+          <Title style={styles.whiteButtons}>Denúncias</Title>
         </Body>
-        <Right style={{flex: 0}}>
+        <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigate('ComplaintsHelp') }}>
-            <Icon name='help' style={{color: 'white'}} />
+            <Icon name='help' style={styles.whiteButtons} />
           </Button>
           <Button transparent onPress={() => { navigation.openDrawer() }}>
-            <Icon name='menu' style={{color: 'white'}} />
+            <Icon name='menu' style={styles.whiteButtons} />
           </Button>
         </Right>
       </Header>
-      <Content padder>
-        <View style={styles.container}>
+      <Content padder style={styles.content}>
+        <View style={{padding: 10}}>
           <Form>
-            <Text style={styles.title}>Dados do Usuário</Text>
+            <H2 style={styles.title}>Dados do Usuário</H2>
             <Item error={inputError} style={styles.inputs}>
               <Icon active name='person'/>
               <Input placeholder='Nome'/>
@@ -99,7 +45,7 @@ export default function Complaints() {
               <Icon active name='mail'/>
               <Input placeholder='E-mail'/>
             </Item>
-            <Text style={styles.title}> Dados da Denúncia</Text>
+            <H2 style={styles.title}>Dados da Denúncia</H2>
             <Item error={inputError} style={styles.inputs}>
               <Icon active name='pin'/>
               <Input placeholder='Endereço e número'/>
@@ -131,9 +77,9 @@ export default function Complaints() {
       </Content>
       <Footer>
         <FooterTab style={styles.anatomy}>
-          <Button full style={styles.button}>
-            <Text style={styles.buttonText}>
-              <Icon style={styles.buttonText} name='megaphone' /> Denuncie
+          <Button full style={styles.footerButton}>
+            <Text style={styles.footerButtonText}>
+              <Icon style={styles.footerButtonText} name='megaphone' /> Denuncie
             </Text>
           </Button>
         </FooterTab>

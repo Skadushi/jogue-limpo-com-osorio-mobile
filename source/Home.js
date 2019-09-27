@@ -2,34 +2,7 @@ import React from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, TouchableOpacity, Image, Platform, StatusBar } from 'react-native';
 import { Container, Header, Title, Content, Button, Left, Right, Body, Icon, Text } from 'native-base';
-
-const styles = StyleSheet.create({
-  containerColumn: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#446D44'
-  },
-  button: {
-    width: 300,
-    height: 40,
-    margin: 15,
-    alignSelf: 'center'
-  },
-  image: {
-    width: 300,
-    height: 220,
-    alignSelf: 'center'
-  },
-  buttonText: {
-    fontSize: 28,
-    width: 330,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-});
+import styles from './styles';
 
 export default function Home() { 
   const { navigate } = useNavigation();
@@ -37,41 +10,41 @@ export default function Home() {
 
   return (
     <Container>
-      <Header style={{backgroundColor: '#5CB85C'}} androidStatusBarColor='#529C52'>
-        <Left style={{flex: 0}}>
+      <Header style={{backgroundColor: '#1d814c'}} androidStatusBarColor='#2d914c'>
+        <Left style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.openDrawer() }}>
-            <Icon name='menu' />
+            <Icon name='menu' style={styles.whiteButtons} />
           </Button>
         </Left>
-        <Body style={{flex: 1, alignItems: 'center'}}>
-          <Title>Jogue Limpo</Title>
+        <Body style={styles.headerBody}>
+          <Title style={styles.whiteButtons}>Jogue Limpo</Title>
         </Body>
-        <Right style={{flex: 0}}>
+        <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.openDrawer() }}>
-            <Icon name='planet' style={{color: '#5CB84C'}}/>
+            <Icon name='planet' style={{color: '#1d844c'}}/>
           </Button>
         </Right>
       </Header>
-      <Container style={styles.containerColumn}>
+      <Container style={styles.homeContainer}>
         <View>
           <TouchableOpacity activeOpacity={.7} style={{ marginBottom: 15 }} onPress={() => { navigate('About') }}>
-            <Image source={require('../assets/logo.png')} style={styles.image} resizeMode='center'/>  
+            <Image source={require('../assets/logo.png')} style={styles.homeImageButton} resizeMode='center'/>  
           </TouchableOpacity>
-          <Button iconLeft success style={styles.button} onPress={() => { navigate('CataTreco') }}>
+          <Button iconLeft style={styles.largeButton} onPress={() => { navigate('CataTreco') }}>
             <Icon name='cart'/>  
-            <Text style={styles.buttonText}>Cata-Treco</Text>
+            <Text style={styles.homeButtonsText}>CATA-TRECO</Text>
           </Button>
-          <Button iconLeft success style={styles.button} onPress={() => { navigate('Gathering') }}>
+          <Button iconLeft style={styles.largeButton} onPress={() => { navigate('Gathering') }}>
             <Icon name='trash'/>
-            <Text style={styles.buttonText}>Coleta</Text>
+            <Text style={styles.homeButtonsText}>COLETA</Text>
           </Button>
-          <Button iconLeft success style={styles.button} onPress={() => { navigate('Complaints') }}>
+          <Button iconLeft style={styles.largeButton} onPress={() => { navigate('Complaints') }}>
             <Icon name='megaphone'/> 
-            <Text style={styles.buttonText}>Denúncias</Text> 
+            <Text style={styles.homeButtonsText}>DENÚNCIAS</Text> 
           </Button> 
-          <Button iconLeft success style={styles.button} onPress={() => { navigate('Mural') }}>
+          <Button iconLeft style={styles.largeButton} onPress={() => { navigate('Mural') }}>
             <Icon name='images'/>
-            <Text style={styles.buttonText}>Mural</Text>
+            <Text style={styles.homeButtonsText}>MURAL</Text>
           </Button>
         </View>
       </Container>

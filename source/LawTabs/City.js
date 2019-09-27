@@ -1,5 +1,7 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import { Content, Accordion } from 'native-base';
+import styles from '../styles';
 
 const cityLaws = [
   { title: 'Licenciamento Ambiental', content: 'Lei Municipal nº5416/2014 – Institui o Licenciamento Ambiental Municipal' },
@@ -16,8 +18,8 @@ const cityLaws = [
 
 export default function City() {
   return (
-    <Content padder style={{ marginTop: 0 }}>
-      <Accordion dataArray={cityLaws} />
+    <Content padder style={styles.accordionContainer}>
+      <Accordion dataArray={cityLaws} headerStyle={styles.accordionHeader} contentStyle={styles.accordionContent}/>
     </Content>
   );
 }

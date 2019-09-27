@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 import { Content, Text, List, ListItem, Icon, Container, Left, Right, Badge } from 'native-base';
-import styles from './style';
+import style from './style';
 
 const drawerCover = require('../../assets/drawerBackground.png');
 const buttons = [
@@ -44,12 +44,7 @@ const buttons = [
     name: "Sobre o Programa",
     route: "About",
     icon: "information-circle"
-  },
-  // {
-  //   name: "Sobre o Aplicativo",
-  //   route: "About",
-  //   icon: "flame"
-  // }
+  }
 ];
 
 class SideBar extends React.Component {
@@ -63,10 +58,10 @@ class SideBar extends React.Component {
 
   render() {
     return (
-      <Container>
-        <Content bounces={false} style={{ flex: 1, backgroundColor: '#fff', top: -1 }}>
+      <Container style={style.content}>
+        <Content bounces={false} style={{ flex: 1, top: -1 }}>
           <TouchableOpacity activeOpacity={.7} onPress={() => this.props.navigation.navigate('Home')}>
-            <Image source={drawerCover} style={styles.drawerCover} />
+            <Image source={drawerCover} style={style.drawerCover} />
           </TouchableOpacity>
           
           <List
@@ -82,9 +77,9 @@ class SideBar extends React.Component {
                   <Icon
                     active
                     name={data.icon}
-                    style={styles.icon}
+                    style={style.icon}
                   />
-                  <Text style={styles.text}>
+                  <Text style={style.text}>
                     {data.name}
                   </Text>
                 </Left>
