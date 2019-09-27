@@ -20,7 +20,7 @@ export default function Home() {
           <Title style={styles.whiteButtons}>Jogue Limpo</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
-          <Button transparent onPress={() => { navigation.openDrawer() }}>
+          <Button transparent onPress={() => { navigate('Developers') }}>
             <Icon name='planet' style={{color: '#1d844c'}}/>
           </Button>
         </Right>

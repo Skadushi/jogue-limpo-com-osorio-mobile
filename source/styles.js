@@ -1,9 +1,13 @@
 import React from 'react';
 import { StyleSheet, Platform } from 'react-native';
 
+const mainColor = '#1d814c';
+const secondaryColor = '#eaffe3';
+const accentColor = '#dffad6';
+
 export default styles = StyleSheet.create({
   content: {
-    backgroundColor: '#dffad6'
+    backgroundColor: secondaryColor
   },
   container: {
     flex: 1,
@@ -29,18 +33,18 @@ export default styles = StyleSheet.create({
   },
   anatomy: {
     margin: 0,
-    backgroundColor: '#1d814c',
+    backgroundColor: mainColor,
     padding: 0,
   },
   largeButton: {
     width: 300,
     height: 40,
     margin: 15,
-    backgroundColor: '#1d814c',
+    backgroundColor: mainColor,
     alignSelf: 'center'
   },
   footerButton: {
-    backgroundColor: '#1d814c',
+    backgroundColor: mainColor,
     padding: 0
   },
   h3s: {
@@ -94,7 +98,7 @@ export default styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#eaffe3'
+    backgroundColor: accentColor
   },
   footerButtonText: {
     color: 'white',
@@ -109,7 +113,7 @@ export default styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 15
+    padding: 15,
   },
   pickerIosListItemContainer: {
     flex: 1,
@@ -126,22 +130,25 @@ export default styles = StyleSheet.create({
   },
   textarea: {
     marginTop: 10,
-    marginStart: 15
+    marginStart: 15,
+    fontSize: 18,
+    borderColor: mainColor
   },
   inputs: {
     marginTop: 5,
     marginBottom: 5,
+    borderColor: mainColor
   },
   tab: {
-    backgroundColor: '#1d814c',
+    backgroundColor: mainColor,
   },
   activeTab: {
-    backgroundColor: '#1d814c',
+    backgroundColor: mainColor,
     fontStyle: 'italic',
   },
   tabs: {
     borderBottomWidth: 2,
-    borderBottomColor: '#1d814c',
+    borderBottomColor: mainColor,
     backgroundColor: 'white',
   },
   tabsText: {
@@ -153,10 +160,10 @@ export default styles = StyleSheet.create({
   },
   accordionContent: {
     textAlign: 'justify',
-    backgroundColor: '#dffad6'
+    backgroundColor: secondaryColor
   },
   accordionContainer: {
     marginTop: 0, 
-    backgroundColor: '#dffad6'
+    backgroundColor: secondaryColor
   }
 });

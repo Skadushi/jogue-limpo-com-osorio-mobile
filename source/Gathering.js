@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigation } from 'react-navigation-hooks';
-import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
+import { StyleSheet, View, Image, Platform, StatusBar, Alert } from 'react-native';
 import { Container, Header, Content, Tabs, Tab, ScrollableTab, Footer, FooterTab, Button, Title, Left, Right, Body, Icon, Text } from 'native-base';
 import styles from './styles';
 
@@ -38,7 +38,7 @@ export default function Gathering() {
       </Tabs>
       <Footer>
         <FooterTab style={styles.anatomy}>
-          <Button full style={styles.footerButton} onPress={() => { navigate('Scheduling') }}>
+          <Button full style={styles.footerButton} onPress={() => { Alert.alert('Localização', 'Aqui irá a localização dos caminhões', [ { text: 'Ok' } ]) }}>
             <Text style={styles.footerButtonText}>
               <Icon style={styles.footerButtonText} name='navigate' /> Caminhões
             </Text>

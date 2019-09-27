@@ -6,7 +6,7 @@ const deviceWidth = Dimensions.get('window').width;
 
 export default {
   content: {
-    backgroundColor: '#dffad6'
+    backgroundColor: '#eaffe3'
   },
   drawerCover: {
     alignSelf: 'stretch',
