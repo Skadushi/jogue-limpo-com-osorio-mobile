@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import * as Permissions from 'expo-permissions';
 import * as IntentLauncher from 'expo-intent-launcher';
-import { StyleSheet, View, Platform, StatusBar, Linking, Alert } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { StyleSheet, View, Platform, StatusBar, Linking, Alert, Image } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H1, H2 } from 'native-base';
 import styles from './styles';
 
@@ -15,6 +16,7 @@ export default function Complaints() {
   const [ inputError, setInputError ] = useState(false);
   const [ selected, setSelected ] = useState("0");
   const [ permission, setPermission ] = useState("undetermined");
+  const [ image, addImages ] = useState("");
 
   async function getPermission(){
     const status = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -33,9 +35,22 @@ export default function Complaints() {
     // }
   }
 
+  async function pickImages(){
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      addImages(result.uri);
+    }
+  }
+
   useEffect(() => {
     getPermission();
-
     console.log(permission);
   }, []);
 
@@ -124,11 +139,15 @@ export default function Complaints() {
                     <Icon name='aperture' style={styles.greenButtons} />
                   </Button>
                   <Button transparent >
-                    <Icon name='images' style={styles.greenButtons} onPress={getPermission}/>
+                    <Icon name='images' style={styles.greenButtons} onPress={pickImages}/>
                   </Button>
                 </Right>
             </ListItem>
-            <View>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+              {image ?
+                <Image source={{ uri: image }} style={{ width: 80, height: 120 }} /> 
+                : null 
+              }
             </View>
           </Form>
         </View>

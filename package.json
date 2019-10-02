@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "expo": "^35.0.0",
+    "expo-camera": "~7.0.0",
     "expo-font": "~7.0.0",
+    "expo-image-picker": "~7.0.0",
     "expo-intent-launcher": "~7.0.0",
     "native-base": "^2.13.8",
     "react": "16.8.3",
@@ -17,7 +19,7 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-image-zoom-viewer": "^2.2.26",
-    "react-native-maps": "^0.25.0",
+    "react-native-maps": "~0.25.0",
     "react-native-reanimated": "^1.2.0",
     "react-native-web": "^0.11.7",
     "react-navigation": "^4.0.10",
