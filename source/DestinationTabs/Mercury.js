@@ -19,7 +19,7 @@ export default function Mercury() {
         <Text style={styles.generalTexts}>Legislação que define a Logística Reversa de Lâmpadas de Mercúrio:</Text>
       </View>
       <Content padder style={{ marginTop: 5}}>
-        <Accordion dataArray={mercuryLaws} headerStyle={styles.accordionHeader} contentStyle={styles.accordionContent} />
+        <Accordion style={styles.accordionComponent} dataArray={mercuryLaws} headerStyle={styles.accordionHeader} contentStyle={styles.accordionContent} />
       </Content>
     </Content>
   );

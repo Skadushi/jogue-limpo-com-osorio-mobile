@@ -19,7 +19,7 @@ const cityLaws = [
 export default function City() {
   return (
     <Content padder style={styles.accordionContainer}>
-      <Accordion dataArray={cityLaws} headerStyle={styles.accordionHeader} contentStyle={styles.accordionContent}/>
+      <Accordion style={styles.accordionComponent} dataArray={cityLaws} headerStyle={styles.accordionHeader} contentStyle={styles.accordionContent}/>
     </Content>
   );
 }

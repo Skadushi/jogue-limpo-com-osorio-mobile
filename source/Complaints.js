@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
-import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
+import * as Permissions from 'expo-permissions';
+import * as IntentLauncher from 'expo-intent-launcher';
+import { StyleSheet, View, Platform, StatusBar, Linking, Alert } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H1, H2 } from 'native-base';
 import styles from './styles';
 
@@ -12,6 +14,30 @@ export default function Complaints() {
   const [ text, setText ] = useState('');
   const [ inputError, setInputError ] = useState(false);
   const [ selected, setSelected ] = useState("0");
+  const [ permission, setPermission ] = useState("undetermined");
+
+  async function getPermission(){
+    const status = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    
+    setPermission(status.status);
+    console.log(status);
+
+    // Redirect to app settings to grant permission manually
+    // if (status.status !== 'granted') {
+    //   if(Platform.OS === 'android'){
+    //     IntentLauncher.startActivityAsync(IntentLauncher.ACTION_APPLICATION_SETTINGS);
+    //   } else if(Platform.OS === 'ios'){
+    //     Linking.openURL('app-settings:');
+    //   }
+    //   return;
+    // }
+  }
+
+  useEffect(() => {
+    getPermission();
+
+    console.log(permission);
+  }, []);
 
   return (
     <Container>
@@ -56,7 +82,7 @@ export default function Complaints() {
             </Item>
             <View style={styles.pickerContainer}>
               <Icon name='clipboard'/> 
-              <Text style={{ paddingBottom: 1.5, paddingStart: 5 }}> Qual o tipo da denúncia?</Text>
+              <Text style={{ paddingBottom: 1.5, paddingStart: 2, marginEnd: 50 }}> Qual o tipo da denúncia?</Text>
               <Picker
                 mode='dropdown'
                 iosIcon={<Icon name='arrow-down' />}
@@ -65,6 +91,20 @@ export default function Complaints() {
                 onValueChange={(itemValue, itemIndex) => setSelected(itemValue)}
                 itemStyle={styles.pickerIosListItemContainer}
                 itemTextStyle={styles.pickerIosListItemText}
+                supportedOrientations='portrait'
+                placeholder='Selecione uma opção'
+                renderHeader={backAction =>
+                  <Header style={styles.anatomy} androidStatusBarColor='#529C52'>
+                    <Left style={styles.sideHeaderButtonContainer}>
+                      <Button transparent onPress={backAction}>
+                        <Icon name='arrow-back' style={styles.whiteButtons} />
+                      </Button>
+                    </Left>
+                    <Body style={{flex: 1, alignItems: 'center', paddingStart: 30}}>
+                      <Title style={styles.whiteButtons}>Tipo de denúncia</Title>
+                    </Body>
+                    <Right />
+                  </Header>}
               >
                 {options.map((item, index) => {
                   return (<Picker.Item label={item} value={index} key={index} />) 
@@ -72,6 +112,24 @@ export default function Complaints() {
               </Picker>
             </View>
             <Textarea style={styles.textarea} rowSpan={3} bordered placeholder='Descreva sua denúncia' />
+            <ListItem icon noBorder>
+                <Left>
+                  <Icon name='camera'/>
+                </Left>
+                <Body>
+                  <Text>Fotos:</Text>
+                </Body>
+                <Right style={{paddingEnd: 0}}>
+                  <Button transparent >
+                    <Icon name='aperture' style={styles.greenButtons} />
+                  </Button>
+                  <Button transparent >
+                    <Icon name='images' style={styles.greenButtons} onPress={getPermission}/>
+                  </Button>
+                </Right>
+            </ListItem>
+            <View>
+            </View>
           </Form>
         </View>
       </Content>

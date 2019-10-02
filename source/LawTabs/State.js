@@ -11,7 +11,7 @@ const stateLaws = [
 export default function State() {
   return (
     <Content padder style={styles.accordionContainer}>
-      <Accordion dataArray={stateLaws} headerStyle={styles.accordionHeader} contentStyle={styles.accordionContent}/>
+      <Accordion style={styles.accordionComponent} dataArray={stateLaws} headerStyle={styles.accordionHeader} contentStyle={styles.accordionContent}/>
     </Content>
     );
 }

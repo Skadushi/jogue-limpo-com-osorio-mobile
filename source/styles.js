@@ -4,6 +4,8 @@ import { StyleSheet, Platform } from 'react-native';
 const mainColor = '#1d814c';
 const secondaryColor = '#eaffe3';
 const accentColor = '#dffad6';
+const cardColor = '#dbfad6';
+const bordersColor = '#caebc5';
 
 export default styles = StyleSheet.create({
   content: {
@@ -16,7 +18,13 @@ export default styles = StyleSheet.create({
     padding: 15,
   },
   calendarBackground: {
-    backgroundColor: '#dbfad6'
+    backgroundColor: cardColor,
+    marginBottom: 8,
+    borderTopStartRadius: 25,
+    borderBottomEndRadius: 25,
+    borderBottomWidth: 3,
+    borderEndWidth: 3,
+    borderColor: bordersColor
   },
   calendarContainer: {
     paddingTop: 20,
@@ -49,6 +57,9 @@ export default styles = StyleSheet.create({
   },
   h3s: {
     margin: 10,
+    borderBottomEndRadius: 25,
+    borderBottomWidth: 3,
+    borderColor: bordersColor
   },
   aboutTitle: {
     marginBottom: 10,
@@ -108,12 +119,15 @@ export default styles = StyleSheet.create({
   whiteButtons: {
     color: 'white',
   },
+  greenButtons: {
+    color: mainColor,
+  },
   pickerContainer: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 15,
+    paddingStart: 15,
   },
   pickerIosListItemContainer: {
     flex: 1,
@@ -156,14 +170,20 @@ export default styles = StyleSheet.create({
   },
   accordionHeader: {
     textAlign: 'justify',
-    backgroundColor: '#a3e6a1'
+    backgroundColor: cardColor,
   },
   accordionContent: {
+    borderColor: secondaryColor,
     textAlign: 'justify',
     backgroundColor: secondaryColor
   },
   accordionContainer: {
     marginTop: 0, 
     backgroundColor: secondaryColor
+  },
+  accordionComponent: {
+    borderColor: bordersColor, 
+    borderWidth: 2
   }
+
 });

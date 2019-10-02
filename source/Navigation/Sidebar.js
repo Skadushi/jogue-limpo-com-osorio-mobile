@@ -2,8 +2,9 @@ import React from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 import { Content, Text, List, ListItem, Icon, Container, Left, Right, Badge } from 'native-base';
 import style from './style';
+import styles from '../styles';
 
-const drawerCover = require('../../assets/drawerBackground.png');
+const drawerCover = require('../../assets/icon.png');
 const buttons = [
   {
     name: "Calendário",
@@ -60,7 +61,7 @@ class SideBar extends React.Component {
     return (
       <Container style={style.content}>
         <Content bounces={false} style={{ flex: 1, top: -1 }}>
-          <TouchableOpacity activeOpacity={.7} onPress={() => this.props.navigation.navigate('Home')}>
+          <TouchableOpacity style={styles.calendarBackground}  activeOpacity={.7} onPress={() => this.props.navigation.navigate('Home')}>
             <Image source={drawerCover} style={style.drawerCover} />
           </TouchableOpacity>
           

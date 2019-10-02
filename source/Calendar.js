@@ -50,7 +50,9 @@ export default function Calendar() {
               renderRow={(data) =>
                 <ListItem itemDivider style={styles.calendarBackground}>
                   <View>
-                    <H3 style={styles.h3s}>{data.title}</H3>
+                    <View style={styles.titleBorder}>
+                      <H3 style={styles.h3s}>{data.title}</H3>
+                    </View>
                     <Text style={styles.generalTexts}>{data.description}</Text>
                   </View>
                 </ListItem> }

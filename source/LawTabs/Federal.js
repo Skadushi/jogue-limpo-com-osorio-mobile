@@ -15,7 +15,7 @@ const federalLaws = [
 export default function Federal(){
   return (
     <Content padder style={styles.accordionContainer}>
-      <Accordion dataArray={federalLaws} headerStyle={styles.accordionHeader} contentStyle={styles.accordionContent}/>
+      <Accordion style={styles.accordionComponent} dataArray={federalLaws} headerStyle={styles.accordionHeader} contentStyle={styles.accordionContent}/>
     </Content>
   );
 }

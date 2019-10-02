@@ -11,10 +11,10 @@ export default {
   drawerCover: {
     alignSelf: 'stretch',
     resizeMode: 'contain',
-    height: deviceHeight / 5.25,
+    height: deviceHeight / 5,
     width: null,
     position: 'relative',
-    marginBottom: 10
+    marginBottom: 5,
   },
   text: {
     fontWeight: Platform.OS === 'ios' ? '500' : '400',
