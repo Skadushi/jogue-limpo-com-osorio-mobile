@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import * as Permissions from 'expo-permissions';
 import * as IntentLauncher from 'expo-intent-launcher';
+import * as Camera from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import { StyleSheet, View, Platform, StatusBar, Linking, Alert, Image } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H1, H2 } from 'native-base';
@@ -15,43 +16,49 @@ export default function Complaints() {
   const [ text, setText ] = useState('');
   const [ inputError, setInputError ] = useState(false);
   const [ selected, setSelected ] = useState("0");
-  const [ permission, setPermission ] = useState("undetermined");
-  const [ image, addImages ] = useState("");
+  const [ permissionGallery, setPermissionGallery ] = useState("undetermined");
+  const [ permissionCamera, setPermissionCamera ] = useState("undetermined");
+  const [ images, setImages ] = useState([]);
+  const [ imagesID, setImagesID ] = useState(0);
 
-  async function getPermission(){
-    const status = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    
-    setPermission(status.status);
-    console.log(status);
-
-    // Redirect to app settings to grant permission manually
-    // if (status.status !== 'granted') {
-    //   if(Platform.OS === 'android'){
-    //     IntentLauncher.startActivityAsync(IntentLauncher.ACTION_APPLICATION_SETTINGS);
-    //   } else if(Platform.OS === 'ios'){
-    //     Linking.openURL('app-settings:');
-    //   }
-    //   return;
-    // }
+  async function getPermissionGallery(){
+    const permission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    setPermissionGallery(permission.status);
+  }
+  async function getPermissionCamera(){
+    const permission = await Permissions.askAsync(Permissions.CAMERA);
+    setPermissionCamera(permission.status);
   }
 
   async function pickImages(){
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-    });
-
-    console.log(result);
-
-    if (!result.cancelled) {
-      addImages(result.uri);
+    if(images.length > 3){
+      Alert.alert(
+        'Máximo de fotos alcançado!',
+        'Há um máximo de quatro fotos por denúncia, aproveite bem esse espaço.', 
+        [
+          {
+            text: 'Ok',
+            style: 'cancel',
+          }
+        ],
+        {cancelable: true},
+      );
+    } else {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All
+      });
+      
+      if (!result.cancelled) {
+        result.id = imagesID;
+        setImagesID(imagesID + 1);
+        setImages([... images, result]);
+      }
     }
   }
 
   useEffect(() => {
-    getPermission();
-    console.log(permission);
+    getPermissionGallery();
+    getPermissionCamera();
   }, []);
 
   return (
@@ -97,7 +104,7 @@ export default function Complaints() {
             </Item>
             <View style={styles.pickerContainer}>
               <Icon name='clipboard'/> 
-              <Text style={{ paddingBottom: 1.5, paddingStart: 2, marginEnd: 50 }}> Qual o tipo da denúncia?</Text>
+              <Text style={{ paddingBottom: 1.5, paddingStart: 2 }}> Qual o tipo da denúncia?</Text>
               <Picker
                 mode='dropdown'
                 iosIcon={<Icon name='arrow-down' />}
@@ -128,25 +135,45 @@ export default function Complaints() {
             </View>
             <Textarea style={styles.textarea} rowSpan={3} bordered placeholder='Descreva sua denúncia' />
             <ListItem icon noBorder>
-                <Left>
-                  <Icon name='camera'/>
-                </Left>
-                <Body>
-                  <Text>Fotos:</Text>
-                </Body>
-                <Right style={{paddingEnd: 0}}>
-                  <Button transparent >
-                    <Icon name='aperture' style={styles.greenButtons} />
-                  </Button>
-                  <Button transparent >
-                    <Icon name='images' style={styles.greenButtons} onPress={pickImages}/>
-                  </Button>
-                </Right>
+              <Left>
+                <Icon name='camera'/>
+              </Left>
+              <Body>
+                <Text>Fotos:</Text>
+              </Body>
+              <Right style={{paddingEnd: 0}}>
+                <Button transparent >
+                  <Icon name='aperture' style={styles.greenButtons} />
+                </Button>
+                <Button transparent >
+                  <Icon name='images' style={styles.greenButtons} onPress={pickImages}/>
+                </Button>
+              </Right>
             </ListItem>
-            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-              {image ?
-                <Image source={{ uri: image }} style={{ width: 80, height: 120 }} /> 
-                : null 
+            <View style={styles.imageVisualizerView}>
+              <View style={{flex: 0, flexDirection: 'row'}}>
+                {
+                  images.map((image, index) => (
+                    <View key={'view' + image.id + 'Id'} style={styles.imagesView}>
+                      <Image source={{ uri: image.uri }} key={image.uri} style={styles.imagePreview} />
+                      <Icon 
+                        onPress={() => {
+                          setImages(function arrayRemove() {
+                            return images.filter(function(ele){
+                                return ele != image;
+                            });
+                          });
+                        }} 
+                        style={styles.smallButton}
+                        key={'button' + image.id + 'id'}
+                        name='remove-circle'
+                      />
+                    </View>
+                  ))   
+                }
+              </View>
+              {
+                images.length !== 0 ? <Text note style={styles.generalTexts}>Obs: as imagens serão enviadas em seu formato original, as miniaturas são apenas uma demonstração.</Text> : null
               }
             </View>
           </Form>

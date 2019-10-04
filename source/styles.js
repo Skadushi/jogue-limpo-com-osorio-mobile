@@ -22,8 +22,8 @@ export default styles = StyleSheet.create({
     marginBottom: 8,
     borderTopStartRadius: 25,
     borderBottomEndRadius: 25,
-    borderBottomWidth: 3,
-    borderEndWidth: 3,
+    borderBottomWidth: 2,
+    borderEndWidth: 2,
     borderColor: bordersColor
   },
   calendarContainer: {
@@ -47,9 +47,19 @@ export default styles = StyleSheet.create({
   largeButton: {
     width: 300,
     height: 40,
-    margin: 15,
+    margin: 10,
     backgroundColor: mainColor,
     alignSelf: 'center'
+  },
+  smallButton: {
+    margin: 5,
+    paddingStart: 5,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: 30,
+    height: 30,
+    color: 'red',
   },
   footerButton: {
     backgroundColor: mainColor,
@@ -58,7 +68,7 @@ export default styles = StyleSheet.create({
   h3s: {
     margin: 10,
     borderBottomEndRadius: 25,
-    borderBottomWidth: 3,
+    borderBottomWidth: 2,
     borderColor: bordersColor
   },
   aboutTitle: {
@@ -94,12 +104,18 @@ export default styles = StyleSheet.create({
   },
   homeImageButton: {
     width: 300,
-    height: 220,
+    height: 210,
     alignSelf: 'center'
   },
   homeButtonsText: {
     fontSize: 28,
     width: 330,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  smallButtonsText: {
+    fontSize: 12,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center'
@@ -184,6 +200,24 @@ export default styles = StyleSheet.create({
   accordionComponent: {
     borderColor: bordersColor, 
     borderWidth: 2
+  },
+  imageVisualizerView: { 
+    flex: 1,
+    marginStart: 15,
+    flexDirection: 'column', 
+    alignItems: 'center', 
+    justifyContent: 'space-evenly', 
+    backgroundColor: bordersColor
+  },
+  imagePreview: { 
+    width: 60, 
+    height: 105, 
+    marginBottom: 3,
+  },
+  imagesView: { 
+    flex: 0, 
+    alignItems: 'center', 
+    justifyContent: 'center',
+    padding: 5,
   }
-
 });
