@@ -1,31 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { useNavigation } from 'react-navigation-hooks';
-import { StyleSheet, View, Image, Platform, StatusBar, Modal } from 'react-native';
+import { ActivityIndicator, StyleSheet, View, Image, Platform, StatusBar, Modal } from 'react-native';
 import { Container, Header, Title, Content, Button, H1, Left, Right, Body, Icon, Text } from 'native-base';
 import styles from './styles'; 
-
-const albums = ["Evento", "Evento", "Evento", "Evento", "Evento", "Evento", "Evento", "Evento", "Evento", "Evento", "Evento", "Evento", "Evento", "Evento", "Evento",];
-const images = [
-  {
-    url: '',
-    props: {
-      source: require('../assets/drawerBackground.png')
-    }
-  },
-  {
-    url: '',
-    props: {
-      source: require('../assets/osorio.png')
-    }
-  }
-];
 
 export default function About() {
   const navigation = useNavigation();
   const { navigate } = useNavigation();
   const [ visible, setVisible ] = useState(false);
+  const [ images, setImages ] = useState([]);
+  const [ albums, setAlbums ] = useState([]);
   
+  async function getEventsFromApi() {
+    try {
+      let response = await fetch(
+        'https://api.myjson.com/bins/189oal'
+      );
+      let responseJson = await response.json();
+      setAlbums(responseJson.albums);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getEventsFromApi();
+  }, []);
+
   return (
     <Container>
       <Header style={styles.anatomy} androidStatusBarColor='#529C52'>    
@@ -44,26 +46,35 @@ export default function About() {
         </Right>
       </Header>
       <Content style={styles.content}>
-        <View style={styles.container}>
-            {albums.map((item, index) => {
-              return (<Button style={styles.largeButton} key={index} onPress={() => { setVisible(true) }}><Text> {item} {index} </Text></Button>) 
-            })}
-        </View>
-        <Modal visible={visible} transparent={true} >
-          <Header style={{backgroundColor: 'black'}} androidStatusBarColor='black'>
-            <Left>
-              <Button style={{backgroundColor: 'black'}} onPress={() => { setVisible(false)}}>
-                <Icon style={styles.whiteButtons} name='arrow-back' />
-              </Button>
-            </Left>
-            <Body />
-            <Right />
-          </Header>
-          <ImageViewer 
-            imageUrls={images} 
-            enableSwipeDown={true}
-            onSwipeDown={() => {setVisible(false)}}/>
-        </Modal>
+        {  
+          albums.length === 0 ? 
+            <ActivityIndicator size='large' color='#529C52' style={{ paddingTop: 25 }}/>
+            :
+            <View>
+              <View style={styles.container}>
+                  {albums.map((item, index) => {
+                    return (<Button style={styles.largeButton} key={index} onPress={() => { setImages(item.images); setVisible(true) }}><Text> {item.eventTitle}</Text></Button>) 
+                  })}
+              </View>
+              <Modal visible={visible} transparent={true} >
+                <Header style={{backgroundColor: 'black'}} androidStatusBarColor='black'>
+                  <Left>
+                    <Button style={{backgroundColor: 'black'}} onPress={() => { setVisible(false)}}>
+                      <Icon style={styles.whiteButtons} name='arrow-back' />
+                    </Button>
+                  </Left>
+                  <Body />
+                  <Right />
+                </Header>
+                <ImageViewer 
+                  imageUrls={images}
+                  saveToLocalByLongPress={false}
+                  enableSwipeDown={true}
+                  failImageSource={'https://cdn4.iconfinder.com/data/icons/ui-beast-4/32/Ui-12-512.png'}
+                  onSwipeDown={() => {setVisible(false)}}/>
+              </Modal>
+            </View>
+        }
       </Content>
     </Container>
   );    

@@ -8,21 +8,30 @@ import Events from './Events';
 
 export default function Calendar() {
   const navigation = useNavigation();
-  const [ month, setMonth ] = useState(Events.list[1].month);
-  const [ monthEvents, setMonthEvents ] = useState(Events.list[1].events);
+  const [ month, setMonth ] = useState(Events.list[0].month);
+  const [ monthEvents, setMonthEvents ] = useState(Events.list[0].events);
   const [ current, setCurrent ] = useState(0);
 
   useEffect(() => {
-    console.log('rerender');
-    if(current === -1){
+    setMonth(Events.list[current].month);
+    setMonthEvents(Events.list[current].events);
+  });
+
+  const prevMonth = () => {
+    if(current - 1 === -1){
       setCurrent(Events.list.length - 1);
-    } else if(current === Events.list.length){
+    } else {
+      setCurrent(current - 1);
+    }
+  }
+
+  const nextMonth = () => {
+    if(current + 1 === Events.list.length){
       setCurrent(0);
     } else {
-      setMonth(Events.list[current].month);
-      setMonthEvents(Events.list[current].events);
+      setCurrent(current + 1);
     }
-  });
+  }
 
   return (
     <Container>
@@ -62,7 +71,7 @@ export default function Calendar() {
       </Content>
       <Footer>
         <FooterTab style={styles.anatomy}>
-          <Button iconLeft style={styles.button} onPress={() => { setCurrent(current-1) }}>
+          <Button iconLeft style={styles.button} onPress={prevMonth}>
             <Text>
               <Icon name='return-left' style={styles.arrowButtons}/>
             </Text>
@@ -70,7 +79,7 @@ export default function Calendar() {
           <Button disabled style={styles.footerButton}>
             <Text style={styles.footerButtonText}>{month.slice(0, 3) + '/' + month.slice(-2)}</Text>
           </Button>
-          <Button iconRight style={styles.button} onPress={() => { setCurrent(current+1) }}>
+          <Button iconRight style={styles.button} onPress={nextMonth}>
             <Text>
               <Icon name='return-right' style={styles.arrowButtons}/>
             </Text>

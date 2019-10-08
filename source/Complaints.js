@@ -30,6 +30,8 @@ export default function Complaints() {
     setPermissionCamera(permission.status);
   }
 
+  
+
   async function pickImages(){
     if(images.length > 3){
       Alert.alert(
