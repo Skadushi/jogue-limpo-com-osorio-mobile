@@ -5,9 +5,7 @@ import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
 import { Container, Header, Content, Tabs, Tab, ScrollableTab, Button, Title, Left, Right, Body, Icon, Text } from 'native-base';
 import styles from './styles';
 
-import City from './LawTabs/City';
-import State from './LawTabs/State';
-import Federal from './LawTabs/Federal';
+import LawsList from './LawTabs/LawsList';
 
 export default function Laws() {
   const navigation = useNavigation();
@@ -31,13 +29,13 @@ export default function Laws() {
       </Header>
       <Tabs tabBarUnderlineStyle={styles.tabs} renderTabBar={() => <ScrollableTab style={styles.tab}/>}>
         <Tab heading='Municipal' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <City />
+          <LawsList apiLink={'https://api.myjson.com/bins/q6m6y'}/>
         </Tab>
         <Tab heading='Estadual' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <State />
+          <LawsList apiLink={'https://api.myjson.com/bins/rdhei'}/>
         </Tab>
         <Tab heading='Federal' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <Federal />
+          <LawsList apiLink={'https://api.myjson.com/bins/8x1ne'}/>
         </Tab>
       </Tabs>
     </Container>

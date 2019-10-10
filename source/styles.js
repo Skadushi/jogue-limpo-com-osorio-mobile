@@ -194,7 +194,8 @@ export default styles = StyleSheet.create({
     backgroundColor: secondaryColor
   },
   accordionContainer: {
-    marginTop: 0, 
+    marginTop: 0,
+    padding: 15,
     backgroundColor: secondaryColor
   },
   accordionComponent: {
