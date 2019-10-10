@@ -58,12 +58,12 @@ export default function About() {
               </View>
               <Modal visible={visible} transparent={true} >
                 <Header style={{backgroundColor: 'black'}} androidStatusBarColor='black'>
-                  <Left>
+                  <Left style={{flex: 0}}>
                     <Button style={{backgroundColor: 'black'}} onPress={() => { setVisible(false)}}>
                       <Icon style={styles.whiteButtons} name='arrow-back' />
                     </Button>
                   </Left>
-                  <Body />
+                  <Body style={{flex: 2}}/>
                   <Right />
                 </Header>
                 <ImageViewer 

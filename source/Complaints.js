@@ -138,14 +138,14 @@ export default function Complaints() {
             <Textarea style={styles.textarea} rowSpan={3} bordered placeholder='Descreva sua denúncia' />
             <ListItem icon noBorder>
               <Left>
-                <Icon name='camera'/>
+                <Icon name='photos'/>
               </Left>
               <Body>
                 <Text>Fotos:</Text>
               </Body>
               <Right style={{paddingEnd: 0}}>
                 <Button transparent >
-                  <Icon name='aperture' style={styles.greenButtons} />
+                  <Icon name='camera' style={styles.greenButtons} />
                 </Button>
                 <Button transparent >
                   <Icon name='images' style={styles.greenButtons} onPress={pickImages}/>
