@@ -36,7 +36,7 @@ export default function Destination() {
           <Electronic />
         </Tab>
         <Tab heading='Lâmpadas de Mercúrio' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <Mercury />
+          <Mercury apiLink={'https://api.myjson.com/bins/xvbm2'}/>
         </Tab>
       </Tabs>
     </Container>

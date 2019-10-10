@@ -220,5 +220,9 @@ export default styles = StyleSheet.create({
     alignItems: 'center', 
     justifyContent: 'center',
     padding: 5,
+  },
+  namesListBody: {
+    flex: 1,
+    alignItems: 'flex-start',
   }
 });

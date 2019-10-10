@@ -16,10 +16,13 @@ export default function CataTreco() {
             <Icon name='arrow-back' style={styles.whiteButtons} />
           </Button>
         </Left>
-        <Body style={styles.headerBody}>
+        <Body style={{flex: 1, alignItems: 'center', paddingStart: 30}}>
           <Title style={styles.whiteButtons}>Cata-Treco</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
+          <Button transparent onPress={() => { navigate('Scheduled') }}>
+            <Icon name='checkmark' style={styles.whiteButtons} />
+          </Button>
           <Button transparent onPress={() => { navigation.openDrawer() }}>
             <Icon name='menu' style={styles.whiteButtons} />
           </Button>
