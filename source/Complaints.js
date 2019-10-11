@@ -30,8 +30,6 @@ export default function Complaints() {
     setPermissionCamera(permission.status);
   }
 
-  
-
   async function pickImages(){
     if(images.length > 3){
       Alert.alert(
@@ -106,7 +104,7 @@ export default function Complaints() {
             </Item>
             <View style={styles.pickerContainer}>
               <Icon name='clipboard'/> 
-              <Text style={{ paddingBottom: 1.5, paddingStart: 2 }}> Qual o tipo da denúncia?</Text>
+              <Text style={{ paddingBottom: 1.5, paddingStart: 2, marginEnd: 10 }}> Tipo de denúncia:</Text>
               <Picker
                 mode='dropdown'
                 iosIcon={<Icon name='arrow-down' />}
@@ -116,7 +114,7 @@ export default function Complaints() {
                 itemStyle={styles.pickerIosListItemContainer}
                 itemTextStyle={styles.pickerIosListItemText}
                 supportedOrientations='portrait'
-                placeholder='Selecione uma opção'
+                placeholder='Selecione o tipo'
                 renderHeader={backAction =>
                   <Header style={styles.anatomy} androidStatusBarColor='#529C52'>
                     <Left style={styles.sideHeaderButtonContainer}>
@@ -127,7 +125,7 @@ export default function Complaints() {
                     <Body style={{flex: 1, alignItems: 'center', paddingStart: 30}}>
                       <Title style={styles.whiteButtons}>Tipo de denúncia</Title>
                     </Body>
-                    <Right />
+                    <Right style={styles.sideHeaderButtonContainer}/>
                   </Header>}
               >
                 {options.map((item, index) => {
@@ -175,7 +173,7 @@ export default function Complaints() {
                 }
               </View>
               {
-                images.length !== 0 ? <Text note style={styles.generalTexts}>Obs: as imagens serão enviadas em seu formato original, as miniaturas são apenas uma demonstração.</Text> : null
+                images.length !== 0 ? <Text note style={[styles.generalTexts, {padding: 10}]}>Obs: as imagens serão enviadas em seu formato original, as miniaturas são apenas uma demonstração.</Text> : null
               }
             </View>
           </Form>

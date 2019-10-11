@@ -40,11 +40,20 @@ export default function Scheduled() {
         <Right style={styles.sideHeaderButtonContainer} />
       </Header>
       <Content style={styles.content}>
+        <H1 style={styles.title}>Agendamentos Confirmados</H1>
         {
           !loadComplete ?
             <ActivityIndicator size='large' color='#529C52' style={{ paddingTop: 25 }}/>
             :
             <Content style={{padding: 20}}>
+              <ListItem itemDivider style={[styles.calendarBackground, {marginBottom: 5}]}>
+                <Left style={{flex: 0, alignItems: 'flex-end'}}>
+                  <Text style={{width: 30, textAlign: 'right'}}>#</Text>
+                </Left>
+                <Body style={styles.namesListBody}>
+                  <Text>Nome</Text>
+                </Body>
+              </ListItem>
               <List
                   dataArray={items}
                   renderRow={(item, {}, index,) =>

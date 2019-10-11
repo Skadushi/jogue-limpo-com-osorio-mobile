@@ -45,6 +45,11 @@ const buttons = [
     name: "Sobre o Programa",
     route: "About",
     icon: "information-circle"
+  },
+  {
+    name: "Sobre a Aplicação",
+    route: "About",
+    icon: "ribbon"
   }
 ];
 

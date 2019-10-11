@@ -93,10 +93,22 @@ export default styles = StyleSheet.create({
     padding: 15,
   },
   aboutImages: {
-    width: 90,
-    height: 90,
+    width: 120,
+    height: 120,
     alignSelf: 'center',
     margin: 10,
+  },
+  developersPhotoContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  developersImages: {
+    width: 400,
+    height: 100,
+    alignSelf: 'center',
+    margin: 5,
   },
   arrowButtons: {
     color: 'white',
@@ -108,11 +120,7 @@ export default styles = StyleSheet.create({
     alignSelf: 'center'
   },
   homeButtonsText: {
-    fontSize: 28,
     width: 330,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center'
   },
   smallButtonsText: {
     fontSize: 12,

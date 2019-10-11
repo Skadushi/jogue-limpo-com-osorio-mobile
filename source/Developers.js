@@ -35,6 +35,9 @@ export default function Developers() {
           <Text style={styles.generalTexts}>Bruno Chagas Alves Fernandes</Text>
           <Text style={styles.generalTexts}>Diana Cabral Cavalcanti</Text>
         </View>
+        <View style={styles.developersPhotoContainer} >
+            <Image source={require('../assets/logo_ifrs3.gif')} style={styles.developersImages} resizeMode='center'/>
+          </View>
       </Content>
     </Container>
   );

@@ -21,7 +21,7 @@ export default function Home() {
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigate('Developers') }}>
-            <Icon name='planet' style={{color: '#1d844c'}}/>
+            <Icon name='ribbon' style={{color: '#1d844c'}}/>
           </Button>
         </Right>
       </Header>
@@ -32,19 +32,19 @@ export default function Home() {
           </TouchableOpacity>
           <Button iconLeft style={styles.largeButton} onPress={() => { navigate('CataTreco') }}>
             <Icon name='cart'/>  
-            <Text style={styles.homeButtonsText}>CATA-TRECO</Text>
+            <Text style={styles.homeButtonsText}>Cata-Treco</Text>
           </Button>
           <Button iconLeft style={styles.largeButton} onPress={() => { navigate('Gathering') }}>
             <Icon name='trash'/>
-            <Text style={styles.homeButtonsText}>COLETA</Text>
+            <Text style={styles.homeButtonsText}>Coleta</Text>
           </Button>
           <Button iconLeft style={styles.largeButton} onPress={() => { navigate('Complaints') }}>
             <Icon name='megaphone'/> 
-            <Text style={styles.homeButtonsText}>DENÚNCIAS</Text> 
+            <Text style={styles.homeButtonsText}>Denúncias</Text> 
           </Button> 
           <Button iconLeft style={styles.largeButton} onPress={() => { navigate('Mural') }}>
             <Icon name='images'/>
-            <Text style={styles.homeButtonsText}>MURAL</Text>
+            <Text style={styles.homeButtonsText}>Mural</Text>
           </Button>
         </View>
       </Container>
