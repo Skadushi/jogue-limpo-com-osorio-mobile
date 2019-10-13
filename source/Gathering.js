@@ -38,7 +38,7 @@ export default function Gathering() {
       </Tabs>
       <Footer>
         <FooterTab style={styles.anatomy}>
-          <Button full style={styles.footerButton} onPress={() => { Alert.alert('Localização', 'Aqui irá a localização dos caminhões', [ { text: 'Ok' } ]) }}>
+          <Button full style={styles.footerButton} onPress={() => { navigate('CityMap') }}>
             <Text style={styles.footerButtonText}>
               <Icon style={styles.footerButtonText} name='navigate' /> Caminhões
             </Text>

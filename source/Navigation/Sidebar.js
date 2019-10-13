@@ -48,7 +48,7 @@ const buttons = [
   },
   {
     name: "Sobre a Aplicação",
-    route: "About",
+    route: "Developers",
     icon: "ribbon"
   }
 ];

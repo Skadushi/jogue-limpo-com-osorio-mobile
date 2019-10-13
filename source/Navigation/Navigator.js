@@ -17,6 +17,7 @@ import Calendar from '../Calendar';
 import Gathering from '../Gathering';
 import Developers from '../Developers';
 import Scheduled from '../Scheduled';
+import CityMap from '../Map/CityMap';
 
 const Drawer = createDrawerNavigator(
   {
@@ -56,7 +57,8 @@ const RootStack = createStackNavigator(
     Calendar: { screen: Calendar },
     Gathering: { screen: Gathering },
     Developers: { screen: Developers },
-    Scheduled: { screen: Scheduled }
+    Scheduled: { screen: Scheduled },
+    CityMap: { screen: CityMap }
   },
   {
     initialRouteName: 'Drawer',
