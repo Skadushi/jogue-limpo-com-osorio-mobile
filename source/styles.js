@@ -67,9 +67,6 @@ export default styles = StyleSheet.create({
   },
   h3s: {
     margin: 10,
-    borderBottomEndRadius: 25,
-    borderBottomWidth: 2,
-    borderColor: bordersColor
   },
   aboutTitle: {
     marginBottom: 10,
@@ -253,10 +250,33 @@ export default styles = StyleSheet.create({
     color: 'black',
     paddingStart: 5,
     position: 'absolute',
-    top: 0,
-    right: 0,
+    top: 40,
+    left: 0,
   },
   mapBackButtonIcon: {
     color: 'black',
+  },
+  districtsListView: {
+    marginStart: 5,
+    marginEnd: 5,
+    marginBottom: 5,
+    marginTop: 10,
+    padding: 0,
+  },
+  districtsListButton: {
+    width: 300,
+    height: 40,
+    margin: 0,
+    backgroundColor: mainColor,
+    alignSelf: 'center'
+  },
+  districtsListInsideView: {
+    paddingLeft: 5,
+    paddingRight: 5,
+    width: 300,
+    backgroundColor: bordersColor,
+    borderBottomStartRadius: 10,
+    borderBottomEndRadius: 10
   }
+
 });

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Title, H1, Left, Right, Body, Icon, Text } from 'native-base';
@@ -7,6 +7,23 @@ import styles from './styles';
 export default function CataTreco() { 
   const navigation = useNavigation();
   const { navigate } = useNavigation();
+  const [ phone, setPhone ] = useState('Telefone para agendamento: 3663-1947');
+
+  async function getPhoneFromApi() {
+    try {
+      let response = await fetch(
+        'https://api.myjson.com/bins/9j592'
+      );
+      let responseJson = await response.json();
+      setPhone(responseJson.phone);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getPhoneFromApi();
+  }, []);
 
   return (
     <Container>
@@ -32,7 +49,7 @@ export default function CataTreco() {
         <View style={styles.container}>
           <H1 style={styles.aboutTitle}>Cata-Treco</H1>
           <Text style={styles.generalTexts}>Serviço de Coleta de descartes de grande volume (exceto eletrônicos) tais como móveis, fogões, geladeiras, sofás velhos, etc... Encaminhando-os ao destino correto. Seu agendamento é feito pelo aplicativo utilizando o botão abaixo ou pelo telefone. E o recolhimento ocorre nas quartas-feiras pela manhã, conforme o agendamento prévio.</Text>
-          <Text style={styles.generalTexts}>Telefone para Agendamento: 3663-1947</Text>
+          <Text style={styles.generalTexts}>{phone}</Text>
         </View>
       </Content>
       <Footer>

@@ -5,7 +5,7 @@ import * as IntentLauncher from 'expo-intent-launcher';
 import * as Camera from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import { StyleSheet, View, Platform, StatusBar, Linking, Alert, Image } from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H1, H2 } from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H1, H2, CheckBox } from 'native-base';
 import styles from './styles';
 
 const options = [ "Selecione uma opção", "Lixo irregular", "Descarte de materiais incorreto", "Lâmpadas de mercúrio" ];
@@ -14,6 +14,7 @@ export default function Complaints() {
   const navigation = useNavigation();
   const { navigate } = useNavigation();
   const [ text, setText ] = useState('');
+  const [ incognito, setIncognito ] = useState(false); 
   const [ inputError, setInputError ] = useState(false);
   const [ selected, setSelected ] = useState("0");
   const [ permissionGallery, setPermissionGallery ] = useState("undetermined");
@@ -56,6 +57,37 @@ export default function Complaints() {
     }
   }
 
+  async function captureImages(){
+    if(images.length > 3){
+      Alert.alert(
+        'Máximo de fotos alcançado!',
+        'Há um máximo de quatro fotos por denúncia, aproveite bem esse espaço.', 
+        [
+          {
+            text: 'Ok',
+            style: 'cancel',
+          }
+        ],
+        {cancelable: true},
+      );
+    } else {
+      let result = await ImagePicker.launchCameraAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.All
+      });
+      
+      if (!result.cancelled) {
+        result.id = imagesID;
+        setImagesID(imagesID + 1);
+        setImages([... images, result]);
+      }
+    }
+  }
+
+  const incognitoMode = () => {
+    setIncognito(!incognito);
+    //clear fields
+  }
+
   useEffect(() => {
     getPermissionGallery();
     getPermissionCamera();
@@ -85,14 +117,27 @@ export default function Complaints() {
         <View style={{padding: 10}}>
           <Form>
             <H2 style={styles.title}>Dados do Usuário</H2>
-            <Item error={inputError} style={styles.inputs}>
-              <Icon active name='person'/>
-              <Input placeholder='Nome'/>
-            </Item>
-            <Item error={inputError} style={styles.inputs}>
-              <Icon active name='mail'/>
-              <Input placeholder='E-mail'/>
-            </Item>
+            {
+              !incognito ? 
+                <View>
+                  <Item error={inputError} style={styles.inputs}>
+                    <Icon active name='person'/>
+                    <Input placeholder='Nome'/>
+                  </Item>
+                  <Item error={inputError} style={styles.inputs}>
+                    <Icon active name='phone-portrait' style={{marginEnd: 4}}/>
+                    <Input placeholder='Telefone' keyboardType='phone-pad' maxLength={11} />
+                  </Item>
+                </View>
+                :
+                null
+            }
+            <ListItem noBorder style={{padding: 0, marginStart: 13}}>
+              <CheckBox  checked={incognito} color='#1d814c' onPress={incognitoMode}/>
+              <Body >
+                <Text onPress={incognitoMode} >Denúncia Anônima</Text>
+              </Body>
+            </ListItem>
             <H2 style={styles.title}>Dados da Denúncia</H2>
             <Item error={inputError} style={styles.inputs}>
               <Icon active name='pin'/>
@@ -143,7 +188,7 @@ export default function Complaints() {
               </Body>
               <Right style={{paddingEnd: 0}}>
                 <Button transparent >
-                  <Icon name='camera' style={styles.greenButtons} />
+                  <Icon name='camera' style={styles.greenButtons} onPress={captureImages} />
                 </Button>
                 <Button transparent >
                   <Icon name='images' style={styles.greenButtons} onPress={pickImages}/>

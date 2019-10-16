@@ -1,15 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
-import { StyleSheet, View, Image, Platform, StatusBar, Alert } from 'react-native';
-import { Container, Header, Content, Tabs, Tab, ScrollableTab, Footer, FooterTab, Button, Title, Left, Right, Body, Icon, Text } from 'native-base';
+import { ActivityIndicator, StyleSheet, View, Image, Platform, StatusBar, Alert } from 'react-native';
+import { Container, Header, Content, Tabs, Tab, ScrollableTab, Footer, H1, FooterTab, Button, Title, Left, Right, Body, Icon, Text } from 'native-base';
 import styles from './styles';
-
-import Selective from './GatheringTabs/Selective';
-import Organic from './GatheringTabs/Organic';
 
 export default function Gathering() {
   const navigation = useNavigation();
   const { navigate } = useNavigation();
+  const [ districts, setDistricts ] = useState([]);
+  const [ selected, setSelected ] = useState();
+
+  async function getDistrictsFromApi() {
+    try {
+      let response = await fetch(
+        'https://api.myjson.com/bins/1h08s0'
+      );
+      let responseJson = await response.json();
+      setDistricts(responseJson.districts);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    getDistrictsFromApi();
+  }, []);
 
   return (
     <Container>
@@ -28,14 +43,36 @@ export default function Gathering() {
           </Button>
         </Right>
       </Header>
-      <Tabs tabBarUnderlineStyle={styles.tabs} renderTabBar={() => <ScrollableTab style={styles.tab}/>}>
-        <Tab heading='Orgânica' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <Organic />
-        </Tab>
-        <Tab heading='Seletiva' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <Selective />
-        </Tab>
-      </Tabs>
+      <Content style={styles.content}>
+        {  
+          districts.length === 0 ? 
+            <ActivityIndicator size='large' color='#529C52' style={{ paddingTop: 25 }}/>
+            :
+            <View style={styles.container}>
+                <H1 style={[styles.title, {marginBottom: 5}]}>Selecione seu Bairro</H1>
+                {districts.map((item, index) => {
+                  return (
+                    <View key={index} style={styles.districtsListView}>
+                      <Button style={styles.districtsListButton} onPress={() => { if(selected !== index){ setSelected(index) } else { setSelected(undefined) } }}>
+                        <Text>{item.name}</Text>
+                      </Button>
+                      {
+                        index === selected ? 
+                          <View style={styles.districtsListInsideView} >
+                            <Text style={styles.generalTexts}>Coleta Seletiva:</Text>
+                            <Text style={styles.generalTexts}>○{item.selective}</Text>
+                            <Text style={styles.generalTexts}>Coleta Orgânica:</Text>
+                            <Text style={styles.generalTexts}>○{item.organic}</Text>
+                          </View>
+                          :
+                          null
+                      }
+                    </View>
+                  ) 
+                })}
+            </View>
+        }
+      </Content>
       <Footer>
         <FooterTab style={styles.anatomy}>
           <Button full style={styles.footerButton} onPress={() => { navigate('CityMap') }}>
