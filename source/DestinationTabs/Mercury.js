@@ -22,7 +22,7 @@ export default function Mercury({ apiLink }) {
 
   useEffect(() => {
     getLawsFromApi();
-  })
+  }, []);
 
   return (
     <Content style={styles.content}>

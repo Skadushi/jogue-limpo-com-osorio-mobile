@@ -12,7 +12,6 @@ const options = [ "Selecione uma opção", "Lixo irregular", "Descarte de materi
 
 export default function Complaints() {
   const navigation = useNavigation();
-  const { navigate } = useNavigation();
   const [ text, setText ] = useState('');
   const [ incognito, setIncognito ] = useState(false); 
   const [ inputError, setInputError ] = useState(false);
@@ -105,7 +104,7 @@ export default function Complaints() {
           <Title style={styles.whiteButtons}>Denúncias</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
-          <Button transparent onPress={() => { navigate('ComplaintsHelp') }}>
+          <Button transparent onPress={() => { navigation.navigate('ComplaintsHelp') }}>
             <Icon name='help' style={styles.whiteButtons} />
           </Button>
           <Button transparent onPress={() => { navigation.openDrawer() }}>

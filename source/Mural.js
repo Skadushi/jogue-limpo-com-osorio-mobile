@@ -7,7 +7,6 @@ import styles from './styles';
 
 export default function About() {
   const navigation = useNavigation();
-  const { navigate } = useNavigation();
   const [ visible, setVisible ] = useState(false);
   const [ images, setImages ] = useState([]);
   const [ albums, setAlbums ] = useState([]);

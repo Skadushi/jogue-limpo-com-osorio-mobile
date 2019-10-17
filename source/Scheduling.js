@@ -6,7 +6,6 @@ import styles from './styles';
 
 export default function Scheduling() {
   const navigation = useNavigation();
-  const { navigate } = useNavigation();
   const [ name, setName ] = useState('');
   const [ item, setItem ] = useState('');
   const [ address, setAddress ] = useState('');
@@ -79,7 +78,7 @@ export default function Scheduling() {
       </Content>
       <Footer>
         <FooterTab style={styles.anatomy}>
-          <Button full style={styles.footerButton} onPress={() => {setDone(true)}} >
+          <Button full style={styles.footerButton} onPress={() => { setDone(true) }} >
             <Text style={styles.footerButtonText}>
               <Icon style={styles.footerButtonText} name='calendar' /> Agende agora!
             </Text>

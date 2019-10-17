@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { ActivityIndicator, StyleSheet, View, Image, Platform, StatusBar, Alert } from 'react-native';
-import { Container, Header, Content, Tabs, Tab, ScrollableTab, Footer, H1, FooterTab, Button, Title, Left, Right, Body, Icon, Text } from 'native-base';
+import { Container, Header, Content, Tabs, Tab, ScrollableTab, Footer, H1, FooterTab, Button, Title, Left, Right, Body, Icon, Text, H3 } from 'native-base';
 import styles from './styles';
 
 export default function Gathering() {
-  const navigation = useNavigation();
-  const { navigate } = useNavigation();
+  const navigation = useNavigation()
   const [ districts, setDistricts ] = useState([]);
   const [ selected, setSelected ] = useState();
 
@@ -59,10 +58,10 @@ export default function Gathering() {
                       {
                         index === selected ? 
                           <View style={styles.districtsListInsideView} >
-                            <Text style={styles.generalTexts}>Coleta Seletiva:</Text>
-                            <Text style={styles.generalTexts}>○{item.selective}</Text>
-                            <Text style={styles.generalTexts}>Coleta Orgânica:</Text>
-                            <Text style={styles.generalTexts}>○{item.organic}</Text>
+                            <Text style={styles.generalTexts}>  Coleta Seletiva:</Text>
+                            <Text style={styles.generalTexts}>{item.selective}</Text>
+                            <Text style={styles.generalTexts}>  Coleta Orgânica:</Text>
+                            <Text style={styles.generalTexts}>{item.organic}</Text>
                           </View>
                           :
                           null
@@ -75,7 +74,7 @@ export default function Gathering() {
       </Content>
       <Footer>
         <FooterTab style={styles.anatomy}>
-          <Button full style={styles.footerButton} onPress={() => { navigate('CityMap') }}>
+          <Button full style={styles.footerButton} onPress={() => { navigation.navigate('CityMap') }}>
             <Text style={styles.footerButtonText}>
               <Icon style={styles.footerButtonText} name='navigate' /> Caminhões
             </Text>

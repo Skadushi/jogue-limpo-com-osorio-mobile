@@ -6,7 +6,6 @@ import styles from './styles';
 
 export default function CataTreco() { 
   const navigation = useNavigation();
-  const { navigate } = useNavigation();
   const [ phone, setPhone ] = useState('Telefone para agendamento: 3663-1947');
 
   async function getPhoneFromApi() {
@@ -37,7 +36,7 @@ export default function CataTreco() {
           <Title style={styles.whiteButtons}>Cata-Treco</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
-          <Button transparent onPress={() => { navigate('Scheduled') }}>
+          <Button transparent onPress={() => { navigation.navigate('Scheduled') }}>
             <Icon name='checkmark' style={styles.whiteButtons} />
           </Button>
           <Button transparent onPress={() => { navigation.openDrawer() }}>
@@ -54,7 +53,7 @@ export default function CataTreco() {
       </Content>
       <Footer>
         <FooterTab style={styles.anatomy}>
-          <Button full style={styles.footerButton} onPress={() => { navigate('Scheduling') }}>
+          <Button full style={styles.footerButton} onPress={() => { navigation.navigate('Scheduling') }}>
             <Text style={styles.footerButtonText}>
               <Icon style={styles.footerButtonText} name='calendar' /> Agendamento
             </Text>

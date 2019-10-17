@@ -22,7 +22,7 @@ export default function LawsList({ apiLink }) {
 
   useEffect(() => {
     getLawsFromApi();
-  })
+  }, []);
 
   return (
     <Content style={styles.accordionContainer}>

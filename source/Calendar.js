@@ -4,8 +4,6 @@ import { StyleSheet, View, Image, Platform, StatusBar, ActivityIndicator } from 
 import { Container, Header, Title, Footer, FooterTab, Content, Button, H1, Left, Right, Body, Icon, Text, H3, List, ListItem } from 'native-base';
 import styles from './styles';
 
-import Events from './Events';
-
 export default function Calendar() {
   const navigation = useNavigation();
   const [ events, setEvents ] = useState([]);

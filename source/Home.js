@@ -5,7 +5,6 @@ import { Container, Header, Title, Content, Button, Left, Right, Body, Icon, Tex
 import styles from './styles';
 
 export default function Home() { 
-  const { navigate } = useNavigation();
   const navigation = useNavigation();
 
   return (
@@ -20,29 +19,29 @@ export default function Home() {
           <Title style={styles.whiteButtons}>Jogue Limpo</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
-          <Button transparent onPress={() => { navigate('Developers') }}>
+          <Button transparent onPress={() => { navigation.navigate('Developers') }}>
             <Icon name='ribbon' style={{color: '#1d844c'}}/>
           </Button>
         </Right>
       </Header>
       <Container style={styles.homeContainer}>
         <View>
-          <TouchableOpacity activeOpacity={.7} style={{ marginBottom: 15 }} onPress={() => { navigate('About') }}>
+          <TouchableOpacity activeOpacity={.7} style={{ marginBottom: 15 }} onPress={() => { navigation.navigate('About') }}>
             <Image source={require('../assets/logo.png')} style={styles.homeImageButton} resizeMode='center'/>  
           </TouchableOpacity>
-          <Button iconLeft style={styles.largeButton} onPress={() => { navigate('CataTreco') }}>
+          <Button iconLeft style={styles.largeButton} onPress={() => { navigation.navigate('CataTreco') }}>
             <Icon name='cart'/>  
             <Text style={styles.homeButtonsText}>Cata-Treco</Text>
           </Button>
-          <Button iconLeft style={styles.largeButton} onPress={() => { navigate('Gathering') }}>
+          <Button iconLeft style={styles.largeButton} onPress={() => { navigation.navigate('Gathering') }}>
             <Icon name='trash'/>
             <Text style={styles.homeButtonsText}>Coleta</Text>
           </Button>
-          <Button iconLeft style={styles.largeButton} onPress={() => { navigate('Complaints') }}>
+          <Button iconLeft style={styles.largeButton} onPress={() => { navigation.navigate('Complaints') }}>
             <Icon name='megaphone'/> 
             <Text style={styles.homeButtonsText}>Denúncias</Text> 
           </Button> 
-          <Button iconLeft style={styles.largeButton} onPress={() => { navigate('Mural') }}>
+          <Button iconLeft style={styles.largeButton} onPress={() => { navigation.navigate('Mural') }}>
             <Icon name='images'/>
             <Text style={styles.homeButtonsText}>Mural</Text>
           </Button>
