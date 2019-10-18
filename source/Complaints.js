@@ -8,14 +8,12 @@ import { StyleSheet, View, Platform, StatusBar, Linking, Alert, Image } from 're
 import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H1, H2, CheckBox } from 'native-base';
 import styles from './styles';
 
-const options = [ "Selecione uma opção", "Lixo irregular", "Descarte de materiais incorreto", "Lâmpadas de mercúrio" ];
-
 export default function Complaints() {
   const navigation = useNavigation();
   const [ text, setText ] = useState('');
   const [ incognito, setIncognito ] = useState(false); 
   const [ inputError, setInputError ] = useState(false);
-  const [ selected, setSelected ] = useState("0");
+  const [ selected, setSelected ] = useState(0);
   const [ permissionGallery, setPermissionGallery ] = useState("undetermined");
   const [ permissionCamera, setPermissionCamera ] = useState("undetermined");
   const [ images, setImages ] = useState([]);
@@ -38,7 +36,6 @@ export default function Complaints() {
         [
           {
             text: 'Ok',
-            style: 'cancel',
           }
         ],
         {cancelable: true},
@@ -92,6 +89,10 @@ export default function Complaints() {
     getPermissionCamera();
   }, []);
 
+  useEffect(() => {
+    console.log(selected);
+  })
+
   return (
     <Container>
       <Header style={styles.anatomy} androidStatusBarColor='#529C52'>
@@ -133,8 +134,8 @@ export default function Complaints() {
             }
             <ListItem noBorder style={{padding: 0, marginStart: 13}}>
               <CheckBox  checked={incognito} color='#1d814c' onPress={incognitoMode}/>
-              <Body >
-                <Text onPress={incognitoMode} >Denúncia Anônima</Text>
+              <Body style={{flex: 0}}>
+                <Text onPress={incognitoMode}>Denúncia Anônima</Text>
               </Body>
             </ListItem>
             <H2 style={styles.title}>Dados da Denúncia</H2>
@@ -154,11 +155,11 @@ export default function Complaints() {
                 iosIcon={<Icon name='arrow-down' />}
                 style={styles.internalPickerContainer}
                 selectedValue={selected}
-                onValueChange={(itemValue, itemIndex) => setSelected(itemValue)}
+                onValueChange={(itemValue, itemIndex) => setSelected(itemValue !== 0 ? itemValue : selected)}
                 itemStyle={styles.pickerIosListItemContainer}
                 itemTextStyle={styles.pickerIosListItemText}
                 supportedOrientations='portrait'
-                placeholder='Selecione o tipo'
+                placeholder='Selecione uma opção'
                 renderHeader={backAction =>
                   <Header style={styles.anatomy} androidStatusBarColor='#529C52'>
                     <Left style={styles.sideHeaderButtonContainer}>
@@ -172,9 +173,10 @@ export default function Complaints() {
                     <Right style={styles.sideHeaderButtonContainer}/>
                   </Header>}
               >
-                {options.map((item, index) => {
-                  return (<Picker.Item label={item} value={index} key={index} />) 
-                })}
+                  <Picker.Item label={"Selecione uma opção:"} value={0} key={'unselectable'}/>
+                  <Picker.Item label={"Lixo irregular"} value={1} key={1} />
+                  <Picker.Item label={"Descarte de materiais incorreto"} value={2} key={2} />
+                  <Picker.Item label={"Lâmpadas de mercúrio"} value={3} key={3} />
               </Picker>
             </View>
             <Textarea style={styles.textarea} rowSpan={3} bordered placeholder='Descreva sua denúncia' />

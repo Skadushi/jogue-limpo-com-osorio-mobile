@@ -134,8 +134,8 @@ export default styles = StyleSheet.create({
   },
   footerButtonText: {
     color: 'white',
-    margin: 3,
-    fontSize: 16
+    fontSize: 16,
+    padding: 10,
   },
   whiteButtons: {
     color: 'white',
@@ -271,12 +271,19 @@ export default styles = StyleSheet.create({
     alignSelf: 'center'
   },
   districtsListInsideView: {
-    paddingLeft: 5,
-    paddingRight: 5,
     width: 300,
+    backgroundColor: accentColor,
+    borderBottomStartRadius: 10,
+    borderBottomEndRadius: 10
+  },
+  districtsListSelective: {
     backgroundColor: bordersColor,
     borderBottomStartRadius: 10,
     borderBottomEndRadius: 10
+  },
+  districtsListTexts: {
+    padding: 5,
+    fontSize: 16,
+    textAlign: 'justify'
   }
-
 });

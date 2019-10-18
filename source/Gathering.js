@@ -52,16 +52,20 @@ export default function Gathering() {
                 {districts.map((item, index) => {
                   return (
                     <View key={index} style={styles.districtsListView}>
-                      <Button style={styles.districtsListButton} onPress={() => { if(selected !== index){ setSelected(index) } else { setSelected(undefined) } }}>
+                      <Button style={styles.districtsListButton} onPress={() => { setSelected(index !== selected ? index : undefined) }}>
                         <Text>{item.name}</Text>
                       </Button>
                       {
                         index === selected ? 
                           <View style={styles.districtsListInsideView} >
-                            <Text style={styles.generalTexts}>  Coleta Seletiva:</Text>
-                            <Text style={styles.generalTexts}>{item.selective}</Text>
-                            <Text style={styles.generalTexts}>  Coleta Orgânica:</Text>
-                            <Text style={styles.generalTexts}>{item.organic}</Text>
+                            <View style={styles.districtsListSelective}>
+                              <Text style={[styles.districtsListTexts, {color: '#1d814c', fontSize: 18, paddingBottom: 0}]}>Coleta Seletiva:</Text>
+                              <Text style={styles.districtsListTexts}>{item.selective}</Text>
+                            </View>
+                            <View>
+                              <Text style={[styles.districtsListTexts, {color: '#1d814c', fontSize: 18, paddingBottom: 0,}]}>Coleta Orgânica:</Text>
+                              <Text style={styles.districtsListTexts}>{item.organic}</Text>
+                            </View>
                           </View>
                           :
                           null
@@ -76,7 +80,7 @@ export default function Gathering() {
         <FooterTab style={styles.anatomy}>
           <Button full style={styles.footerButton} onPress={() => { navigation.navigate('CityMap') }}>
             <Text style={styles.footerButtonText}>
-              <Icon style={styles.footerButtonText} name='navigate' /> Caminhões
+              <Icon style={styles.footerButtonText} name='pin' /> Caminhões
             </Text>
           </Button>
         </FooterTab>
