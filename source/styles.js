@@ -248,10 +248,12 @@ export default styles = StyleSheet.create({
   },
   mapBackButton: {
     color: 'black',
-    paddingStart: 5,
+    marginStart: 5,
     position: 'absolute',
-    top: 40,
+    top: 50,
     left: 0,
+    backgroundColor: 'white',
+    borderRadius: 90,
   },
   mapBackButtonIcon: {
     color: 'black',

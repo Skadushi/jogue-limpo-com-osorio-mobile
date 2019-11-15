@@ -5,7 +5,7 @@ import * as IntentLauncher from 'expo-intent-launcher';
 import * as Camera from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import { StyleSheet, View, Platform, StatusBar, Linking, Alert, Image } from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H1, H2, CheckBox } from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H2, CheckBox } from 'native-base';
 import styles from './styles';
 
 export default function Complaints() {
@@ -174,9 +174,10 @@ export default function Complaints() {
                   </Header>}
               >
                   <Picker.Item label={"Selecione uma opção:"} value={0} key={'unselectable'}/>
-                  <Picker.Item label={"Lixo irregular"} value={1} key={1} />
-                  <Picker.Item label={"Descarte de materiais incorreto"} value={2} key={2} />
-                  <Picker.Item label={"Lâmpadas de mercúrio"} value={3} key={3} />
+                  <Picker.Item label={"Lixo e caliças em área irregular"} value={1} key={1} />
+                  <Picker.Item label={"Caminhão não passou"} value={2} key={2} />
+                  <Picker.Item label={"Atraso do caminhão de lixo"} value={3} key={3} />
+                  <Picker.Item label={"Descarte de volumosos"} value={4} key={4} />
               </Picker>
             </View>
             <Textarea style={styles.textarea} rowSpan={3} bordered placeholder='Descreva sua denúncia' />

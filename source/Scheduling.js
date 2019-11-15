@@ -10,34 +10,74 @@ export default function Scheduling() {
   const [ item, setItem ] = useState('');
   const [ address, setAddress ] = useState('');
   const [ district, setDistrict ] = useState('');
-  const [ done, setDone ] = useState(false);
 
-  useEffect(function handleInput(){
-    if(done && name !== '' && address !== '' && district !== '' && item !== ''){
+  async function sendRequestToApi() {
+    fetch('https://api.myjson.com/bins', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+      body: JSON.stringify({
+        userName: name,
+        userAddress: address,
+        userDistrict: district,
+        userItem: item,
+      }),
+    })
+    .then((response) => {
+      console.log(response);
       Alert.alert(
-        'Enviar com esses dados:',
-        name + ' ' + address + ' ' + district + ' ' + item, 
+        'Sucesso!',
+        'Requisição enviada com sucesso!',
         [
           {
-            text: 'Cancel',
-            onPress: () => {console.log('Cancel Pressed'); setDone(false)},
+            text: 'Ok',
+          },
+        ],
+        {cancelable: false},
+      );
+      setName('');
+      setAddress('');
+      setDistrict('');
+      setItem('');
+    })
+    .catch((error) => {
+      console.error(error);
+      Alert.alert(
+        'Oops!',
+        'Ocorreu um erro ao fazer a requisição!',
+        [
+          {
+            text: 'Ok',
+          },
+        ],
+        {cancelable: false},
+      );
+    });
+  }
+
+  const handleInput = () => {
+    if(name !== '' && address !== '' && district !== '' && item !== ''){
+      Alert.alert(
+        'Enviar com esses dados:',
+        'Nome: ' + name + '\n' + 
+        'Endereço: ' + address + '\n' + 
+        'Bairro: ' + district + '\n' + 
+        'Descrição: ' + item, 
+        [
+          {
+            text: 'Não',
             style: 'cancel',
           },
           {text: 'OK', onPress: () => {
-            console.log('OK Pressed');
-            setDone(false);
-            setName('');
-            setAddress('');
-            setDistrict('');
-            setItem('');
+            sendRequestToApi();
           }},
         ],
         {cancelable: false},
       );
-    } else {
-      setDone(false);
     }
-  });
+  }
 
   return (
     <Container>
@@ -48,7 +88,7 @@ export default function Scheduling() {
           </Button>
         </Left>
         <Body style={styles.headerBody}>
-          <Title style={styles.whiteButtons}>Agentamento</Title>
+          <Title style={styles.whiteButtons}>Agendamento</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.openDrawer() }}>
@@ -78,7 +118,7 @@ export default function Scheduling() {
       </Content>
       <Footer>
         <FooterTab style={styles.anatomy}>
-          <Button full style={styles.footerButton} onPress={() => { setDone(true) }} >
+          <Button full style={styles.footerButton} onPress={handleInput} >
             <Text style={styles.footerButtonText}>
               <Icon style={styles.footerButtonText} name='calendar' /> Agende agora!
             </Text>

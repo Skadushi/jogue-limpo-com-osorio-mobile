@@ -25,7 +25,15 @@
     ],
     "ios": {
       "bundleIdentifier": "br.gov.rs.osorio.joguelimpo",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSAppTransportSecurity" : {
+          "NSAllowsArbitraryLoads" : true,
+          "NSAllowsArbitraryLoadsForMedia": true, 
+          "NSAllowsArbitraryLoadsInWebContent": true, 
+          "NSExceptionAllowsInsecureHTTPLoads": true
+        }
+      }
     },
     "android": {
       "package": "br.gov.rs.osorio.joguelimpo"

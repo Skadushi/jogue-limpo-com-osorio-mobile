@@ -27,6 +27,11 @@ export default function ComplaintsHelp() {
           <H1 style={styles.title}>Dados da Denúncia</H1>
           <Text style={styles.generalTexts}>Com esses dados que os responsáveis pelo Programa irão descobrir qual o problema que está ocorrendo e onde. É importante que o endereço e o bairro sejam bem especificados para que o local seja encontrado de forma mais fácil. Também é importante que a descrição seja bem clara para que o processo seja rápido.</Text>
           <Text style={styles.generalTexts}>Caso o tipo da denúncia não se encontra nos tipos especificados, é por que não faz parte do escopo de denúncias aceitas pelo Programa. Denúncias que sejam feitas sem que tenha uma ligação com o Programa não terão prioridade de atendimento. Caso você ache que sua denúncia poderia fazer parte das disponíveis, ligue para: 3663-1947.</Text>
+          <H1 style={styles.title}>Tipos da Denúncia</H1>
+          <Text style={styles.generalTexts}>Lixo e caliças em área irregular: lixo e caliças em terrenos baldios ou na rua.</Text>
+          <Text style={styles.generalTexts}>Caminhão não passou: nesse dia o caminhão não passou em meu endereço.</Text>
+          <Text style={styles.generalTexts}>Atraso do caminhão de lixo: o caminhão passou, porém fora do horário programado.</Text>
+          <Text style={styles.generalTexts}>Descarte de volumosos: sofás, móveis e colchões em lugares irregulares.</Text>
        </View>
       </Content>
     </Container>
