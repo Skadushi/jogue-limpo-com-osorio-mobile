@@ -29,7 +29,7 @@ export default function Laws() {
       </Header>
       <Tabs tabBarUnderlineStyle={styles.tabs} renderTabBar={() => <ScrollableTab style={styles.tab}/>}>
         <Tab heading='Municipal' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <LawsList apiLink={'https://api.myjson.com/bins/q6m6y'}/>
+          <LawsList apiLink={'https://api.myjson.com/bins/uhwve'}/>
         </Tab>
         <Tab heading='Estadual' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
           <LawsList apiLink={'https://api.myjson.com/bins/rdhei'}/>
