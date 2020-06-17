@@ -6,8 +6,16 @@ const postWithoutImage = {
     }
   }
 
+const postWithImage = {
+    headers: {
+      'accept': 'application/json',
+      'Content-Type': 'multipart/form-data'
+    }
+  }
+
   const requestsConfigList ={
      reqPostWithoutImage : postWithoutImage,
+     reqPostWithImage : postWithImage,
   }
 
   export default requestsConfigList;

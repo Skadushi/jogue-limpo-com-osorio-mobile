@@ -7,6 +7,10 @@ import * as ImagePicker from 'expo-image-picker';
 import { StyleSheet, View, Platform, StatusBar, Linking, Alert, Image } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H2, CheckBox } from 'native-base';
 import styles from './styles';
+import axios from 'axios';
+import { resizeImages } from './Helper/images';
+import URL_API from './Config/Constants';
+import requestsConfigList from './Config/requestsConfig';
 
 export default function Complaints() {
   const navigation = useNavigation();
@@ -32,14 +36,14 @@ export default function Complaints() {
   const [ validateType, setValidateType ] = useState(false);
   const [ validatePhotos, setValidatePhotos ] = useState(false);
  
-  async function getPermissionGallery(){
+  /*async function getPermissionGallery(){
     const permission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     setPermissionGallery(permission.status);
   }
   async function getPermissionCamera(){
     const permission = await Permissions.askAsync(Permissions.CAMERA);
     setPermissionCamera(permission.status);
-  }
+  }*/
 
   async function pickImages(){
     if(images.length > 3){
@@ -93,7 +97,7 @@ export default function Complaints() {
   }
 
   async function sendRequestToApi() {    
-    fetch('https://api.myjson.com/bins', {
+    /*fetch('https://api.myjson.com/bins', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -161,7 +165,84 @@ export default function Complaints() {
         ],
         {cancelable: false},
       );
-    });
+    });*/
+
+    //axios setup
+    axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://saude.osorio.rs.gov.br:3003/';
+    axios.defaults.headers.common['Access-Control-Allow-Methods'] = '*';
+    axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+
+    const form = new FormData();
+
+    form.append('name',name);
+    form.append('phone',contact);
+    form.append('typeReport',selected);
+    form.append('adressOcurr',address + ' / ' + district);
+    form.append('description',description);
+
+    const resizedImgs = await resizeImages(images);
+
+    resizedImgs.forEach(img => form.append('images',img));
+    
+    axios.post(URL_API.report,form,requestsConfigList.reqPostWithImage)
+      .then((response) => {
+        console.log(response.status);
+        console.log(response.data);
+        if (response.status === 200) {
+          Alert.alert(
+            'Sucesso!',
+            'Denúncia enviada com sucesso!',
+            [
+              {
+                text: 'Ok',
+              },
+            ],
+            {cancelable: false},
+          );
+          setName('');
+          setContact('')
+          setAddress('');
+          setDistrict('');
+          setDescription('');
+          setImages([]);
+          setSelected(0);
+          setValidateName(false);
+          setValidateContact(false);
+          setValidateAddress(false);
+          setValidateDistrict(false);
+          setValidateType(false);
+          setValidateDescription(false);
+          setValidatePhotos(false);
+
+        } else {
+          
+          Alert.alert(
+            'Oops!',
+            'Ocorreu um erro no servidor!',
+            [
+              {
+                text: 'Ok',
+              },
+            ],
+            { cancelable: false },
+          );
+
+        }
+      })
+      .catch((error) =>{
+        console.log(error);
+        Alert.alert(
+          'Oops!',
+          'Ocorreu um erro ao fazer a requisição!',
+          [
+            {
+              text: 'Ok',
+            },
+          ],
+          {cancelable: false},
+        );
+      });
+
   }
 
   const checkInternet = () => {
@@ -256,10 +337,23 @@ export default function Complaints() {
     }
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
     getPermissionGallery();
     getPermissionCamera();
+  }, []);*/
+
+  useEffect(() => {
+    
+    //from expo documentation
+    (async() => {
+                  
+       await ImagePicker.requestCameraPermissionsAsync();
+       await ImagePicker.requestCameraRollPermissionsAsync();
+
+    })();
+
   }, []);
+
 
   return (
     <Container>
