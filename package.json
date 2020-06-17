@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "expo": "^37.0.0",
     "expo-camera": "~8.2.0",
     "expo-font": "~8.1.0",

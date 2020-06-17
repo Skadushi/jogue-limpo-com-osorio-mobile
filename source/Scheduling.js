@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, StatusBar, Alert, Linking } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H1 } from 'native-base';
+import axios from 'axios';
 import styles from './styles';
 
 export default function Scheduling() {
@@ -18,7 +19,7 @@ export default function Scheduling() {
   const [ validateDistrict, setValidateDistrict ] = useState(false); 
 
   async function sendRequestToApi() {    
-    fetch('https://api.myjson.com/bins', {
+    /*fetch('https://api.myjson.com/bins', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -78,7 +79,71 @@ export default function Scheduling() {
         ],
         {cancelable: false},
       );
-    });
+    });*/
+
+    axios.post('http://saude.osorio.rs.gov.br:3003/cataTreco',{
+        name: name,
+        local: district ,
+        adressOcurr: address,
+        description: item,
+    },requestConfig)
+      .then((response)=>{
+        console.log(response);
+        console.log(response.status);
+        console.log(response.data);
+        if(response.status === 200){
+          Alert.alert(
+            'Sucesso!',
+            'Requisição enviada com sucesso! \n' +
+            'Número da requisição: 13',
+            [
+              {
+                text: 'Ok',
+              },
+            ],
+            {cancelable: false},
+          );
+          setName('');
+          setAddress('');
+          setDistrict('');
+          setItem('');
+          setValidateAddress(false);
+          setValidateDistrict(false);
+          setValidateItem(false);
+          setValidateName(false);
+        }else{
+          Alert.alert(
+            'Oops!',
+            'Ocorreu um erro no servidor!',
+            [
+              {
+                text: 'Ok',
+              },
+            ],
+            { cancelable: false },
+          );
+        }
+      }).catch((error)=>{
+          console.log(error);
+          Alert.alert(
+            'Oops!',
+            'Ocorreu um erro ao fazer a requisição!',
+            [
+              {
+                text: 'Ok',
+              },
+            ],
+            {cancelable: false},
+          );
+      });
+
+  }
+
+  const requestConfig = {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json; charset=utf-8',
+    }
   }
 
   const checkInternet = () => {
