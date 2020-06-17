@@ -3,6 +3,8 @@ import { useNavigation } from 'react-navigation-hooks';
 import { ActivityIndicator, StyleSheet, View, Image, Platform, StatusBar, Alert } from 'react-native';
 import { Container, Header, Content, Tabs, Tab, ScrollableTab, Footer, H1, FooterTab, Button, Title, Left, Right, Body, Icon, Text, H3 } from 'native-base';
 import styles from './styles';
+import axios from 'axios';
+import URL_API from './Config/Constants';
 
 export default function Gathering() {
   const navigation = useNavigation()
@@ -10,7 +12,7 @@ export default function Gathering() {
   const [ selected, setSelected ] = useState();
 
   async function getDistrictsFromApi() {
-    try {
+    /*try {
       let response = await fetch(
         'https://api.myjson.com/bins/1h08s0'
       );
@@ -18,6 +20,12 @@ export default function Gathering() {
       setDistricts(responseJson.districts);
     } catch (error) {
       console.error(error);
+    }*/
+    try {
+      const response = await axios.get(URL_API.coleta);
+      setDistricts(response.data);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -53,18 +61,18 @@ export default function Gathering() {
                   return (
                     <View key={index} style={styles.districtsListView}>
                       <Button style={styles.districtsListButton} onPress={() => { setSelected(index !== selected ? index : undefined) }}>
-                        <Text>{item.name}</Text>
+                        <Text>nome Bairro{/*item.name*/}</Text>
                       </Button>
                       {
                         index === selected ? 
                           <View style={styles.districtsListInsideView} >
                             <View style={styles.districtsListSelective}>
                               <Text style={[styles.districtsListTexts, {color: '#1d814c', fontSize: 18, paddingBottom: 0}]}>Coleta Seletiva:</Text>
-                              <Text style={styles.districtsListTexts}>{item.selective}</Text>
+                              <Text style={styles.districtsListTexts}>xxx{/*item.selective*/}</Text>
                             </View>
                             <View>
                               <Text style={[styles.districtsListTexts, {color: '#1d814c', fontSize: 18, paddingBottom: 0,}]}>Coleta Orgânica:</Text>
-                              <Text style={styles.districtsListTexts}>{item.organic}</Text>
+                              <Text style={styles.districtsListTexts}>xxx{/*item.organic*/}</Text>
                             </View>
                           </View>
                           :

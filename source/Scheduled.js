@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { ActivityIndicator, View, } from 'react-native';
 import { Container, Header, List, ListItem, Title, Content, Button, H1, Left, Right, Body, Icon, Text } from 'native-base';
-import styles from './styles'; 
+import styles from './styles';
+import axios from 'axios';
+import URL_API from './Config/Constants';
 
 export default function Scheduled() {
   const navigation = useNavigation();
@@ -10,7 +12,7 @@ export default function Scheduled() {
   const [ items, setItems ] = useState([]);
   
   async function getScheduledFromApi() {
-    try {
+    /*try {
       let response = await fetch(
         'https://api.myjson.com/bins/9n70a'
       );
@@ -19,6 +21,16 @@ export default function Scheduled() {
       setLoading(true);
     } catch (error) {
       console.error(error);
+    }*/
+    try {
+     
+      const response = await axios.get(URL_API.catatreco);
+      setItems(response.data);
+      console.log('Itens buscados...');
+      console.log(items);
+      setLoading(true);
+    } catch (error) {
+      console.log(error);
     }
   }
 
@@ -59,7 +71,7 @@ export default function Scheduled() {
                   renderRow={(item, {}, index,) =>
                     <ListItem itemDivider style={[styles.calendarBackground, {marginBottom: 0}]} key={index}>
                       <Left style={{flex: 0, alignItems: 'flex-end'}}>
-                        <Text style={{width: 30, textAlign: 'right'}}>{item.protocol}</Text>
+                        <Text style={{width: 30, textAlign: 'right'}}>0{/*item.protocol*/}</Text>
                       </Left>
                       <Body style={styles.namesListBody}>
                         <Text>{item.name}</Text>
