@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, ActivityIndicator } from 'react-native';
 import { Content, Accordion } from 'native-base';
 import styles from '../styles';
+import axios from 'axios';
+import URL_API from '../Config/Constants';
 
-export default function LawsList({ apiLink }) {
+export default function LawsList() {
   const [ loadComplete, setLoading ] = useState(false);
   const [ laws, setLaws ] = useState();
 
   async function getLawsFromApi() {
-    try {
+    /*try {
       let response = await fetch(
         apiLink
       );
@@ -17,6 +19,16 @@ export default function LawsList({ apiLink }) {
       setLoading(true);
     } catch (error) {
       console.error(error);
+    }*/
+    
+    try {
+      const response = await axios.get(URL_API.leis);
+      setLaws(response.data);
+      //console.log(laws);
+      console.log(response.data[0].name);
+      setLoading(true);
+    } catch (error) {
+      console.log(error);
     }
   }
 

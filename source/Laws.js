@@ -29,13 +29,13 @@ export default function Laws() {
       </Header>
       <Tabs tabBarUnderlineStyle={styles.tabs} renderTabBar={() => <ScrollableTab style={styles.tab}/>}>
         <Tab heading='Municipal' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <LawsList apiLink={'https://api.myjson.com/bins/uhwve'}/>
+          <LawsList />
         </Tab>
         <Tab heading='Estadual' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <LawsList apiLink={'https://api.myjson.com/bins/rdhei'}/>
+          <LawsList />
         </Tab>
         <Tab heading='Federal' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <LawsList apiLink={'https://api.myjson.com/bins/8x1ne'}/>
+          <LawsList />
         </Tab>
       </Tabs>
     </Container>

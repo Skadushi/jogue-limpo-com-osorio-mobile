@@ -21,67 +21,6 @@ export default function Scheduling() {
   const [ validateDistrict, setValidateDistrict ] = useState(false); 
 
   async function sendRequestToApi() {    
-    /*fetch('https://api.myjson.com/bins', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json; charset=utf-8',
-      },
-      body: JSON.stringify({
-        name: name,
-        address: address,
-        district: district,
-        item: item,
-      }),
-    })
-    .then((response) => {
-      console.log(response);
-      if(response.status !== 201) {
-        Alert.alert(
-          'Oops!',
-          'Ocorreu um problema no servidor!',
-          [
-            {
-              text: 'Ok',
-            },
-          ],
-          {cancelable: false},
-        );
-      } else {
-        Alert.alert(
-          'Sucesso!',
-          'Requisição enviada com sucesso! \n' +
-          'Número da requisição: 13',
-          [
-            {
-              text: 'Ok',
-            },
-          ],
-          {cancelable: false},
-        );
-        setName('');
-        setAddress('');
-        setDistrict('');
-        setItem('');
-        setValidateAddress(false);
-        setValidateDistrict(false);
-        setValidateItem(false);
-        setValidateName(false);
-      }      
-    })
-    .catch((error) => {
-      console.error(error);
-      Alert.alert(
-        'Oops!',
-        'Ocorreu um erro ao fazer a requisição!',
-        [
-          {
-            text: 'Ok',
-          },
-        ],
-        {cancelable: false},
-      );
-    });*/
 
     axios.post(URL_API.catatreco,{
         name: name,
@@ -90,9 +29,7 @@ export default function Scheduling() {
         description: item,
     },requestsConfigList.reqPostWithoutImage)
       .then((response)=>{
-        console.log(response);
-        console.log(response.status);
-        console.log(response.data);
+        
         if(response.status === 200){
           Alert.alert(
             'Sucesso!',

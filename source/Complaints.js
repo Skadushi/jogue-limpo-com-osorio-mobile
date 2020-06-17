@@ -97,76 +97,7 @@ export default function Complaints() {
   }
 
   async function sendRequestToApi() {    
-    /*fetch('https://api.myjson.com/bins', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json; charset=utf-8',
-      },
-      body: JSON.stringify({
-        userName: name,
-        userContact: contact,
-        userType: incognito,
-        complaintAddress: address,
-        complaintDistrict: district,
-        complaintType: selected,  
-        complaintDescription: description,
-        complaintPhotos: images,
-      }),
-    })
-    .then((response) => {
-      console.log(response);
-      if(response.status !== 201) {
-        Alert.alert(
-          'Oops!',
-          'Ocorreu um problema no servidor!',
-          [
-            {
-              text: 'Ok',
-            },
-          ],
-          {cancelable: false},
-        );
-      } 
-      Alert.alert(
-        'Sucesso!',
-        'Denúncia enviada com sucesso!',
-        [
-          {
-            text: 'Ok',
-          },
-        ],
-        {cancelable: false},
-      );
-      setName('');
-      setContact('')
-      setAddress('');
-      setDistrict('');
-      setDescription('');
-      setImages([]);
-      setSelected(0);
-      setValidateName(false);
-      setValidateContact(false);
-      setValidateAddress(false);
-      setValidateDistrict(false);
-      setValidateType(false);
-      setValidateDescription(false);
-      setValidatePhotos(false);
-    })
-    .catch((error) => {
-      console.error(error);
-      Alert.alert(
-        'Oops!',
-        'Ocorreu um erro ao fazer a denúncia!',
-        [
-          {
-            text: 'Ok',
-          },
-        ],
-        {cancelable: false},
-      );
-    });*/
-
+   
     //axios setup
     axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://saude.osorio.rs.gov.br:3003/';
     axios.defaults.headers.common['Access-Control-Allow-Methods'] = '*';

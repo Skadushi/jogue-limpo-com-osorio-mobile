@@ -12,22 +12,12 @@ export default function Scheduled() {
   const [ items, setItems ] = useState([]);
   
   async function getScheduledFromApi() {
-    /*try {
-      let response = await fetch(
-        'https://api.myjson.com/bins/9n70a'
-      );
-      let responseJson = await response.json();
-      setItems(responseJson.scheduled);
-      setLoading(true);
-    } catch (error) {
-      console.error(error);
-    }*/
+  
     try {
      
       const response = await axios.get(URL_API.catatreco);
       setItems(response.data);
-      console.log('Itens buscados...');
-      console.log(items);
+      
       setLoading(true);
     } catch (error) {
       console.log(error);
@@ -71,7 +61,7 @@ export default function Scheduled() {
                   renderRow={(item, {}, index,) =>
                     <ListItem itemDivider style={[styles.calendarBackground, {marginBottom: 0}]} key={index}>
                       <Left style={{flex: 0, alignItems: 'flex-end'}}>
-                        <Text style={{width: 30, textAlign: 'right'}}>0{/*item.protocol*/}</Text>
+                        <Text style={{width: 30, textAlign: 'right'}}>{item.protocol}</Text>
                       </Left>
                       <Body style={styles.namesListBody}>
                         <Text>{item.name}</Text>

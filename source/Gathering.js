@@ -12,15 +12,7 @@ export default function Gathering() {
   const [ selected, setSelected ] = useState();
 
   async function getDistrictsFromApi() {
-    /*try {
-      let response = await fetch(
-        'https://api.myjson.com/bins/1h08s0'
-      );
-      let responseJson = await response.json();
-      setDistricts(responseJson.districts);
-    } catch (error) {
-      console.error(error);
-    }*/
+ 
     try {
       const response = await axios.get(URL_API.coleta);
       setDistricts(response.data);
