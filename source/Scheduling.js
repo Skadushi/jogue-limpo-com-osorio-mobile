@@ -4,6 +4,8 @@ import { StyleSheet, View, Image, Platform, StatusBar, Alert, Linking } from 're
 import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H1 } from 'native-base';
 import axios from 'axios';
 import styles from './styles';
+import URL_API from './Config/Constants';
+import requestsConfigList from './Config/requestsConfig';
 
 export default function Scheduling() {
   const navigation = useNavigation();
@@ -81,12 +83,12 @@ export default function Scheduling() {
       );
     });*/
 
-    axios.post('http://saude.osorio.rs.gov.br:3003/cataTreco',{
+    axios.post(URL_API.catatreco,{
         name: name,
         local: district ,
         adressOcurr: address,
         description: item,
-    },requestConfig)
+    },requestsConfigList.reqPostWithoutImage)
       .then((response)=>{
         console.log(response);
         console.log(response.status);
@@ -139,12 +141,6 @@ export default function Scheduling() {
 
   }
 
-  const requestConfig = {
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json; charset=utf-8',
-    }
-  }
 
   const checkInternet = () => {
     Linking.canOpenURL("https://google.com").then(connection => {
