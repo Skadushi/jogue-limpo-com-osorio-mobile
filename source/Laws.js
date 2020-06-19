@@ -1,14 +1,44 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { AppLoading } from 'expo';
 import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
 import { Container, Header, Content, Tabs, Tab, ScrollableTab, Button, Title, Left, Right, Body, Icon, Text } from 'native-base';
 import styles from './styles';
 
-import LawsList from './LawTabs/LawsList';
+import LawsListMunicipal from './LawTabs/LawsListMunicipal';
+import LawsListEstadual from './LawTabs/LawsListEstadual';
+import LawsListFederal from './LawTabs/LawsListFederal';
 
 export default function Laws() {
+
   const navigation = useNavigation();
+  const navigate = useNavigation();
+
+  const [tabSelected, setTabSelected] = useState(0);
+  let tabNumber = 0;
+
+  const [keyLawsMunicipais,setKeyLawsMunicipais] = useState(0);
+  const [keyLawsEstaduais,setKeyLawsEstaduais] = useState(0);
+  const [keyLawsFederais,setKeyLawsFederais] = useState(0);
+
+  if(navigation.state.params != undefined) {
+
+    tabNumber = navigation.state.params.tabInfo;
+    let tabKey = navigate.state.params.tabKey;
+
+    if(keyLawsFederais != tabKey && tabNumber == 2){
+      setKeyLawsFederais(tabKey);
+      setKeyLawsMunicipais(tabKey + 1);
+    }else if(keyLawsEstaduais != tabKey && tabNumber == 1){
+      setKeyLawsEstaduais(tabKey);
+      setKeyLawsMunicipais(tabKey + 1);
+    }
+
+    if(tabSelected != tabNumber){
+      setTabSelected(tabNumber);
+    }
+
+  }
 
   return (
     <Container>
@@ -27,15 +57,16 @@ export default function Laws() {
           </Button>
         </Right>
       </Header>
-      <Tabs tabBarUnderlineStyle={styles.tabs} renderTabBar={() => <ScrollableTab style={styles.tab}/>}>
+
+      <Tabs initialPage={tabSelected} tabBarUnderlineStyle={styles.tabs} renderTabBar={() => <ScrollableTab style={styles.tab}/>}>
         <Tab heading='Municipal' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <LawsList />
+          <LawsListMunicipal  key={keyLawsMunicipais}/>
         </Tab>
         <Tab heading='Estadual' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <LawsList />
+          <LawsListEstadual key={keyLawsEstaduais} />
         </Tab>
         <Tab heading='Federal' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <LawsList />
+          <LawsListFederal key={keyLawsFederais} />
         </Tab>
       </Tabs>
     </Container>

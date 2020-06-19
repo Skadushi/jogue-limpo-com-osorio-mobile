@@ -6,28 +6,26 @@ import axios from 'axios';
 import URL_API from '../Config/Constants';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function LawsList() {
+export default function LawsListFederal() {
   const [ loadComplete, setLoading ] = useState(false);
   const [ laws, setLaws ] = useState([]);
+  const [ lawsFederais, setLawsFederais ] = useState([]);
   const [ selected,setSelected ] = useState();
 
   async function getLawsFromApi() {
-    /*try {
-      let response = await fetch(
-        apiLink
-      );
-      let responseJson = await response.json();
-      setLaws(responseJson.laws);
-      setLoading(true);
-    } catch (error) {
-      console.error(error);
-    }*/
     
     try {
       const response = await axios.get(URL_API.leis);
       setLaws(response.data);
-      console.log(laws);
-      //console.log(response.data[0].name);
+      //console.log(response.data);
+
+      setLawsFederais(
+        laws.filter((law)=>{
+          return law.typeLei == 'Federal';
+        })
+      );
+      console.log('leis federais...');
+      console.log(lawsFederais);
       setLoading(true);
     } catch (error) {
       console.log(error);
@@ -46,7 +44,7 @@ export default function LawsList() {
           <ActivityIndicator size='large' color='#529C52' style={{ paddingTop: 25 }}/>
           :
           <View style={{flex:1,justifyContent:'space-around',alignItems:'stretch',borderColor: '#caebc5', borderWidth: 2}}>
-          {laws.map((item, index) => {
+          {lawsFederais.map((item, index) => {
             return (
               <View key={index} >
 
