@@ -5,9 +5,8 @@ import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
 import { Container, Header, Content, Tabs, Tab, ScrollableTab, Button, Title, Left, Right, Body, Icon, Text } from 'native-base';
 import styles from './styles';
 
-import LawsListMunicipal from './LawTabs/LawsListMunicipal';
-import LawsListEstadual from './LawTabs/LawsListEstadual';
-import LawsListFederal from './LawTabs/LawsListFederal';
+import LawsList from './LawTabs/LawsList';
+import URL_API from './Config/Constants';
 
 export default function Laws() {
 
@@ -33,13 +32,13 @@ export default function Laws() {
 
       <Tabs  tabBarUnderlineStyle={styles.tabs} renderTabBar={() => <ScrollableTab style={styles.tab}/>}>
         <Tab heading='Municipal' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <LawsListMunicipal  />
+          <LawsList apiLink={URL_API.leisMunicipais}/>
         </Tab>
         <Tab heading='Estadual' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <LawsListEstadual  />
+          <LawsList apiLink={URL_API.leisEstaduais}/>
         </Tab>
         <Tab heading='Federal' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <LawsListFederal  />
+          <LawsList apiLink={URL_API.leisFederais}/>
         </Tab>
       </Tabs>
     </Container>

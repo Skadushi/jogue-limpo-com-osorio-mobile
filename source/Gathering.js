@@ -14,7 +14,7 @@ export default function Gathering() {
   async function getDistrictsFromApi() {
  
     try {
-      const response = await axios.get(URL_API.coleta);
+      const response = await axios.get(URL_API.coleta);  
       setDistricts(response.data);
     } catch (error) {
       console.log(error);
@@ -53,18 +53,18 @@ export default function Gathering() {
                   return (
                     <View key={index} style={styles.districtsListView}>
                       <Button style={styles.districtsListButton} onPress={() => { setSelected(index !== selected ? index : undefined) }}>
-                        <Text>nome Bairro{/*item.name*/}</Text>
+                        <Text>{item.name}</Text>
                       </Button>
                       {
                         index === selected ? 
                           <View style={styles.districtsListInsideView} >
                             <View style={styles.districtsListSelective}>
                               <Text style={[styles.districtsListTexts, {color: '#1d814c', fontSize: 18, paddingBottom: 0}]}>Coleta Seletiva:</Text>
-                              <Text style={styles.districtsListTexts}>xxx{/*item.selective*/}</Text>
+                              <Text style={styles.districtsListTexts}>{item.selective}</Text>
                             </View>
                             <View>
                               <Text style={[styles.districtsListTexts, {color: '#1d814c', fontSize: 18, paddingBottom: 0,}]}>Coleta Orgânica:</Text>
-                              <Text style={styles.districtsListTexts}>xxx{/*item.organic*/}</Text>
+                              <Text style={styles.districtsListTexts}>{item.organic}</Text>
                             </View>
                           </View>
                           :

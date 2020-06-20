@@ -4,7 +4,9 @@ const URL_API = {
     report : BASE_URL + '/report' ,
     calendars : BASE_URL + '/calendars' ,
     catatreco : BASE_URL + '/cataTreco' ,
-    leis : BASE_URL + '/leis' ,
+    leisMunicipais: BASE_URL + '/leisMunicipais',
+    leisEstaduais: BASE_URL + '/leisEstaduais',
+    leisFederais: BASE_URL + '/leisFederais',
     muralPhotos: BASE_URL + '/photos' ,
     coleta: BASE_URL + '/coleta' 
 }
