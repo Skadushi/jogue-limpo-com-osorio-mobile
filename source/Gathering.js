@@ -76,15 +76,6 @@ export default function Gathering() {
             </View>
         }
       </Content>
-      <Footer>
-        <FooterTab style={styles.anatomy}>
-          <Button full style={styles.footerButton} onPress={() => { navigation.navigate('CityMap') }}>
-            <Text style={styles.footerButtonText}>
-              <Icon style={styles.footerButtonText} name='pin' /> Caminhões
-            </Text>
-          </Button>
-        </FooterTab>
-      </Footer>
     </Container>
   );    
 }
