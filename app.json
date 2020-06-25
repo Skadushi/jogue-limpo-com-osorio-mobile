@@ -35,7 +35,12 @@
       }
     },
     "android": {
-      "package": "br.gov.rs.osorio.joguelimpo"
+      "package": "br.gov.rs.osorio.joguelimpo",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE", 
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "packagerOpts": {
       "sourceExts": [
