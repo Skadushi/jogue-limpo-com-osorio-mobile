@@ -18,6 +18,7 @@ import Gathering from '../Gathering';
 import Developers from '../Developers';
 import Scheduled from '../Scheduled';
 import CityMap from '../Map/CityMap';
+import LawPdfView from '../LawTabs/LawPdfView';
 
 const Drawer = createDrawerNavigator(
   {
@@ -58,7 +59,8 @@ const RootStack = createStackNavigator(
     Gathering: { screen: Gathering },
     Developers: { screen: Developers },
     Scheduled: { screen: Scheduled },
-    CityMap: { screen: CityMap }
+    CityMap: { screen: CityMap },
+    LawPdfView: {screen: LawPdfView}
   },
   {
     initialRouteName: 'Drawer',

@@ -1,25 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, ActivityIndicator, View } from 'react-native';
-import { Content, Accordion ,Text,Button, Icon, ListItem, Left, Right} from 'native-base';
+import { Content, Accordion ,Text,Button, Icon, ListItem, Left, Right, List, Body} from 'native-base';
 import styles from '../styles';
 import axios from 'axios';
+import { useNavigation } from 'react-navigation-hooks';
 import URL_API from '../Config/Constants';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 
 export default function LawsList({apiLink}) {
   const [ loadComplete, setLoading ] = useState(false);
   const [ laws, setLaws ] = useState([]);
   const [ selected,setSelected ] = useState();
+  const [urlPdf,setUrlPdf] = useState('');
+  const navigation = useNavigation();
+  const navigate = useNavigation();
 
   async function getLawsFromApi() {
     
-    try {
+    /*try {
       const response = await axios.get(apiLink);
       setLaws(response.data);
       setLoading(true);
     } catch (error) {
       console.log(error);
-    }
+    }*/
+    setLaws([
+      {name:'Lei do governo 1'},
+      {name:'Lei do governo 2'},
+      {name:'Lei do governo 3'},
+      {name:'Lei do governo 4'},
+      {name:'Lei do governo 5'},
+    ]);
+
   }
 
   useEffect(() => {
@@ -30,7 +42,28 @@ export default function LawsList({apiLink}) {
     <Content style={styles.accordionContainer}>
 
       {
-        !loadComplete ?
+
+       <FlatList
+          data={laws}
+          renderItem={({item}) => {
+            return(
+              <ListItem>
+                <Left>
+                  <Text style={{fontSize:16}} >{item.name}</Text>
+                </Left>
+                
+                <TouchableOpacity onPress={() => {navigation.navigate('LawPdfView')}} >
+                  <Right>
+                    <Icon name="ios-eye" style={{fontSize:35,color:'black'}}/>
+                  </Right>
+                </TouchableOpacity>       
+              </ListItem>
+            )
+          }}
+          keyExtractor={item => item.name}
+       />
+          
+       /* !loadComplete ?
           <ActivityIndicator size='large' color='#529C52' style={{ paddingTop: 25 }}/>
           :
           <View style={{flex:1,justifyContent:'space-around',alignItems:'stretch',borderColor: '#caebc5', borderWidth: 2}}>
@@ -65,7 +98,7 @@ export default function LawsList({apiLink}) {
                   ) 
                 })}
           </View>
-              }
+             */ }
     </Content>
   );
 }

@@ -11,6 +11,8 @@
     "axios": "^0.19.2",
     "expo": "^37.0.0",
     "expo-camera": "~8.2.0",
+    "expo-constants": "^9.1.1",
+    "expo-file-system": "^9.0.1",
     "expo-font": "~8.1.0",
     "expo-image-manipulator": "^8.1.0",
     "expo-image-picker": "~8.1.0",
@@ -27,10 +29,12 @@
     "react-native-maps": "0.26.1",
     "react-native-reanimated": "~1.7.0",
     "react-native-web": "^0.11.7",
+    "react-native-webview": "^10.3.2",
     "react-navigation": "^4.0.10",
     "react-navigation-drawer": "^2.2.2",
     "react-navigation-hooks": "^1.0.3",
-    "react-navigation-stack": "^1.9.0"
+    "react-navigation-stack": "^1.9.0",
+    "rn-pdf-reader-js": "^3.1.0"
   },
   "devDependencies": {
     "babel-preset-expo": "^8.1.0"

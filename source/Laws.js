@@ -32,13 +32,13 @@ export default function Laws() {
 
       <Tabs  tabBarUnderlineStyle={styles.tabs} renderTabBar={() => <ScrollableTab style={styles.tab}/>}>
         <Tab heading='Municipal' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <LawsList apiLink={URL_API.leisMunicipais}/>
+          <LawsList apiLink={URL_API.leisMunicipais} />
         </Tab>
         <Tab heading='Estadual' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <LawsList apiLink={URL_API.leisEstaduais}/>
+          <LawsList apiLink={URL_API.leisEstaduais} />
         </Tab>
         <Tab heading='Federal' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
-          <LawsList apiLink={URL_API.leisFederais}/>
+          <LawsList apiLink={URL_API.leisFederais} />
         </Tab>
       </Tabs>
     </Container>
