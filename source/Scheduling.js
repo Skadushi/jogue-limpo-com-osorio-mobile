@@ -10,7 +10,11 @@ import requestsConfigList from './Config/requestsConfig';
 export default function Scheduling() {
   const navigation = useNavigation();
   const [ internet, setInternet ] = useState(); 
+
   const [ sent, setSent ] = useState(false);
+  const [inputError] = useState(false);
+  const [loading,setLoading] = useState(false);
+
   const [ name, setName ] = useState('');
   const [ item, setItem ] = useState('');
   const [ address, setAddress ] = useState('');
@@ -20,61 +24,82 @@ export default function Scheduling() {
   const [ validateAddress, setValidateAddress ] = useState(false); 
   const [ validateDistrict, setValidateDistrict ] = useState(false); 
 
-  async function sendRequestToApi() {    
+  async function sendRequestToApi() {
+    
+    try {
 
-    axios.post(URL_API.catatreco,{
+      axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://saude.osorio.rs.gov.br:3003/';
+      axios.defaults.headers.common['Access-Control-Allow-Methods'] = '*';
+      axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+
+      axios.post(URL_API.catatreco,{
         name: name,
         local: district ,
         adressOcurr: address,
         description: item,
-    },requestsConfigList.reqPostWithoutImage)
-      .then((response)=>{
+      },requestsConfigList.reqPostWithoutImage)
+        .then((response)=>{
         
-        if(response.status === 200){
-          Alert.alert(
-            'Sucesso!',
-            'Requisição enviada com sucesso! \n' +
-            'Número da requisição: 13',
-            [
-              {
-                text: 'Ok',
-              },
-            ],
+          if(response.status === 200){
+            Alert.alert(
+              'Sucesso!',
+              'Requisição enviada com sucesso! \n',
+              [
+                {
+                  text: 'Ok',
+                },
+              ],
             {cancelable: false},
-          );
-          setName('');
-          setAddress('');
-          setDistrict('');
-          setItem('');
-          setValidateAddress(false);
-          setValidateDistrict(false);
-          setValidateItem(false);
-          setValidateName(false);
-        }else{
-          Alert.alert(
-            'Oops!',
-            'Ocorreu um erro no servidor!',
-            [
-              {
-                text: 'Ok',
-              },
-            ],
-            { cancelable: false },
-          );
-        }
-      }).catch((error)=>{
-          console.log(error);
-          Alert.alert(
-            'Oops!',
-            'Ocorreu um erro ao fazer a requisição!',
-            [
-              {
-                text: 'Ok',
-              },
-            ],
-            {cancelable: false},
-          );
-      });
+            );
+            setName('');
+            setAddress('');
+            setDistrict('');
+            setItem('');
+            setValidateAddress(false);
+            setValidateDistrict(false);
+            setValidateItem(false);
+            setValidateName(false);
+            }else{
+              Alert.alert(
+                'Oops!',
+                'Ocorreu um erro no servidor!',
+                [
+                  {
+                    text: 'Ok',
+                  },
+                ],
+                { cancelable: false },
+              );
+            }
+        }).catch((error)=>{
+              console.log(error);
+              Alert.alert(
+                'Oops!',
+                'Ocorreu um erro ao fazer a requisição!',
+                [
+                  {
+                    text: 'Ok',
+                  },
+                ],
+                {cancelable: false},
+              );
+        });
+      
+    } catch (err) {
+      console.log(err);
+      Alert.alert(
+        'Estamos com um problema no servidor.',
+        'Tente mais tarde',
+        [
+          {
+            text: 'Ok',
+          },
+        ],
+        {cancelable:false},
+      );
+    }
+
+
 
   }
 
@@ -121,6 +146,8 @@ export default function Scheduling() {
         ],
         {cancelable: false},
       );
+    }else{
+     console.log('falta preencher todos os campos');
     }
   }
 
@@ -145,39 +172,60 @@ export default function Scheduling() {
         <View style={{padding: 10}}>
           <Form>
             <H1 style={styles.title}>Agende a busca!</H1>
-            <Item style={styles.inputs} error={sent && !validateName ? true : false}>
+            <Item error={inputError} style={styles.inputs} error={sent && !validateName ? true : false}>
               <Icon active name='person'/>
               <Input placeholder='Nome Completo' value={name} 
                 onChangeText={(text) => {
-                  if(text.length < 8) setValidateName(false); else setValidateName(true);
+                  if(text.length < 1) setValidateName(false); else setValidateName(true);
                   setName(text);
                 }
               }/>
             </Item>
-            <Item style={styles.inputs} error={sent && !validateAddress ? true : false}>
+            {
+              sent && !validateName ?
+                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, insira seu nome completo</Text>
+                :
+                null
+            }
+
+            <Item error={inputError} style={styles.inputs} error={sent && !validateAddress ? true : false}>
               <Icon active name='pin'/>
               <Input placeholder='Endereço e número' value={address} 
                 onChangeText={(text) => {
-                  if(text.length < 12) setValidateAddress(false); else setValidateAddress(true);
+                  if(text.length < 1) setValidateAddress(false); else setValidateAddress(true);
                   setAddress(text) 
                 }
               }/>
             </Item>
-            <Item style={styles.inputs} error={sent && !validateDistrict ? true : false}>
+            {
+              sent && !validateAddress ?
+                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, insira endereço e número</Text>
+                :
+                null
+            }
+
+            <Item error={inputError} style={styles.inputs} error={sent && !validateDistrict ? true : false}>
               <Icon active name='map'/>
               <Input placeholder='Bairro' value={district}
                 onChangeText={(text) => {
-                  if(text.length < 8) setValidateDistrict(false); else setValidateDistrict(true); 
+                  if(text.length < 1) setValidateDistrict(false); else setValidateDistrict(true); 
                   setDistrict(text) 
                 }
               }/>
             </Item>
+            {
+              sent && !validateDistrict ?
+                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, insira o bairro</Text>
+                :
+                null
+            }
+            
             <Textarea 
               style={[styles.textarea, sent && !validateItem ? {borderColor: 'red'} : {borderColor: '#1d814c'}]} 
               rowSpan={5} bordered placeholder='Descreva o item' 
               value={item} 
               onChangeText={(text) => { 
-                if(text.length < 20) setValidateItem(false); else setValidateItem(true);
+                if(text.length < 1) setValidateItem(false); else setValidateItem(true);
                 setItem(text) 
               }
             }/>
