@@ -317,7 +317,7 @@ export default function Complaints() {
                     <Icon active name='person'/>
                     <Input placeholder='Nome' value={name}
                       onChangeText={(text) => {
-                        if(text.length < 5) setValidateName(false); else setValidateName(true);
+                        if(text.length < 1) setValidateName(false); else setValidateName(true);
                         setName(text);
                       }}
                     />
@@ -346,7 +346,7 @@ export default function Complaints() {
               <Icon active name='pin'/>
               <Input placeholder='Endereço e número' value={address}
                 onChangeText={(text) => {
-                  if(text.length < 12) setValidateAddress(false); else setValidateAddress(true);
+                  if(text.length < 1) setValidateAddress(false); else setValidateAddress(true);
                   setAddress(text);
                 }}
               /> 
@@ -355,7 +355,7 @@ export default function Complaints() {
               <Icon active name='map'/>
               <Input placeholder='Bairro' value={district}
                 onChangeText={(text) => {
-                  if(text.length < 8) setValidateDistrict(false); else setValidateDistrict(true);
+                  if(text.length < 1) setValidateDistrict(false); else setValidateDistrict(true);
                   setDistrict(text);
                 }}
               /> 
@@ -397,7 +397,7 @@ export default function Complaints() {
               rowSpan={5} bordered placeholder='Descreva a denúncia' 
               value={description} 
               onChangeText={(text) => { 
-                if(text.length < 20) setValidateDescription(false); else setValidateDescription(true);
+                if(text.length < 1) setValidateDescription(false); else setValidateDescription(true);
                 setDescription(text) 
               }
             }/>

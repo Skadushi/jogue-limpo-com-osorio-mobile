@@ -67,6 +67,9 @@ export default function Scheduled() {
                         <Text>{item.name}</Text>
                       </Body>
                     </ListItem>}
+                  
+                  keyExtractor={item => item._id}
+                  
                 />
             </Content>
         }
