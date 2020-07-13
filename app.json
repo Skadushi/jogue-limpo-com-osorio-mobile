@@ -5,8 +5,7 @@
     "privacy": "public",
     "platforms": [
       "ios",
-      "android",
-      "web"
+      "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
@@ -24,18 +23,17 @@
     ],
     "ios": {
       "bundleIdentifier": "br.gov.rs.osorio.joguelimpo",
+      "buildNumber": "1",
       "supportsTablet": true,
+      "requireFullScreen": false,
       "infoPlist": {
-        "NSAppTransportSecurity": {
-          "NSAllowsArbitraryLoads": true,
-          "NSAllowsArbitraryLoadsForMedia": true,
-          "NSAllowsArbitraryLoadsInWebContent": true,
-          "NSExceptionAllowsInsecureHTTPLoads": true
-        }
+        "NSCameraUsageDescription": "Este aplicativo usa a câmera para capturar imagens que podem ser usadas no cadastro de denúncias.",
+        "NSPhotoLibraryUsageDescription": "Este aplicativo permite que você envie fotos da sua biblioteca para cadastro de denúncias."
       }
     },
     "android": {
       "package": "br.gov.rs.osorio.joguelimpo",
+      "versionCode": 1,
       "permissions": [
         "CAMERA",
         "READ_EXTERNAL_STORAGE", 

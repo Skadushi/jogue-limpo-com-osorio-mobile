@@ -6,6 +6,7 @@ import * as Camera from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import { StyleSheet, View, Platform, StatusBar, Linking, Alert, Image } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H2, CheckBox } from 'native-base';
+import { TextInputMask } from 'react-native-masked-text';
 import styles from './styles';
 import axios from 'axios';
 import { resizeImages } from './Helper/images';
@@ -324,12 +325,22 @@ export default function Complaints() {
                   </Item>
                   <Item error={inputError} style={styles.inputs} error={sent && !validateContact ? true : false}>
                     <Icon active name='phone-portrait' style={{marginEnd: 4}}/>
-                    <Input placeholder='Telefone' keyboardType='phone-pad' maxLength={11} value={contact}
-                      onChangeText={(text) => {
-                        if(text.length < 8) setValidateContact(false); else setValidateContact(true);
-                        setContact(text);
-                      }}
-                    />
+                    <TextInputMask style={styles.textInputMask}
+                    placeholder="Telefone"
+                    keyBoardType={'numeric'}
+                    placeholderTextColor = "#555"
+                    type={'cel-phone'}
+                    options={{
+                      maskType: 'BRL',
+                      withDDD: true,
+                      dddMask: '(99) '
+                    }}
+                    value={contact}
+                    onChangeText={(text) => {
+                      if(text.length < 8) setValidateContact(false); else setValidateContact(true);
+                      setContact(text);
+                    }}
+                  />
                   </Item>
                 </View>
                 :
