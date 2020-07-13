@@ -287,5 +287,11 @@ export default styles = StyleSheet.create({
     padding: 5,
     fontSize: 16,
     textAlign: 'justify'
+  },
+  textInputMask:{
+    height: 48, 
+    width: 200, 
+    fontSize:17.3, 
+    marginLeft:7,
   }
 });
