@@ -28,12 +28,12 @@ export default function Developers() {
         <View style={styles.container}>
           <H2 style={styles.h3s}>Desenvolvimento da Aplicação:</H2>
           <Text style={styles.generalTexts}>Aplicativo: Andrei Gabriel Santos Deniz</Text>
-          <Text style={styles.generalTexts}><Icon name='logo-github' /> @Skadushi</Text>
+          <Text style={styles.generalTexts}>Aplicativo: Luis Rodrigo Pereira Cardoso</Text>
           <Text style={styles.generalTexts}>Servidor: Diego José da Silva Ribeiro</Text>
-          <Text style={styles.generalTexts}><Icon name='logo-github' /> @DiRibeiro</Text>
+          
           <H2 style={styles.h3s}>Orientação:</H2>
           <Text style={styles.generalTexts}>Bruno Chagas Alves Fernandes</Text>
-          <Text style={styles.generalTexts}>Diana Cabral Cavalcanti</Text>
+          <Text style={styles.generalTexts}>Vinícius Fritzen Machado</Text>
         </View>
         <View style={styles.developersPhotoContainer} >
             <Image source={require('../assets/logo_ifrs3.gif')} style={styles.developersImages} resizeMode='center'/>

@@ -67,6 +67,7 @@ export default styles = StyleSheet.create({
   },
   h3s: {
     margin: 10,
+    textAlign:'center'
   },
   aboutTitle: {
     marginBottom: 10,
