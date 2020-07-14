@@ -8,23 +8,13 @@ import URL_API from './Config/Constants';
 import requestsConfigList from './Config/requestsConfig';
 
 export default function Scheduling() {
+
   const navigation = useNavigation();
-  const [ internet, setInternet ] = useState(); 
-
-  const [ sent, setSent ] = useState(false);
-  const [inputError] = useState(false);
-  
-  const [validateInputs, setvalidateInputs] = useState(false);
-
   const [ name, setName ] = useState('');
   const [ item, setItem ] = useState('');
   const [ address, setAddress ] = useState('');
   const [ district, setDistrict ] = useState('');
-  const [ validateName, setValidateName ] = useState(false);
-  const [ validateItem, setValidateItem ] = useState(false); 
-  const [ validateAddress, setValidateAddress ] = useState(false); 
-  const [ validateDistrict, setValidateDistrict ] = useState(false); 
-
+  
   async function sendRequestToApi() {
     
     try {
@@ -56,10 +46,6 @@ export default function Scheduling() {
             setAddress('');
             setDistrict('');
             setItem('');
-            setValidateAddress(false);
-            setValidateDistrict(false);
-            setValidateItem(false);
-            setValidateName(false);
             }else{
               Alert.alert(
                 'Oops!',
@@ -99,37 +85,9 @@ export default function Scheduling() {
         {cancelable:false},
       );
     }
-
-
-
   }
 
-
-  const checkInternet = () => {
-    Linking.canOpenURL("https://google.com").then(connection => {
-      if (!connection) {
-        setInternet(false);
-        Alert.alert(
-          'Oops!',
-          'Conecte-se à internet para mandar a requisição!',
-          [
-            {
-              text: 'Ok',
-            },
-          ],
-          {cancelable: false},
-        );
-      } else {
-        console.log('oie');
-        setInternet(true);
-        sendRequestToApi();
-      }
-    });
-  };
-
   const handleSubmit = () => {
-    setSent(true);
-    if(validateName && validateItem && validateAddress && validateDistrict){
       Alert.alert(
         'Enviar com esses dados:',
         'Nome: ' + name + '\n' + 
@@ -141,17 +99,16 @@ export default function Scheduling() {
             text: 'Não',
           },
           {text: 'OK', onPress: () => {
-            checkInternet();
-            setSent(false);
+            sendRequestToApi();
           }},
         ],
         {cancelable: false},
       );
-    }
+    
   }
 
   function verifyInputs(){
-    if(validateName && validateItem && validateAddress && validateDistrict){
+    if(name.length > 0 && item.length > 0 && address.length > 0 && district.length > 0 ){
       return true;
     }else{
       return false;
@@ -176,48 +133,49 @@ export default function Scheduling() {
         </Right>
       </Header>
       <Content padder style={styles.content}>
-        <View style={{padding: 10}}>
+        <View style={{padding: 5}}>
           <Form>
             <H1 style={styles.title}>Agende a busca!</H1>
-            <Item error={inputError} style={styles.inputs} error={sent && !validateName ? true : false}>
+            <Item  style={styles.inputs}>
+              <Text style={styles.requiredInputs}>*</Text>
               <Icon active name='person'/>
               <Input placeholder='Nome Completo' value={name} 
                 onChangeText={(text) => {
-                  if(text.length < 1) setValidateName(false); else setValidateName(true);
                   setName(text);
                 }
               }/>
             </Item>
-
-            <Item error={inputError} style={styles.inputs} error={sent && !validateAddress ? true : false}>
+            
+            <Item style={styles.inputs} >
+              <Text style={styles.requiredInputs}>*</Text>
               <Icon active name='pin'/>
               <Input placeholder='Endereço e número' value={address} 
                 onChangeText={(text) => {
-                  if(text.length < 1) setValidateAddress(false); else setValidateAddress(true);
                   setAddress(text) 
                 }
               }/>
             </Item>
 
-            <Item error={inputError} style={styles.inputs} error={sent && !validateDistrict ? true : false}>
+            <Item style={styles.inputs} >
+              <Text style={styles.requiredInputs}>*</Text>
               <Icon active name='map'/>
               <Input placeholder='Bairro' value={district}
-                onChangeText={(text) => {
-                  if(text.length < 1) setValidateDistrict(false); else setValidateDistrict(true); 
+                onChangeText={(text) => {     
                   setDistrict(text) 
                 }
               }/>
             </Item>
            
+            <Text style={{color:'red',paddingLeft:15,fontSize:22,marginTop:10}}>*</Text>
             <Textarea 
-              style={[styles.textarea, sent && !validateItem ? {borderColor: 'red'} : {borderColor: '#1d814c'}]} 
+              style={[styles.textarea,{borderColor: '#1d814c'}]} 
               rowSpan={5} bordered placeholder='Descreva o item' 
               value={item} 
               onChangeText={(text) => { 
-                if(text.length < 1) setValidateItem(false); else setValidateItem(true);
                 setItem(text) 
               }
             }/>
+            <Text style={{color:'red',fontSize:16,paddingLeft:15,marginTop:5,marginBottom:20}}>Os campos marcados com (*) são de preenchimento obrigatório.</Text>
             
           </Form>
         </View>

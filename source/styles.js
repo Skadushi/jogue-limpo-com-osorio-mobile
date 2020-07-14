@@ -165,12 +165,17 @@ export default styles = StyleSheet.create({
     width: Platform.OS === 'ios' ? undefined : 120,
   },
   textarea: {
-    marginTop: 10,
+    marginTop: 0,
     marginStart: 15,
     fontSize: 18,
     borderColor: mainColor
   },
-  inputs: {
+  requiredInputs:{
+    color:'red',
+    paddingRight:5,
+    fontSize:22
+  },
+  inputs: {  
     marginTop: 5,
     marginBottom: 5,
     borderColor: mainColor
