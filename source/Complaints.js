@@ -97,8 +97,10 @@ export default function Complaints() {
     }
   }
 
-  async function sendRequestToApi() {    
-   
+  async function sendRequestToApi() {   
+    
+    try {
+
     //axios setup
     axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://saude.osorio.rs.gov.br:3003/';
     axios.defaults.headers.common['Access-Control-Allow-Methods'] = '*';
@@ -174,13 +176,21 @@ export default function Complaints() {
           {cancelable: false},
         );
       });
+      
+    } catch (err) {
+      console.log('erro no try catch - sendrequesttoapi');
+      console.log(err);
+    }
+   
+   
 
   }
 
   const checkInternet = () => {
-    console.log('4');
+    console.log('chekando internet');
     Linking.canOpenURL("https://google.com").then(connection => {
       if (!connection) {
+        console.log('internet false');
         setInternet(false);
         Alert.alert(
           'Oops!',
@@ -193,6 +203,7 @@ export default function Complaints() {
           {cancelable: false},
         );
       } else {
+        console.log('internet true');
         setInternet(true);
         sendRequestToApi();
       }
@@ -202,9 +213,9 @@ export default function Complaints() {
   const handleSubmit = () => {
     setSent(true);
     verifyImages();
-    console.log('1');
+    console.log('handle submit');
     if(incognito){
-      console.log('2');
+      console.log('icognito - true');
       if(validateAddress && validateDistrict && validateDescription && selected !== 0 && validatePhotos){
         Alert.alert(
           'Enviar com esses dados:',
@@ -227,7 +238,7 @@ export default function Complaints() {
         );
       } 
     } else {
-      console.log('3');
+      console.log('icognito - false');
       if(validateName && validateContact && validateAddress && validateDistrict && validateDescription && selected !== 0 && validatePhotos){
         Alert.alert(
           'Enviar com esses dados:',
@@ -274,6 +285,7 @@ export default function Complaints() {
     getPermissionCamera();
   }, []);*/
 
+
   useEffect(() => {
     
     //from expo documentation
@@ -285,7 +297,6 @@ export default function Complaints() {
     })();
 
   }, []);
-
 
   return (
     <Container>
@@ -323,6 +334,12 @@ export default function Complaints() {
                       }}
                     />
                   </Item>
+                  {   
+                    sent && !validateName ?
+                      <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, insira seu nome</Text>
+                      :
+                      null
+                  }
                   <Item error={inputError} style={styles.inputs} error={sent && !validateContact ? true : false}>
                     <Icon active name='phone-portrait' style={{marginEnd: 4}}/>
                     <TextInputMask style={styles.textInputMask}
@@ -342,6 +359,12 @@ export default function Complaints() {
                     }}
                   />
                   </Item>
+                  {   
+                    sent && !validateContact ?
+                      <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, insira seu telefone</Text>
+                      :
+                      null
+                  }
                 </View>
                 :
                 null
@@ -362,7 +385,13 @@ export default function Complaints() {
                 }}
               /> 
             </Item>
-            <Item error={true} style={styles.inputs}  error={sent && !validateDistrict ? true : false}>
+            {   
+              sent && !validateAddress ?
+                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, insira endereço e número</Text>
+                :
+                null
+            }
+            <Item error={inputError} style={styles.inputs}  error={sent && !validateDistrict ? true : false}>
               <Icon active name='map'/>
               <Input placeholder='Bairro' value={district}
                 onChangeText={(text) => {
@@ -371,6 +400,12 @@ export default function Complaints() {
                 }}
               /> 
             </Item>
+            {   
+              sent && !validateDistrict ?
+                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, insira bairro</Text>
+                :
+                null
+            }
             <View style={styles.pickerContainer}>
               <Icon name='clipboard' style={sent && selected === 0 ? {color: 'red'} : {color: 'black'}}/> 
               <Picker
@@ -403,6 +438,12 @@ export default function Complaints() {
                   <Picker.Item label={"4 - Descarte de volumosos"} value={4} key={4} />
               </Picker>
             </View>
+            {   
+              sent && selected === 0 ?
+                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, selecione o tipo da denúncia</Text>
+                :
+                null
+            }
             <Textarea 
               style={[styles.textarea, sent && !validateDescription ? {borderColor: 'red'} : {borderColor: '#1d814c'}]} 
               rowSpan={5} bordered placeholder='Descreva a denúncia' 
@@ -434,6 +475,12 @@ export default function Complaints() {
                 </Button>
               </Right>
             </ListItem>
+            {
+              sent && !validateDescription ?
+                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, para esse tipo de denúncia é necessário no mínimo uma foto.</Text>
+                :
+                null
+            }
             <View style={styles.imageVisualizerView}>
               <View style={{flex: 0, flexDirection: 'row'}}>
                 {

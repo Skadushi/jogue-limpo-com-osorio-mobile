@@ -13,7 +13,8 @@ export default function Scheduling() {
 
   const [ sent, setSent ] = useState(false);
   const [inputError] = useState(false);
-  const [loading,setLoading] = useState(false);
+  
+  const [validateInputs, setvalidateInputs] = useState(false);
 
   const [ name, setName ] = useState('');
   const [ item, setItem ] = useState('');
@@ -146,8 +147,14 @@ export default function Scheduling() {
         ],
         {cancelable: false},
       );
+    }
+  }
+
+  function verifyInputs(){
+    if(validateName && validateItem && validateAddress && validateDistrict){
+      return true;
     }else{
-     console.log('falta preencher todos os campos');
+      return false;
     }
   }
 
@@ -181,12 +188,6 @@ export default function Scheduling() {
                 }
               }/>
             </Item>
-            {
-              sent && !validateName ?
-                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, insira seu nome completo</Text>
-                :
-                null
-            }
 
             <Item error={inputError} style={styles.inputs} error={sent && !validateAddress ? true : false}>
               <Icon active name='pin'/>
@@ -197,12 +198,6 @@ export default function Scheduling() {
                 }
               }/>
             </Item>
-            {
-              sent && !validateAddress ?
-                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, insira endereço e número</Text>
-                :
-                null
-            }
 
             <Item error={inputError} style={styles.inputs} error={sent && !validateDistrict ? true : false}>
               <Icon active name='map'/>
@@ -213,13 +208,7 @@ export default function Scheduling() {
                 }
               }/>
             </Item>
-            {
-              sent && !validateDistrict ?
-                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, insira o bairro</Text>
-                :
-                null
-            }
-            
+           
             <Textarea 
               style={[styles.textarea, sent && !validateItem ? {borderColor: 'red'} : {borderColor: '#1d814c'}]} 
               rowSpan={5} bordered placeholder='Descreva o item' 
@@ -229,23 +218,31 @@ export default function Scheduling() {
                 setItem(text) 
               }
             }/>
-            {
-              sent && !validateItem ?
-                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, detalhe melhor o item a ser buscado</Text>
-                :
-                null
-            }
+            
           </Form>
         </View>
       </Content>
+      
+        
       <Footer>
-        <FooterTab style={styles.anatomy}>
-          <Button full style={styles.footerButton} onPress={handleSubmit} >
+      {
+        verifyInputs() ?
+        <FooterTab style={styles.anatomy}> 
+          <Button  full  style={styles.footerButton} onPress={handleSubmit} >
             <Text style={styles.footerButtonText}>
               <Icon style={styles.footerButtonText} name='calendar' /> Agende agora!
             </Text>
+          </Button>  
+        </FooterTab>
+        :
+        <FooterTab style={{margin:0,padding:0}}>
+          <Button  full disabled  style={{padding:0}}  >
+            <Text style={{fontSize:16,padding:10,color:'white'}}>
+              <Icon style={{fontSize:16,padding:10,color:'white'}} name='calendar' /> Agende agora!
+            </Text>
           </Button>
         </FooterTab>
+      }
       </Footer>
     </Container>
   );
