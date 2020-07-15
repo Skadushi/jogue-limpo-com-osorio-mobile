@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, ActivityIndicator, View } from 'react-native';
-import { Content, Accordion ,Text,Button, Icon, ListItem, Left, Right, List, Body} from 'native-base';
+import { Content, Accordion, Text, Button, Icon, ListItem, Left, Right, List, Body } from 'native-base';
 import styles from '../styles';
 import axios from 'axios';
 import { useNavigation } from 'react-navigation-hooks';
 import URL_API from '../Config/Constants';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 
-export default function LawsList({apiLink}) {
-  const [ loadComplete, setLoading ] = useState(false);
-  const [ laws, setLaws ] = useState([]);
-  const [ selected,setSelected ] = useState();
-  const [urlPdf,setUrlPdf] = useState('');
+export default function LawsList({ apiLink }) {
+  const [loadComplete, setLoading] = useState(false);
+  const [laws, setLaws] = useState([]);
+  const [selected, setSelected] = useState();
+  const [urlPdf, setUrlPdf] = useState('');
   const navigation = useNavigation();
   const navigate = useNavigation();
 
   async function getLawsFromApi() {
-    
+
     /*try {
       const response = await axios.get(apiLink);
       setLaws(response.data);
@@ -25,11 +25,11 @@ export default function LawsList({apiLink}) {
       console.log(error);
     }*/
     setLaws([
-      {name:'Lei do governo 1'},
-      {name:'Lei do governo 2'},
-      {name:'Lei do governo 3'},
-      {name:'Lei do governo 4'},
-      {name:'Lei do governo 5'},
+      { name: 'Lei do governo 1', uri: 'http://www.africau.edu/images/default/sample.pdf' },
+      { name: 'Lei do governo 2', uri: 'http://www.africau.edu/images/default/sample.pdf'  },
+      { name: 'Lei do governo 3', uri: 'http://www.africau.edu/images/default/sample.pdf'  },
+      { name: 'Lei do governo 4', uri: 'http://www.africau.edu/images/default/sample.pdf'  },
+      { name: 'Lei do governo 5', uri: 'http://www.africau.edu/images/default/sample.pdf'  },
     ]);
 
   }
@@ -43,26 +43,25 @@ export default function LawsList({apiLink}) {
 
       {
 
-       <FlatList
+        <FlatList
           data={laws}
-          renderItem={({item}) => {
-            return(
-              <ListItem>
-                <Left>
-                  <Text style={{fontSize:16}} >{item.name}</Text>
-                </Left>
-                
-                <TouchableOpacity onPress={() => {navigation.navigate('LawPdfView')}} >
+          renderItem={({ item }) => {
+            return (
+              <TouchableOpacity onPress={() => { navigation.navigate('LawPdfView', { title: item.name, uri: item.uri }) }} >
+                <ListItem>
+                  <Left>
+                    <Text style={{ fontSize: 16 }} >{item.name}</Text>
+                  </Left>
                   <Right>
-                    <Icon name="ios-eye" style={{fontSize:35,color:'black'}}/>
+                    <Icon type="AntDesign" name="filetext1" style={{ fontSize: 30, color: 'black' }}/>
                   </Right>
-                </TouchableOpacity>       
-              </ListItem>
+                </ListItem>
+              </TouchableOpacity>
             )
           }}
           keyExtractor={item => item.name}
-       />
-          
+        />
+
        /* !loadComplete ?
           <ActivityIndicator size='large' color='#529C52' style={{ paddingTop: 25 }}/>
           :
