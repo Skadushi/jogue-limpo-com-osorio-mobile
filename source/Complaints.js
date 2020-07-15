@@ -15,10 +15,7 @@ import requestsConfigList from './Config/requestsConfig';
 
 export default function Complaints() {
   const navigation = useNavigation();
-  const [ sent, setSent ] = useState(false);
-  const [ internet, setInternet ] = useState(); 
   const [ incognito, setIncognito ] = useState(false); 
-  const [ inputError, setInputError ] = useState(false);
   const [ selected, setSelected ] = useState(0);
   const [ permissionGallery, setPermissionGallery ] = useState("undetermined");
   const [ permissionCamera, setPermissionCamera ] = useState("undetermined");
@@ -29,22 +26,6 @@ export default function Complaints() {
   const [ address, setAddress ] = useState('');
   const [ district, setDistrict ] = useState('');
   const [ description, setDescription ] = useState('');
-  const [ validateName, setValidateName ] = useState(false);
-  const [ validateContact, setValidateContact ] = useState(false); 
-  const [ validateAddress, setValidateAddress ] = useState(false); 
-  const [ validateDistrict, setValidateDistrict ] = useState(false); 
-  const [ validateDescription, setValidateDescription ] = useState(false);
-  const [ validateType, setValidateType ] = useState(false);
-  const [ validatePhotos, setValidatePhotos ] = useState(false);
- 
-  /*async function getPermissionGallery(){
-    const permission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    setPermissionGallery(permission.status);
-  }
-  async function getPermissionCamera(){
-    const permission = await Permissions.askAsync(Permissions.CAMERA);
-    setPermissionCamera(permission.status);
-  }*/
 
   async function pickImages(){
     if(images.length > 3){
@@ -140,13 +121,6 @@ export default function Complaints() {
           setDescription('');
           setImages([]);
           setSelected(0);
-          setValidateName(false);
-          setValidateContact(false);
-          setValidateAddress(false);
-          setValidateDistrict(false);
-          setValidateType(false);
-          setValidateDescription(false);
-          setValidatePhotos(false);
 
         } else {
           
@@ -178,45 +152,27 @@ export default function Complaints() {
       });
       
     } catch (err) {
-      console.log('erro no try catch - sendrequesttoapi');
       console.log(err);
-    }
-   
-   
+      Alert.alert(
+        'Estamos com um problema no servidor.',
+        'Tente mais tarde',
+        [
+          {
+            text: 'Ok',
+          },
+        ],
+        {cancelable:false},
+      );
+    } 
 
   }
 
-  const checkInternet = () => {
-    console.log('chekando internet');
-    Linking.canOpenURL("https://google.com").then(connection => {
-      if (!connection) {
-        console.log('internet false');
-        setInternet(false);
-        Alert.alert(
-          'Oops!',
-          'Conecte-se à internet para mandar a denúncia!',
-          [
-            {
-              text: 'Ok',
-            },
-          ],
-          {cancelable: false},
-        );
-      } else {
-        console.log('internet true');
-        setInternet(true);
-        sendRequestToApi();
-      }
-    });
-  };
 
   const handleSubmit = () => {
-    setSent(true);
-    verifyImages();
+   
     console.log('handle submit');
     if(incognito){
       console.log('icognito - true');
-      if(validateAddress && validateDistrict && validateDescription && selected !== 0 && validatePhotos){
         Alert.alert(
           'Enviar com esses dados:',
           'Denuncia Anônima \n' +
@@ -230,16 +186,14 @@ export default function Complaints() {
               text: 'Não',
             },
             {text: 'OK', onPress: () => {
-              checkInternet();
-              setSent(false);
+              sendRequestToApi();
             }},
           ],
           {cancelable: false},
         );
-      } 
+      
     } else {
       console.log('icognito - false');
-      if(validateName && validateContact && validateAddress && validateDistrict && validateDescription && selected !== 0 && validatePhotos){
         Alert.alert(
           'Enviar com esses dados:',
           'Nome:' + name + '\n' +
@@ -254,37 +208,18 @@ export default function Complaints() {
               text: 'Não',
             },
             {text: 'OK', onPress: () => {
-              checkInternet();
-              setSent(false);
+              sendRequestToApi();
             }},
           ],
           {cancelable: false},
         );
-      }
+      
     }
   }
 
   const setIncognitoMode = () => {
     setIncognito(!incognito);
   }
-
-  const verifyImages = () => {
-    if(selected === 2 || selected === 4){
-      setValidatePhotos(true);
-    } else {
-      if(images.length === 0){
-        setValidatePhotos(false);
-      } else {
-        setValidatePhotos(true);
-      }
-    }
-  }
-
-  /*useEffect(() => {
-    getPermissionGallery();
-    getPermissionCamera();
-  }, []);*/
-
 
   useEffect(() => {
     
@@ -297,6 +232,16 @@ export default function Complaints() {
     })();
 
   }, []);
+
+  function verifyInputs(){
+    if(address.length > 0 && district.length > 0 && selected !== 0 && description.length > 0 && incognito){
+      return true;
+    }else if(name.length > 0 && contact.length > 8 && address.length > 0 && district.length > 0 && selected !== 0 && description.length > 0 && !incognito){
+      return true;
+    }else{
+      return false;
+    }
+  }
 
   return (
     <Container>
@@ -319,28 +264,24 @@ export default function Complaints() {
         </Right>
       </Header>
       <Content padder style={styles.content}>
-        <View style={{padding: 10}}>
+        <View style={{padding: 5}}>
           <Form>
             <H2 style={styles.title}>Dados do Usuário</H2>
             {
               !incognito ? 
                 <View>
-                  <Item error={inputError} style={styles.inputs} error={sent && !validateName ? true : false}>
+                  <Item  style={styles.inputs} >
+                    <Text style={styles.requiredInputs}>**</Text>
                     <Icon active name='person'/>
                     <Input placeholder='Nome' value={name}
                       onChangeText={(text) => {
-                        if(text.length < 1) setValidateName(false); else setValidateName(true);
                         setName(text);
                       }}
                     />
                   </Item>
-                  {   
-                    sent && !validateName ?
-                      <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, insira seu nome</Text>
-                      :
-                      null
-                  }
-                  <Item error={inputError} style={styles.inputs} error={sent && !validateContact ? true : false}>
+                 
+                  <Item style={styles.inputs} >
+                    <Text style={styles.requiredInputs}>**</Text>
                     <Icon active name='phone-portrait' style={{marginEnd: 4}}/>
                     <TextInputMask style={styles.textInputMask}
                     placeholder="Telefone"
@@ -354,17 +295,10 @@ export default function Complaints() {
                     }}
                     value={contact}
                     onChangeText={(text) => {
-                      if(text.length < 8) setValidateContact(false); else setValidateContact(true);
                       setContact(text);
                     }}
                   />
                   </Item>
-                  {   
-                    sent && !validateContact ?
-                      <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, insira seu telefone</Text>
-                      :
-                      null
-                  }
                 </View>
                 :
                 null
@@ -376,38 +310,29 @@ export default function Complaints() {
               </Body>
             </ListItem>
             <H2 style={styles.title}>Dados da Denúncia</H2>
-            <Item error={inputError} style={styles.inputs} error={sent && !validateAddress ? true : false}>
+            <Item style={styles.inputs} >
+              <Text style={styles.requiredInputs}>*</Text>
               <Icon active name='pin'/>
               <Input placeholder='Endereço e número' value={address}
                 onChangeText={(text) => {
-                  if(text.length < 1) setValidateAddress(false); else setValidateAddress(true);
                   setAddress(text);
                 }}
               /> 
             </Item>
-            {   
-              sent && !validateAddress ?
-                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, insira endereço e número</Text>
-                :
-                null
-            }
-            <Item error={inputError} style={styles.inputs}  error={sent && !validateDistrict ? true : false}>
+            
+            <Item  style={styles.inputs} >
+              <Text style={styles.requiredInputs}>*</Text>
               <Icon active name='map'/>
               <Input placeholder='Bairro' value={district}
                 onChangeText={(text) => {
-                  if(text.length < 1) setValidateDistrict(false); else setValidateDistrict(true);
                   setDistrict(text);
                 }}
               /> 
             </Item>
-            {   
-              sent && !validateDistrict ?
-                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, insira bairro</Text>
-                :
-                null
-            }
+            
             <View style={styles.pickerContainer}>
-              <Icon name='clipboard' style={sent && selected === 0 ? {color: 'red'} : {color: 'black'}}/> 
+              <Text style={styles.requiredInputs}>*</Text>
+              <Icon name='clipboard' style={{color: 'black'}}/> 
               <Picker
                 mode='dropdown'
                 iosIcon={<Icon name='arrow-down' />}
@@ -438,30 +363,20 @@ export default function Complaints() {
                   <Picker.Item label={"4 - Descarte de volumosos"} value={4} key={4} />
               </Picker>
             </View>
-            {   
-              sent && selected === 0 ?
-                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, selecione o tipo da denúncia</Text>
-                :
-                null
-            }
+            
+            <Text style={{color:'red',paddingLeft:15,fontSize:22,marginTop:10}}>*</Text>
             <Textarea 
-              style={[styles.textarea, sent && !validateDescription ? {borderColor: 'red'} : {borderColor: '#1d814c'}]} 
+              style={[styles.textarea,{borderColor: '#1d814c'}]} 
               rowSpan={5} bordered placeholder='Descreva a denúncia' 
               value={description} 
               onChangeText={(text) => { 
-                if(text.length < 1) setValidateDescription(false); else setValidateDescription(true);
                 setDescription(text) 
               }
             }/>
-            {
-              sent && !validateDescription ?
-                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, informe mais dados sobre a denúncia.</Text>
-                :
-                null
-            }
+           
             <ListItem icon noBorder>
               <Left>
-                <Icon name='photos' style={!validatePhotos && sent ? {color: 'red'} : {color: 'black'}}/>
+                <Icon name='photos' style={{color: 'black'}}/>
               </Left>
               <Body>
                 <Text>Fotos:</Text>
@@ -475,12 +390,7 @@ export default function Complaints() {
                 </Button>
               </Right>
             </ListItem>
-            {
-              sent && !validateDescription ?
-                <Text style={[styles.generalTexts, {color: 'red', marginStart: 15}]}>Por favor, para esse tipo de denúncia é necessário no mínimo uma foto.</Text>
-                :
-                null
-            }
+            
             <View style={styles.imageVisualizerView}>
               <View style={{flex: 0, flexDirection: 'row'}}>
                 {
@@ -507,10 +417,16 @@ export default function Complaints() {
                 images.length !== 0 ? <Text note style={[styles.generalTexts, {padding: 10}]}>Obs: as imagens serão enviadas em seu formato original, as miniaturas são apenas uma demonstração.</Text> : null
               }
             </View>
+
+            <Text style={{color:'red',fontSize:16,paddingLeft:15,marginTop:5,marginBottom:5}}>Os campos marcados com (*) são de preenchimento obrigatório.</Text>
+            <Text style={{color:'red',fontSize:16,paddingLeft:15,marginTop:5,marginBottom:20}}>Os campos marcados com (**) são de preenchimento obrigatório, somente se a denúncia NÃO for anônima.</Text>
+
           </Form>
         </View>
       </Content>
       <Footer>
+      {
+        verifyInputs() ?
         <FooterTab style={styles.anatomy}>
           <Button full style={styles.footerButton} onPress={handleSubmit}>
             <Text style={styles.footerButtonText}>
@@ -518,6 +434,15 @@ export default function Complaints() {
             </Text>
           </Button>
         </FooterTab>
+        :
+        <FooterTab style={{margin:0,padding:0}}>
+          <Button full disabled style={{padding:0}} >
+            <Text style={{fontSize:16,padding:10,color:'white'}}>
+              <Icon style={{fontSize:16,padding:10,color:'white'}} name='megaphone' /> Denuncie
+            </Text>
+          </Button>
+        </FooterTab>
+      }      
       </Footer>
     </Container>
   );
