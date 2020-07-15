@@ -16,7 +16,7 @@ import requestsConfigList from './Config/requestsConfig';
 export default function Complaints() {
   const navigation = useNavigation();
   const [ incognito, setIncognito ] = useState(false); 
-  const [ selected, setSelected ] = useState(0);
+  const [ selected, setSelected ] = useState("0");
   const [ permissionGallery, setPermissionGallery ] = useState("undetermined");
   const [ permissionCamera, setPermissionCamera ] = useState("undetermined");
   const [ images, setImages ] = useState([]);
@@ -234,9 +234,9 @@ export default function Complaints() {
   }, []);
 
   function verifyInputs(){
-    if(address.length > 0 && district.length > 0 && selected !== 0 && description.length > 0 && incognito){
+    if(address.length > 0 && district.length > 0 && selected != 0 && description.length > 0 && incognito){
       return true;
-    }else if(name.length > 0 && contact.length > 8 && address.length > 0 && district.length > 0 && selected !== 0 && description.length > 0 && !incognito){
+    }else if(name.length > 0 && contact.length > 8 && address.length > 0 && district.length > 0 && selected != 0 && description.length > 0 && !incognito){
       return true;
     }else{
       return false;
@@ -357,10 +357,10 @@ export default function Complaints() {
                   </Header>}
               >
                   <Picker.Item label={"Selecione o tipo de denúncia:"} value={0} key={'unselectable'}/>
-                  <Picker.Item label={"1 - Lixo e caliças em área irregular"} value={1} key={1} />
-                  <Picker.Item label={"2 - Caminhão não passou"} value={2} key={2} />
-                  <Picker.Item label={"3 - Atraso do caminhão de lixo"} value={3} key={3} />
-                  <Picker.Item label={"4 - Descarte de volumosos"} value={4} key={4} />
+                  <Picker.Item label={"1 - Lixo e caliças em área irregular"} value={'Lixo e caliças em área irregular'} key={1} />
+                  <Picker.Item label={"2 - Caminhão não passou"} value={'Caminhão não passou'} key={2} />
+                  <Picker.Item label={"3 - Atraso do caminhão de lixo"} value={'Atraso do caminhão de lixo'} key={3} />
+                  <Picker.Item label={"4 - Descarte de volumosos"} value={'Descarte de volumosos'} key={4} />
               </Picker>
             </View>
             
