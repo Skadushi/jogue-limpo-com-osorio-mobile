@@ -252,7 +252,7 @@ export default function Complaints() {
           </Button>
         </Left>
         <Body style={{flex: 1, alignItems: 'center', paddingStart: 30}}>
-          <Title style={styles.whiteButtons}>Denúncias</Title>
+          <Title style={{color: 'white', marginLeft:15}}>Denúncias</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.navigate('ComplaintsHelp') }}>

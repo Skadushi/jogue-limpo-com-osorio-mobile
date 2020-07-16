@@ -16,7 +16,7 @@ export default function About() {
           </Button>
         </Left>
         <Body style={styles.headerBody}>
-          <Title style={styles.whiteButtons}>Sobre o Programa</Title>
+          <Title style={{color: 'white', marginLeft:15}}>Sobre o Programa</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.openDrawer() }}>

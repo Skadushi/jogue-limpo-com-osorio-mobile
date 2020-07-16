@@ -34,7 +34,7 @@ export default function Gathering() {
           </Button>
         </Left>
         <Body style={styles.headerBody}>
-          <Title style={styles.whiteButtons}>Coleta de Lixo</Title>
+          <Title style={{color: 'white', marginLeft:15}}>Coleta de Lixo</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.openDrawer() }}>

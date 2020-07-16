@@ -16,7 +16,7 @@ export default function Home() {
           </Button>
         </Left>
         <Body style={styles.headerBody}>
-          <Title style={styles.whiteButtons}>Jogue Limpo</Title>
+          <Title style={{color: 'white', marginLeft:8}}>Jogue Limpo</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.navigate('Developers') }}>

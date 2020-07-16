@@ -25,7 +25,7 @@ export default function LawsList({ apiLink }) {
       console.log(error);
     }*/
     setLaws([
-      { name: 'Lei do governo 1', uri: 'http://www.africau.edu/images/default/sample.pdf' },
+      { name: 'Lei do governo 1 bla bla bla bem grande essa lei', uri: 'http://www.africau.edu/images/default/sample.pdf' },
       { name: 'Lei do governo 2', uri: 'http://www.africau.edu/images/default/sample.pdf'  },
       { name: 'Lei do governo 3', uri: 'http://www.africau.edu/images/default/sample.pdf'  },
       { name: 'Lei do governo 4', uri: 'http://www.africau.edu/images/default/sample.pdf'  },

@@ -36,7 +36,7 @@ export default function About() {
           </Button>
         </Left>
         <Body style={styles.headerBody}>
-          <Title style={styles.whiteButtons}>Mural de Fotos</Title>
+          <Title style={{color: 'white', marginLeft:15}}>Mural de Fotos</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.openDrawer() }}>

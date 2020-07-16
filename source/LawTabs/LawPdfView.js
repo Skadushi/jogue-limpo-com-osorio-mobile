@@ -12,6 +12,15 @@ export default function LawPdfView() {
     const uri = navigation.state.params.uri;
 
     //observações: componente webView, faz download do pdf mas nao mostra
+
+    const getTitle = () => {
+        const maxChar = 28;
+        let titleTruncated = title.substring(0, maxChar);
+        if (title.length > maxChar)
+            titleTruncated += " ..."
+        return titleTruncated;
+    }
+
     return (
         <Container>
 
@@ -22,7 +31,7 @@ export default function LawPdfView() {
                     </Button>
                 </Left>
                 <Body style={styles.headerBody}>
-                    <Title style={styles.whiteButtons}>{title}</Title>
+                    <Title style={{color: 'white', marginLeft:-23}}>{getTitle()}</Title>
                 </Body>
                 {/* <Right style={styles.sideHeaderButtonContainer}>
                     <Button transparent onPress={() => { navigation.openDrawer() }}>

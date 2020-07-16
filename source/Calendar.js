@@ -64,7 +64,7 @@ export default function Calendar() {
           </Button>
         </Left>
         <Body style={styles.headerBody}>
-          <Title style={{color: 'white'}}>Calendário</Title>
+          <Title style={{color: 'white', marginLeft:15}}>Calendário</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.openDrawer() }}>

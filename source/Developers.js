@@ -16,7 +16,7 @@ export default function Developers() {
           </Button>
         </Left>
         <Body style={styles.headerBody}>
-          <Title style={styles.whiteButtons}>Sobre a Aplicação</Title>
+          <Title style={{color: 'white', marginLeft:15}}>Sobre a Aplicação</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.openDrawer() }}>

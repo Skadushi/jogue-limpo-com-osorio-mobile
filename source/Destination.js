@@ -20,7 +20,7 @@ export default function Destination() {
           </Button>
         </Left>
         <Body style={styles.headerBody}>
-          <Title style={styles.whiteButtons}>Destinação de Resíduos</Title>
+          <Title style={{color: 'white', marginLeft:15}}>Destinação de Resíduos</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.openDrawer() }}>

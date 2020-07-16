@@ -21,7 +21,7 @@ export default function Laws() {
           </Button>
         </Left>
         <Body style={styles.headerBody}>
-          <Title style={styles.whiteButtons}>Leis</Title>
+          <Title style={{color: 'white', marginLeft:15}}>Leis</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.openDrawer() }}>
