@@ -9,8 +9,7 @@ export default function LawPdfView() {
 
     const navigation = useNavigation();
     const title = navigation.state.params.title;
-    const uri = navigation.state.params.uri;
-
+    const file = navigation.state.params.file;
     //observações: componente webView, faz download do pdf mas nao mostra
 
     const getTitle = () => {
@@ -43,7 +42,7 @@ export default function LawPdfView() {
             <>
                 <PdfReader
                     source={{
-                        uri: uri,
+                        uri: `http://saude.osorio.rs.gov.br:3003/` + file,
                     }}
                     // props={{ useGoogleReader: true, withPinchZoom: false }}                    
                 />

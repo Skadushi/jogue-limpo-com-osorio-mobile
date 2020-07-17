@@ -4,7 +4,6 @@ import { Content, Accordion, Text, Button, Icon, ListItem, Left, Right, List, Bo
 import styles from '../styles';
 import axios from 'axios';
 import { useNavigation } from 'react-navigation-hooks';
-import URL_API from '../Config/Constants';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 
 export default function LawsList({ apiLink }) {
@@ -12,26 +11,20 @@ export default function LawsList({ apiLink }) {
   const [laws, setLaws] = useState([]);
   const [selected, setSelected] = useState();
   const [urlPdf, setUrlPdf] = useState('');
-  const navigation = useNavigation();
-  const navigate = useNavigation();
+  const {navigate} = useNavigation();
 
   async function getLawsFromApi() {
 
-    /*try {
+    try {
       const response = await axios.get(apiLink);
+      //a rota filtrada não está funcionando, então para testar use a rota de baixo
+      //const response = await axios.get('http://saude.osorio.rs.gov.br:3003/leis')
       setLaws(response.data);
+      console.log(response.data);
       setLoading(true);
     } catch (error) {
       console.log(error);
-    }*/
-    setLaws([
-      { name: 'Lei do governo 1 bla bla bla bem grande essa lei', uri: 'http://www.africau.edu/images/default/sample.pdf' },
-      { name: 'Lei do governo 2', uri: 'http://www.africau.edu/images/default/sample.pdf'  },
-      { name: 'Lei do governo 3', uri: 'http://www.africau.edu/images/default/sample.pdf'  },
-      { name: 'Lei do governo 4', uri: 'http://www.africau.edu/images/default/sample.pdf'  },
-      { name: 'Lei do governo 5', uri: 'http://www.africau.edu/images/default/sample.pdf'  },
-    ]);
-
+    }
   }
 
   useEffect(() => {
@@ -47,10 +40,10 @@ export default function LawsList({ apiLink }) {
           data={laws}
           renderItem={({ item }) => {
             return (
-              <TouchableOpacity onPress={() => { navigation.navigate('LawPdfView', { title: item.name, uri: item.uri }) }} >
+              <TouchableOpacity onPress={() =>  navigate('LawPdfView', { title: item.title, file: item.file })} >
                 <ListItem>
                   <Left>
-                    <Text style={{ fontSize: 16 }} >{item.name}</Text>
+                    <Text style={{ fontSize: 16 }} >{item.title}</Text>
                   </Left>
                   <Right>
                     <Icon type="AntDesign" name="filetext1" style={{ fontSize: 30, color: 'black' }}/>
@@ -59,45 +52,9 @@ export default function LawsList({ apiLink }) {
               </TouchableOpacity>
             )
           }}
-          keyExtractor={item => item.name}
+          keyExtractor={item => item._id}
         />
-
-       /* !loadComplete ?
-          <ActivityIndicator size='large' color='#529C52' style={{ paddingTop: 25 }}/>
-          :
-          <View style={{flex:1,justifyContent:'space-around',alignItems:'stretch',borderColor: '#caebc5', borderWidth: 2}}>
-          {laws.map((item, index) => {
-            return (
-              <View key={index} >
-
-                <TouchableOpacity style={{backgroundColor:'#dbfad6'}}  onPress={() => { setSelected(index !== selected ? index : undefined) }}>
-                  <View style={{flex:1,padding:10,flexDirection:'row',justifyContent:'space-between'}}>
-                      <Text>{item.name}</Text>
-                      {
-                        selected === index ? 
-                          <Icon name='ios-arrow-up'/>
-                          :
-                          <Icon name='ios-arrow-down'/>
-                      }
-                  </View>
-                </TouchableOpacity>
-                
-              
-                {
-                 index === selected ? 
-                    <View style={{backgroundColor:'#eaffe3',padding:5,textAlign:'justify'}} >
-                      
-                        <Text style={{fontSize:16}}>{item.description}</Text>
-                     
-                    </View>
-                    :
-                    null
-                  }
-              </View>
-                  ) 
-                })}
-          </View>
-             */ }
+    }
     </Content>
   );
 }
