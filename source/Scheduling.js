@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, StatusBar, Alert, Linking } from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H1 } from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H1, Spinner } from 'native-base';
 import axios from 'axios';
 import styles from './styles';
 import URL_API from './Config/Constants';
@@ -10,6 +10,7 @@ import requestsConfigList from './Config/requestsConfig';
 export default function Scheduling() {
 
   const navigation = useNavigation();
+  const [loading,setLoading] = useState(false);
   const [ name, setName ] = useState('');
   const [ item, setItem ] = useState('');
   const [ address, setAddress ] = useState('');
@@ -18,7 +19,7 @@ export default function Scheduling() {
   async function sendRequestToApi() {
     
     try {
-
+      setLoading(true);
       axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://saude.osorio.rs.gov.br:3003/';
       axios.defaults.headers.common['Access-Control-Allow-Methods'] = '*';
       axios.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
@@ -30,8 +31,8 @@ export default function Scheduling() {
         description: item,
       },requestsConfigList.reqPostWithoutImage)
         .then((response)=>{
-        
           if(response.status === 200){
+            setLoading(false);
             Alert.alert(
               'Sucesso!',
               'Requisição enviada com sucesso! \n',
@@ -47,6 +48,7 @@ export default function Scheduling() {
             setDistrict('');
             setItem('');
             }else{
+              setLoading(false);
               Alert.alert(
                 'Oops!',
                 'Ocorreu um erro no servidor!',
@@ -59,6 +61,7 @@ export default function Scheduling() {
               );
             }
         }).catch((error)=>{
+              setLoading(false);
               console.log(error);
               Alert.alert(
                 'Oops!',
@@ -73,6 +76,7 @@ export default function Scheduling() {
         });
       
     } catch (err) {
+      setLoading(false);
       console.log(err);
       Alert.alert(
         'Estamos com um problema no servidor.',
@@ -187,9 +191,14 @@ export default function Scheduling() {
         verifyInputs() ?
         <FooterTab style={styles.anatomy}> 
           <Button  full  style={styles.footerButton} onPress={handleSubmit} >
-            <Text style={styles.footerButtonText}>
-              <Icon style={styles.footerButtonText} name='calendar' /> Agende agora!
-            </Text>
+            {
+              loading ?
+              <Spinner color="white"/>
+              :
+              <Text style={styles.footerButtonText}>
+                <Icon style={styles.footerButtonText} name='calendar' /> Agende agora!
+              </Text>
+            }   
           </Button>  
         </FooterTab>
         :

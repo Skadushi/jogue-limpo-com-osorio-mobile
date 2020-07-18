@@ -5,7 +5,7 @@ import * as IntentLauncher from 'expo-intent-launcher';
 import * as Camera from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import { StyleSheet, View, Platform, StatusBar, Linking, Alert, Image } from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H2, CheckBox } from 'native-base';
+import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H2, CheckBox, Spinner } from 'native-base';
 import { TextInputMask } from 'react-native-masked-text';
 import styles from './styles';
 import axios from 'axios';
@@ -17,6 +17,7 @@ export default function Complaints() {
   const navigation = useNavigation();
   const [ incognito, setIncognito ] = useState(false); 
   const [ selected, setSelected ] = useState("0");
+  const [loading,setLoading] = useState(false);
   const [ permissionGallery, setPermissionGallery ] = useState("undetermined");
   const [ permissionCamera, setPermissionCamera ] = useState("undetermined");
   const [ images, setImages ] = useState([]);
@@ -81,7 +82,7 @@ export default function Complaints() {
   async function sendRequestToApi() {   
     
     try {
-
+    setLoading(true);
     //axios setup
     axios.defaults.headers.common['Access-Control-Allow-Origin'] = 'http://saude.osorio.rs.gov.br:3003/';
     axios.defaults.headers.common['Access-Control-Allow-Methods'] = '*';
@@ -101,9 +102,8 @@ export default function Complaints() {
     
     axios.post(URL_API.report,form,requestsConfigList.reqPostWithImage)
       .then((response) => {
-        console.log(response.status);
-        console.log(response.data);
         if (response.status === 200) {
+          setLoading(false);
           Alert.alert(
             'Sucesso!',
             'Denúncia enviada com sucesso!',
@@ -123,7 +123,7 @@ export default function Complaints() {
           setSelected(0);
 
         } else {
-          
+          setLoading(false);
           Alert.alert(
             'Oops!',
             'Ocorreu um erro no servidor!',
@@ -138,6 +138,7 @@ export default function Complaints() {
         }
       })
       .catch((error) =>{
+        setLoading(false);
         console.log(error);
         Alert.alert(
           'Oops!',
@@ -152,6 +153,7 @@ export default function Complaints() {
       });
       
     } catch (err) {
+      setLoading(false);
       console.log(err);
       Alert.alert(
         'Estamos com um problema no servidor.',
@@ -170,9 +172,7 @@ export default function Complaints() {
 
   const handleSubmit = () => {
    
-    console.log('handle submit');
     if(incognito){
-      console.log('icognito - true');
         Alert.alert(
           'Enviar com esses dados:',
           'Denuncia Anônima \n' +
@@ -193,7 +193,6 @@ export default function Complaints() {
         );
       
     } else {
-      console.log('icognito - false');
         Alert.alert(
           'Enviar com esses dados:',
           'Nome:' + name + '\n' +
@@ -429,9 +428,14 @@ export default function Complaints() {
         verifyInputs() ?
         <FooterTab style={styles.anatomy}>
           <Button full style={styles.footerButton} onPress={handleSubmit}>
-            <Text style={styles.footerButtonText}>
-              <Icon style={styles.footerButtonText} name='megaphone' /> Denuncie
-            </Text>
+            {
+              loading ? 
+              <Spinner color="white"/>
+              :
+              <Text style={styles.footerButtonText}>
+                <Icon style={styles.footerButtonText} name='megaphone' /> Denuncie
+              </Text>
+            }   
           </Button>
         </FooterTab>
         :
