@@ -189,17 +189,19 @@ export default function Scheduling() {
       <Footer>
       {
         verifyInputs() ?
-        <FooterTab style={styles.anatomy}> 
-          <Button  full  style={styles.footerButton} onPress={handleSubmit} >
+        <FooterTab style={styles.anatomy}>        
             {
               loading ?
-              <Spinner color="white"/>
+              <Button full  style={styles.footerButton}>
+                <Spinner color="white"/>
+              </Button>     
               :
-              <Text style={styles.footerButtonText}>
-                <Icon style={styles.footerButtonText} name='calendar' /> Agende agora!
-              </Text>
+              <Button  full  style={styles.footerButton} onPress={handleSubmit} >
+                <Text style={styles.footerButtonText}>
+                  <Icon style={styles.footerButtonText} name='calendar' /> Agende agora!
+                </Text>
+              </Button>  
             }   
-          </Button>  
         </FooterTab>
         :
         <FooterTab style={{margin:0,padding:0}}>

@@ -427,16 +427,19 @@ export default function Complaints() {
       {
         verifyInputs() ?
         <FooterTab style={styles.anatomy}>
-          <Button full style={styles.footerButton} onPress={handleSubmit}>
             {
               loading ? 
-              <Spinner color="white"/>
+              <Button full  style={styles.footerButton}>
+                <Spinner color="white"/>
+              </Button>
               :
-              <Text style={styles.footerButtonText}>
-                <Icon style={styles.footerButtonText} name='megaphone' /> Denuncie
-              </Text>
+              <Button full style={styles.footerButton} onPress={handleSubmit}>
+                <Text style={styles.footerButtonText}>
+                  <Icon style={styles.footerButtonText} name='megaphone' /> Denuncie
+                </Text>
+              </Button>
             }   
-          </Button>
+          
         </FooterTab>
         :
         <FooterTab style={{margin:0,padding:0}}>
