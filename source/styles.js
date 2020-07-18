@@ -28,9 +28,9 @@ export default styles = StyleSheet.create({
   },
   calendarContainer: {
     paddingTop: 20,
-    paddingStart: 15,
-    paddingEnd: 15,
-    paddingBottom: 15
+    paddingStart: 10,
+    paddingEnd: 10,
+    paddingBottom: 10
   },
   sideHeaderButtonContainer: {
     flex: 0,
