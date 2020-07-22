@@ -5,12 +5,14 @@ import { Container, Header, Title, Footer, FooterTab, Content, Button, H1, Left,
 import styles from './styles';
 import axios from 'axios';
 import URL_API from './Config/Constants';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import ItemListCalendar from './Components/ItemListCalendar';
 
 export default function Calendar() {
   const navigation = useNavigation();
   const [ visible, setVisible ] = useState(false);
   const [ events, setEvents ] = useState([]);
+  const [urlImageModal, seturlImageModal] = useState('');
   const [ month, setMonth ] = useState('');
   const [ monthEvents, setMonthEvents ] = useState([]);
   const [ current, setCurrent ] = useState(0);
@@ -69,7 +71,35 @@ export default function Calendar() {
     }
   }
 
-  const maxLenghtDescription = 100;
+  function showModal(){
+      
+      return(
+        <Modal visible={visible} 
+          transparent={true}
+          onRequestClose={()=>{
+            //console.log("modal has been closed");
+          }} 
+          >
+          <Header style={{backgroundColor: 'black'}} androidStatusBarColor='black'>
+            <Left style={{flex: 0}}>
+                <Button style={{backgroundColor: 'black'}} onPress={() => { setVisible(false)}}>
+                    <Icon style={styles.whiteButtons} name='arrow-back' />
+                </Button>
+            </Left>
+                <Body style={{flex: 2}}/>
+                <Right />
+          </Header>
+          <View style={{flex:1}}>
+          {
+            <Image resizeMode='cover' style={{flex:1}} source={{uri:urlImageModal}}/>
+          }
+          </View> 
+        </Modal>
+      );
+  }
+
+  
+
 
   return (
     <Container>
@@ -99,16 +129,8 @@ export default function Calendar() {
                 <List
                   dataArray={/*monthEvents*/events}
                   renderRow={(data) =>
-                    /*<ListItem itemDivider style={styles.calendarBackground}>
-                      <View>
-                        <View style={styles.titleBorder}>
-                          <H3 style={styles.h3s}>{data.title}</H3>
-                        </View>
-                           <Text style={styles.generalTexts}>{data.description.substring(0,maxLenghtDescription) + (data.description.length > maxLenghtDescription ? "...":"")}</Text>
-                      </View>
-                    </ListItem> */
 
-                    /*<Card >
+                    <Card >
                       <CardItem bordered style={{backgroundColor:'#dbfad6'}}>
                         <Body>
                           <H3 style={styles.h3s}>{data.title}</H3>
@@ -116,20 +138,28 @@ export default function Calendar() {
                       </CardItem>
                       <CardItem bordered style={{backgroundColor:'#dbfad6'}}>
                         <Body>
-                          <Thumbnail square style={{height:300,width:300}} source={{uri:'http://saude.osorio.rs.gov.br:3003/'+data.image}}/>  
+                          <TouchableOpacity activeOpacity={.7} onPress={()=>{
+                              seturlImageModal('http://saude.osorio.rs.gov.br:3003/'+data.image);
+                              setVisible(true);
+                          }} >
+                            <Thumbnail square style={{height:300,width:300}} source={{uri:'http://saude.osorio.rs.gov.br:3003/'+data.image}}/>  
+                          </TouchableOpacity>
                         </Body>
                       </CardItem>
                       <CardItem bordered style={{backgroundColor:'#dbfad6'}}>
                         <Body> 
-                            <Text style={styles.generalTexts}>{data.description.substring(0,maxLenghtDescription) + (data.description.length > maxLenghtDescription ? "...":"")}</Text>
+                          <ItemListCalendar dataText={data.description}/>
                         </Body>
                       </CardItem>
-                    </Card>*/
-                    <ItemListCalendar dataList={data}/>
+                    </Card>
+
                     }
                 />
               </View>
             </View>
+        }
+        {
+          showModal()
         }
       </Content>
       <Footer>
