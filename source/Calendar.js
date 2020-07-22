@@ -5,6 +5,7 @@ import { Container, Header, Title, Footer, FooterTab, Content, Button, H1, Left,
 import styles from './styles';
 import axios from 'axios';
 import URL_API from './Config/Constants';
+import ItemListCalendar from './Components/ItemListCalendar';
 
 export default function Calendar() {
   const navigation = useNavigation();
@@ -106,7 +107,8 @@ export default function Calendar() {
                            <Text style={styles.generalTexts}>{data.description.substring(0,maxLenghtDescription) + (data.description.length > maxLenghtDescription ? "...":"")}</Text>
                       </View>
                     </ListItem> */
-                    <Card >
+
+                    /*<Card >
                       <CardItem bordered style={{backgroundColor:'#dbfad6'}}>
                         <Body>
                           <H3 style={styles.h3s}>{data.title}</H3>
@@ -122,7 +124,8 @@ export default function Calendar() {
                             <Text style={styles.generalTexts}>{data.description.substring(0,maxLenghtDescription) + (data.description.length > maxLenghtDescription ? "...":"")}</Text>
                         </Body>
                       </CardItem>
-                    </Card>
+                    </Card>*/
+                    <ItemListCalendar dataList={data}/>
                     }
                 />
               </View>
