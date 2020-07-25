@@ -275,8 +275,12 @@ export default styles = StyleSheet.create({
     width: 300,
     height: 40,
     margin: 0,
+    paddingLeft:10,
+    paddingRight:10,
+    paddingBottom:20,
+    paddingTop:5,
     backgroundColor: mainColor,
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   districtsListInsideView: {
     width: 300,
