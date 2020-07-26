@@ -17,6 +17,7 @@ export default function Gathering() {
     try {
       const response = await axios.get(URL_API.coleta);  
       setDistricts(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }
@@ -26,13 +27,6 @@ export default function Gathering() {
     getDistrictsFromApi();
   }, []);
 
-  function renderBadgeGathering(typeGathering){
-    if(typeGathering == "organica"){
-      <Badge success style={{position:'absolute',top: 0,right: -10}} ><Text style={{color:'#fff',fontSize:20}} >Organica</Text></Badge>
-    }else{
-      <Badge success style={{position:'absolute',top: 0,right: -10}} ><Text style={{color:'#fff',fontSize:20}} >Seletiva</Text></Badge>
-    }
-  }
 
   return (
     <Container>

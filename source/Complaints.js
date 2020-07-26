@@ -387,6 +387,12 @@ export default function Complaints() {
            
             <ListItem icon noBorder>
               <Left>
+                {
+                  (selected == "Lixo e caliças em área irregular" || selected == "Descarte de volumosos") ?
+                  <Text style={styles.requiredInputs}>*</Text>
+                  :
+                  null
+                }   
                 <Icon name='photos' style={{color: 'black'}}/>
               </Left>
               <Body>
@@ -428,7 +434,6 @@ export default function Complaints() {
                 images.length !== 0 ? <Text note style={[styles.generalTexts, {padding: 10}]}>Obs: as imagens serão enviadas em seu formato original, as miniaturas são apenas uma demonstração.</Text> : null
               }
             </View>
-            <Text style={{color:'red',fontSize:16,paddingLeft:15,marginTop:5,marginBottom:5}}>Para os tipo de denúncias 1 e 4, é obrigatório imagens.</Text>
             <Text style={{color:'red',fontSize:16,paddingLeft:15,marginBottom:5}}>Os campos marcados com (*) são de preenchimento obrigatório.</Text>
             <Text style={{color:'red',fontSize:16,paddingLeft:15,marginBottom:20}}>Os campos marcados com (**) são de preenchimento obrigatório, somente se a denúncia NÃO for anônima.</Text>
 
