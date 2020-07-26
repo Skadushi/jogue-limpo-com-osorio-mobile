@@ -233,13 +233,25 @@ export default function Complaints() {
   }, []);
 
   function verifyInputs(){
-    if(address.length > 0 && district.length > 0 && selected != 0 && description.length > 0 && incognito){
+    //com foto + denuncia anônima
+    if(address.length > 0 && district.length > 0 && (selected == "Lixo e caliças em área irregular" || selected == "Descarte de volumosos") && description.length > 0 && images.length > 0 && incognito){
       return true;
-    }else if(name.length > 0 && contact.length > 8 && address.length > 0 && district.length > 0 && selected != 0 && description.length > 0 && !incognito){
+
+     //com foto + denuncia pública 
+    }else if(name.length > 0 && contact.length > 8 && address.length > 0 && district.length > 0 && (selected == "Lixo e caliças em área irregular" || selected == "Descarte de volumosos") && description.length > 0 && images.length > 0 && !incognito){
+      return true;
+
+    //sem foto + denuncia anônima
+    }else if(address.length > 0 && district.length > 0 && (selected == "Caminhão não passou" || selected == "Atraso do caminhão de lixo") && description.length > 0 && incognito){
+      return true;
+
+    //sem foto + denuncia pública  
+    }else if(name.length > 0 && contact.length > 0 && address.length > 0 && district.length > 0 && (selected == "Caminhão não passou" || selected == "Atraso do caminhão de lixo") && description.length > 0 && !incognito){
       return true;
     }else{
-      return false;
+      return false
     }
+    
   }
 
   return (
@@ -416,9 +428,9 @@ export default function Complaints() {
                 images.length !== 0 ? <Text note style={[styles.generalTexts, {padding: 10}]}>Obs: as imagens serão enviadas em seu formato original, as miniaturas são apenas uma demonstração.</Text> : null
               }
             </View>
-
-            <Text style={{color:'red',fontSize:16,paddingLeft:15,marginTop:5,marginBottom:5}}>Os campos marcados com (*) são de preenchimento obrigatório.</Text>
-            <Text style={{color:'red',fontSize:16,paddingLeft:15,marginTop:5,marginBottom:20}}>Os campos marcados com (**) são de preenchimento obrigatório, somente se a denúncia NÃO for anônima.</Text>
+            <Text style={{color:'red',fontSize:16,paddingLeft:15,marginTop:5,marginBottom:5}}>Para os tipo de denúncias 1 e 4, é obrigatório imagens.</Text>
+            <Text style={{color:'red',fontSize:16,paddingLeft:15,marginBottom:5}}>Os campos marcados com (*) são de preenchimento obrigatório.</Text>
+            <Text style={{color:'red',fontSize:16,paddingLeft:15,marginBottom:20}}>Os campos marcados com (**) são de preenchimento obrigatório, somente se a denúncia NÃO for anônima.</Text>
 
           </Form>
         </View>
