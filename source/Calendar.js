@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, Modal,StatusBar, ActivityIndicator } from 'react-native';
-import { Container, Header, Title, Footer, FooterTab, Content, Button, H1, Left, Right, Body, Icon, Text, H3, List, ListItem, Card, CardItem, Thumbnail } from 'native-base';
+import { Container, Header, Title, Footer, FooterTab, Content, Button, H1, Left, Right, Body, Icon, Text, H3, List, ListItem, Card, CardItem, Thumbnail, H2 } from 'native-base';
 import styles from './styles';
 import axios from 'axios';
 import URL_API from './Config/Constants';
@@ -14,33 +14,17 @@ export default function Calendar() {
   const [ events, setEvents ] = useState([]);
   const [urlImageModal, seturlImageModal] = useState('');
   const [ month, setMonth ] = useState('');
-  const [ monthEvents, setMonthEvents ] = useState([]);
-  const [ current, setCurrent ] = useState(0);
   const [ loadComplete, setLoadComplete ] = useState(false);
+  const [ current, setCurrent ] = useState(new Date());
 
   async function getEventsFromApi() {
-    /*try {
-      let response = await fetch(
-        'https://api.myjson.com/bins/15wlyq'
-      );
-      let responseJson = await response.json();
-      setEvents(responseJson.list);
-      setMonth(responseJson.list[0].month);
-      setMonthEvents(responseJson.list[0].events);
-      setLoadComplete(true);
-      console.log(responseJson.list);
-    } catch (error) {
-      console.error(error);
-    }*/
     try {
-      const response = await axios.get(URL_API.calendars);
+      const response = await axios.get(URL_API.calendars + `/${current.getFullYear()}/${current.getMonth() + 1}`);
       setEvents(response.data);
-      console.log('dados buscados da api...');
-      console.log(response.data);
       setLoadComplete(true);
     } catch (err) {
-      console.log('calendar-caiu no catch..');
       console.log(err);
+      setEvents([]);
     }
   }
 
@@ -48,37 +32,28 @@ export default function Calendar() {
     getEventsFromApi();
   }, []);
 
-  /*useEffect(() => {
-    if(loadComplete){
-      setMonth(events[current].month);
-      setMonthEvents(events[current].events);
-    }
-  });*/
+  useEffect(() => {
+    console.log(current.toString());
+  }, [current])
 
   const prevMonth = () => {
-    if(current - 1 === -1){
-      setCurrent(events.length - 1);
-    } else {
-      setCurrent(current - 1);
-    }
+    setCurrent(new Date(current.setMonth(current.getMonth() - 1)));
+    getEventsFromApi();
   }
 
   const nextMonth = () => {
-    if(current + 1 === events.length){
-      setCurrent(0);
-    } else {
-      setCurrent(current + 1);
-    }
+    setCurrent(new Date(current.setMonth(current.getMonth() + 1)));
+    getEventsFromApi();
   }
 
+  const getFormattedDate = () => {
+    return `${('0' + (current.getMonth() + 1)).slice(-2)}/${current.getFullYear()}`;
+  };
+
   function showModal(){
-      
       return(
         <Modal visible={visible} 
-          transparent={true}
-          onRequestClose={()=>{
-            //console.log("modal has been closed");
-          }} 
+          transparent={false} 
           >
           <Header style={{backgroundColor: 'black'}} androidStatusBarColor='black'>
             <Left style={{flex: 0}}>
@@ -91,15 +66,12 @@ export default function Calendar() {
           </Header>
           <View style={{flex:1}}>
           {
-            <Image resizeMode='cover' style={{flex:1}} source={{uri:urlImageModal}}/>
+            <Image resizeMode='contain' style={{flex:1}} source={{uri:urlImageModal}}/>
           }
           </View> 
         </Modal>
       );
   }
-
-  
-
 
   return (
     <Container>
@@ -124,37 +96,42 @@ export default function Calendar() {
             <ActivityIndicator size='large' color='#529C52' style={{ paddingTop: 25 }}/>
             :
             <View style={styles.calendarContainer}>
-              <H1 style={styles.aboutTitle}>{'Eventos ' /*+ month*/}</H1>
+              <H1 style={styles.aboutTitle}>{`Eventos ${getFormattedDate()}`}</H1>
               <View style={{marginTop: 10}}>
-                <List
-                  dataArray={/*monthEvents*/events}
-                  renderRow={(data) =>
-
-                    <Card >
-                      <CardItem bordered style={{backgroundColor:'#dbfad6'}}>
-                        <Body>
-                          <H3 style={styles.h3s}>{data.title}</H3>
-                        </Body>
-                      </CardItem>
-                      <CardItem bordered style={{backgroundColor:'#dbfad6'}}>
-                        <Body>
-                          <TouchableOpacity activeOpacity={.7} onPress={()=>{
-                              seturlImageModal('http://saude.osorio.rs.gov.br:3003/'+data.image);
-                              setVisible(true);
-                          }} >
-                            <Thumbnail square style={{height:300,width:300}} source={{uri:'http://saude.osorio.rs.gov.br:3003/'+data.image}}/>  
-                          </TouchableOpacity>
-                        </Body>
-                      </CardItem>
-                      <CardItem bordered style={{backgroundColor:'#dbfad6'}}>
-                        <Body> 
-                          <ItemListCalendar dataText={data.description}/>
-                        </Body>
-                      </CardItem>
-                    </Card>
-
+                {
+                  events.length > 0 ? 
+                  <List
+                    dataArray={events}
+                    renderRow={(data, index) =>
+                      <Card key={index}>
+                        <CardItem bordered style={{backgroundColor:'#dbfad6'}}>
+                          <Body>
+                            <H2 style={styles.h3s}>{data.title}</H2>
+                          </Body>
+                        </CardItem>
+                        <CardItem bordered style={{backgroundColor:'#dbfad6'}}>
+                          <Body style={{display: 'flex', alignItems: 'center'}} >
+                            <TouchableOpacity activeOpacity={.7} style={{display: 'flex', width: '100%'}} onPress={() => {
+                                seturlImageModal('http://saude.osorio.rs.gov.br:3003/'+data.image);
+                                setVisible(true);
+                              }} >
+                              <Thumbnail square style={styles.calendarThumbnail} source={{ uri:`http://saude.osorio.rs.gov.br:3003/${data.image}`}}/>  
+                            </TouchableOpacity>
+                          </Body>
+                        </CardItem>
+                        <CardItem bordered style={{backgroundColor:'#dbfad6'}}>
+                          <Body> 
+                            <ItemListCalendar dataText={data.description}/>
+                          </Body>
+                        </CardItem>
+                      </Card>
                     }
-                />
+                  />
+                  : 
+                  <View>
+                    <H3 style={{textAlign: 'center'}}>Este mês não possui eventos cadastrados.</H3>
+                  </View>
+                }
               </View>
             </View>
         }
@@ -174,7 +151,7 @@ export default function Calendar() {
               !loadComplete ? 
                 <Text style={styles.footerButtonText}>Mês/Ano</Text>
                 :
-                <Text style={styles.footerButtonText}>mes/ano{ /*month.slice(0, 3) + '/' + month.slice(-2)*/ }</Text>
+            <Text style={styles.footerButtonText}>{getFormattedDate()}</Text>
             }
           </Button>
           <Button iconRight style={styles.button} onPress={nextMonth}>

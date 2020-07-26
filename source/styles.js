@@ -1,11 +1,13 @@
 import React from 'react';
-import { StyleSheet, Platform } from 'react-native';
+import { StyleSheet, Platform, Dimensions } from 'react-native';
 
 const mainColor = '#1d814c';
 const secondaryColor = '#eaffe3';
 const accentColor = '#dffad6';
 const cardColor = '#dbfad6';
 const bordersColor = '#caebc5';
+const deviceWidth = Dimensions.get('screen').width;
+const calendarImages = deviceWidth - 60;
 
 export default styles = StyleSheet.create({
   content: {
@@ -31,6 +33,10 @@ export default styles = StyleSheet.create({
     paddingStart: 10,
     paddingEnd: 10,
     paddingBottom: 10
+  },
+  calendarThumbnail: {
+    height: 200,
+    width: calendarImages
   },
   sideHeaderButtonContainer: {
     flex: 0,
