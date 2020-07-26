@@ -4,6 +4,8 @@ import { useNavigation } from 'react-navigation-hooks';
 import { ActivityIndicator, StyleSheet, View, Image, Platform, StatusBar, Modal } from 'react-native';
 import { Container, Header, Title, Content, Button, H1, Left, Right, Body, Icon, Text } from 'native-base';
 import styles from './styles'; 
+import axios from 'axios';
+import URL_API from './Config/Constants';
 
 export default function About() {
   const navigation = useNavigation();
@@ -12,20 +14,33 @@ export default function About() {
   const [ albums, setAlbums ] = useState([]);
   
   async function getEventsFromApi() {
-    try {
-      let response = await fetch(
-        'https://api.myjson.com/bins/189oal'
-      );
-      let responseJson = await response.json();
-      setAlbums(responseJson.albums);
+  
+    try{
+
+      const response = await axios.get(URL_API.muralPhotos);
+      setAlbums(response.data.result);
+      console.log('array de albums');
+      console.log(albums);
+
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
   useEffect(() => {
     getEventsFromApi();
   }, []);
+
+  function getImagesToView(arrayImages){
+      setImages([]);
+      const tempImages = [];
+      arrayImages.map(img =>{
+        tempImages.push('http://saude.osorio.rs.gov.br:3003/' + img);
+      })
+      setImages(tempImages);
+      console.log('images do modal');
+      console.log(images);
+  }
 
   return (
     <Container>
@@ -51,8 +66,10 @@ export default function About() {
             :
             <View>
               <View style={styles.container}>
-                  {albums.map((item, index) => {
-                    return (<Button style={styles.largeButton} key={index} onPress={() => { setImages(item.images); setVisible(true) }}><Text> {item.eventTitle}</Text></Button>) 
+                  {albums.map((item, index) => {       
+                    return (
+                      <Button key={index} style={styles.largeButton} key={index} onPress={() => { getImagesToView(item.images); setVisible(true) }}><Text> {item.title}</Text></Button>
+                    )
                   })}
               </View>
               <Modal visible={visible} transparent={true} >
@@ -66,7 +83,8 @@ export default function About() {
                   <Right />
                 </Header>
                 <ImageViewer 
-                  imageUrls={images}
+                  //imageUrls={images}
+                  imageUrls={images.map(e => {return {url: e}})}
                   saveToLocalByLongPress={false}
                   enableSwipeDown={true}
                   failImageSource={'https://cdn4.iconfinder.com/data/icons/ui-beast-4/32/Ui-12-512.png'}
