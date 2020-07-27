@@ -50,10 +50,10 @@ export default function Scheduled() {
             <Content style={{padding: 20}}>
               <ListItem itemDivider style={[styles.calendarBackground, {marginBottom: 5}]}>
                 <Left style={{flex: 0, alignItems: 'flex-start'}}>
-                  <Text style={{width: 60, textAlign: 'left'}}>Data da Coleta</Text>
+                  <Text style={{width: 65, textAlign: 'left', fontWeight: 'bold'}}>Data da Coleta</Text>
                 </Left>
                 <Body style={styles.namesListBody}>
-                  <Text>Nome do Solicitante</Text>
+                  <Text style={{fontWeight: 'bold'}}>Nome do Solicitante</Text>
                 </Body>
               </ListItem>
               <List
@@ -61,7 +61,7 @@ export default function Scheduled() {
                   renderRow={(item, {}, index,) =>
                     <ListItem itemDivider style={[styles.calendarBackground, {marginBottom: 0}]} key={index}>
                       <Left style={{flex: 0, alignItems: 'flex-start'}}>
-                        <Text style={{width: 60, textAlign: 'left'}}>{shortDate(item.dateToCollect)}</Text>
+                        <Text style={{width: 65, textAlign: 'left'}}>{shortDate(item.dateToCollect)}</Text>
                       </Left>
                       <Body style={styles.namesListBody}>
                         <Text>{item.name}</Text>
