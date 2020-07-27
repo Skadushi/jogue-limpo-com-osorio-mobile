@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import ImageViewer from 'react-native-image-zoom-viewer';
 import { useNavigation } from 'react-navigation-hooks';
 import { ActivityIndicator, StyleSheet, View, Image, Platform, StatusBar, Modal } from 'react-native';
 import { Container, Header, Title, Content, Button, H1, Left, Right, Body, Icon, Text } from 'native-base';
 import styles from './styles'; 
 import axios from 'axios';
 import URL_API from './Config/Constants';
-import CarouselModal from './Components/CarouselModal';
 
 export default function About() {
   const navigation = useNavigation();
@@ -32,7 +32,7 @@ export default function About() {
   }, []);
 
   function getImagesToView(arrayImages){
-     
+      setImages([]);
       const tempImages = [];
       arrayImages.map(img =>{
         tempImages.push('http://saude.osorio.rs.gov.br:3003/' + img);
@@ -72,17 +72,23 @@ export default function About() {
                     )
                   })}
               </View>
-              <Modal visible={visible} transparent={false} >
+              <Modal visible={visible} transparent={true} >
                 <Header style={{backgroundColor: 'black'}} androidStatusBarColor='black'>
                   <Left style={{flex: 0}}>
-                    <Button style={{backgroundColor: 'black'}} onPress={() => {  setImages([]); setVisible(false)}}>
+                    <Button style={{backgroundColor: 'black'}} onPress={() => { setVisible(false)}}>
                       <Icon style={styles.whiteButtons} name='arrow-back' />
                     </Button>
                   </Left>
                   <Body style={{flex: 2}}/>
                   <Right />
                 </Header>
-                  <CarouselModal imagesCarousel={images} />
+                <ImageViewer 
+                  //imageUrls={images}
+                  imageUrls={images.map(e => {return {url: e}})}
+                  saveToLocalByLongPress={false}
+                  enableSwipeDown={true}
+                  failImageSource={'https://cdn4.iconfinder.com/data/icons/ui-beast-4/32/Ui-12-512.png'}
+                  onSwipeDown={() => {setVisible(false)}}/>
               </Modal>
             </View>
         }
