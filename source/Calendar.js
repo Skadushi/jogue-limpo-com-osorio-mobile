@@ -64,7 +64,7 @@ export default function Calendar() {
                 <Body style={{flex: 2}}/>
                 <Right />
           </Header>
-          <View style={{flex:1}}>
+          <View style={{flex:1, backgroundColor:'black'}}>
           {
             <Image resizeMode='contain' style={{flex:1}} source={{uri:urlImageModal}}/>
           }
