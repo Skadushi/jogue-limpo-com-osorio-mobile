@@ -5,6 +5,7 @@ import { Container, Header, List, ListItem, Title, Content, Button, H1, Left, Ri
 import styles from './styles';
 import axios from 'axios';
 import URL_API from './Config/Constants';
+import { shortDate } from './Helper/date';
 
 export default function Scheduled() {
   const navigation = useNavigation();
@@ -17,7 +18,6 @@ export default function Scheduled() {
      
       const response = await axios.get(URL_API.catatreco);
       setItems(response.data);
-      
       setLoading(true);
     } catch (error) {
       console.log(error);
@@ -49,8 +49,8 @@ export default function Scheduled() {
             :
             <Content style={{padding: 20}}>
               <ListItem itemDivider style={[styles.calendarBackground, {marginBottom: 5}]}>
-                <Left style={{flex: 0, alignItems: 'flex-end'}}>
-                  <Text style={{width: 50, textAlign: 'right'}}>#</Text>
+                <Left style={{flex: 0, alignItems: 'flex-start'}}>
+                  <Text style={{width: 60, textAlign: 'left'}}>Data da Coleta</Text>
                 </Left>
                 <Body style={styles.namesListBody}>
                   <Text>Nome do Solicitante</Text>
@@ -60,8 +60,8 @@ export default function Scheduled() {
                   dataArray={items}
                   renderRow={(item, {}, index,) =>
                     <ListItem itemDivider style={[styles.calendarBackground, {marginBottom: 0}]} key={index}>
-                      <Left style={{flex: 0, alignItems: 'flex-end'}}>
-                        <Text style={{width: 50, textAlign: 'right'}}>{item.protocol}</Text>
+                      <Left style={{flex: 0, alignItems: 'flex-start'}}>
+                        <Text style={{width: 60, textAlign: 'left'}}>{shortDate(item.dateToCollect)}</Text>
                       </Left>
                       <Body style={styles.namesListBody}>
                         <Text>{item.name}</Text>
