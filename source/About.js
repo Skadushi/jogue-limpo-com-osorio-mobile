@@ -37,16 +37,16 @@ export default function About() {
             <Image source={require('../assets/osorio.png')} style={styles.aboutImages} resizeMode='center' />
           </View>
           <View style={styles.developersPhotoContainer} >
-            <Image source={require('../assets/logo_ifrs3.gif')} style={styles.developersImages} resizeMode='center'/>
+            <Image source={require('../assets/logo_ifrs.png')} style={styles.developersImages} resizeMode='center'/>
           </View>
-          <H1 style={styles.aboutTitle}>Equipe envolvida</H1>
+          <H1 style={styles.aboutTitle, {marginTop: 35, marginBottom: 10}}>Equipe envolvida</H1>
           <Text style={styles.personName}>Eduardo Aluísio Cardoso Abrahão</Text>
           <Text style={styles.personAtribute}>Prefeito</Text>
 
           <Text style={styles.personName}>Soraia Abrahão</Text>
           <Text style={styles.personAtribute}>Idealizadora do Programa Jogue Limpo com Osório</Text>
 
-          <Text style={styles.personName}>Edilson Pires</Text>
+          <Text style={styles.personName}>Edilson Nunes Pires</Text>
           <Text style={styles.personAtribute}>Secretário de Meio Ambiente, Agricultura e Pecuária</Text>
 
           <Text style={styles.personName}>Bruno Chagas Alves Fernandes</Text>

@@ -34,7 +34,7 @@ export default function CataTreco() {
           <H1 style={styles.aboutTitle}>Cata-Treco</H1>
           <Text style={styles.generalTexts}>Serviço de Coleta de descartes de grande volume (exceto eletrônicos) tais como móveis, fogões, geladeiras, sofás velhos, etc... Encaminhando-os ao destino correto. Seu agendamento é feito pelo aplicativo utilizando o botão abaixo ou pelo telefone. E o recolhimento ocorre nas quartas-feiras pela manhã, conforme o agendamento prévio.</Text>
           <Text style={styles.generalTexts}>Todas as requisições que forem agendadas pela equipe Cata-Treco, sejam elas feitas por telefone ou pelo aplicativo, serão colocadas na tabela que pode ser acessada clicando no botão <Icon type="MaterialIcons" name='playlist-add-check' style={{ fontSize: 21, color: 'black' }} /> no topo da tela.</Text>
-          <Text style={styles.generalTexts}>Telefone para agendamento: 3663-1947</Text>
+          <Text style={styles.generalTexts, {fontWeight: 'bold', marginTop: 20}}>Telefone para agendamento: 3663-1947</Text>
         </View>
       </Content>
       <Footer>
