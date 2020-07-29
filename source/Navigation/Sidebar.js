@@ -42,15 +42,15 @@ const buttons = [
     icon: "images"
   },
   {
-    name: "Sobre o Programa",
+    name: "Sobre o Aplicativo",
     route: "About",
     icon: "information-circle"
-  },
-  {
+  }
+  /*{
     name: "Sobre a Aplicação",
     route: "Developers",
     icon: "ribbon"
-  }
+  }*/
 ];
 
 class SideBar extends React.Component {

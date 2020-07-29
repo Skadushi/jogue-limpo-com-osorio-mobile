@@ -15,7 +15,7 @@ import ComplaintsHelp from '../ComplaintsHelp';
 import Scheduling from '../Scheduling';
 import Calendar from '../Calendar';
 import Gathering from '../Gathering';
-import Developers from '../Developers';
+//import Developers from '../Developers';
 import Scheduled from '../Scheduled';
 import CityMap from '../Map/CityMap';
 import LawPdfView from '../LawTabs/LawPdfView';
@@ -32,7 +32,7 @@ const Drawer = createDrawerNavigator(
     Scheduling: { screen: Scheduling },
     Calendar: { screen: Calendar },
     Gathering: { screen: Gathering },
-    Developers: { screen: Developers },
+    //Developers: { screen: Developers },
   },
   {
     initialRouteName: 'Home',
@@ -57,7 +57,7 @@ const RootStack = createStackNavigator(
     Scheduling: { screen: Scheduling },
     Calendar: { screen: Calendar },
     Gathering: { screen: Gathering },
-    Developers: { screen: Developers },
+    //Developers: { screen: Developers },
     Scheduled: { screen: Scheduled },
     CityMap: { screen: CityMap },
     LawPdfView: {screen: LawPdfView}

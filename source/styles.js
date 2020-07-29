@@ -110,7 +110,7 @@ export default styles = StyleSheet.create({
   },
   developersImages: {
     width: 400,
-    height: 100,
+    height: 80,
     alignSelf: 'center',
     margin: 5,
   },
@@ -309,5 +309,16 @@ export default styles = StyleSheet.create({
     width: 200, 
     fontSize:17.3, 
     marginLeft:7,
+  },
+  personName:{
+    fontSize:18,
+    marginTop:5,
+    fontWeight: 'bold',
+    textAlign:'center'
+  },
+  personAtribute:{
+    fontSize: 14,
+    marginBottom:5,
+    textAlign:'center'
   }
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
-import { Container, Header, Title, Content, Button, H1, Left, Right, Body, Icon, Text } from 'native-base';
+import { Container, Header, Title, Content, Button, H1, H2, Left, Right, Body, Icon, Text } from 'native-base';
 import styles from './styles';
 
 export default function About() {
@@ -36,6 +36,34 @@ export default function About() {
             <Image source={require('../assets/logo.png')} style={styles.aboutImages} resizeMode='center'/>
             <Image source={require('../assets/osorio.png')} style={styles.aboutImages} resizeMode='center' />
           </View>
+          <View style={styles.developersPhotoContainer} >
+            <Image source={require('../assets/logo_ifrs3.gif')} style={styles.developersImages} resizeMode='center'/>
+          </View>
+          <H1 style={styles.aboutTitle}>Equipe envolvida</H1>
+          <Text style={styles.personName}>Eduardo Aluísio Cardoso Abrahão</Text>
+          <Text style={styles.personAtribute}>Prefeito</Text>
+
+          <Text style={styles.personName}>Soraia Abrahão</Text>
+          <Text style={styles.personAtribute}>Idealizadora do Programa Jogue Limpo com Osório</Text>
+
+          <Text style={styles.personName}>Edilson Pires</Text>
+          <Text style={styles.personAtribute}>Secretário de Meio Ambiente, Agricultura e Pecuária</Text>
+
+          <Text style={styles.personName}>Bruno Chagas Alves Fernandes</Text>
+          <Text style={styles.personAtribute}>Professor do IFRS Campus Osório</Text>
+
+          <Text style={styles.personName}>Vinícius Fritzen Machado</Text>
+          <Text style={styles.personAtribute}>Professor do IFRS Campus Osório</Text>
+
+          <Text style={styles.personName}>Andrei Gabriel Santos Deniz</Text>
+          <Text style={styles.personAtribute}>Aluno do IFRS Campus Osório</Text>
+
+          <Text style={styles.personName}>Luis Rodrigo Pereira Cardoso</Text>
+          <Text style={styles.personAtribute}>Aluno do IFRS Campus Osório</Text>
+
+          <Text style={styles.personName}>Diego José da Silva Ribeiro</Text>
+          <Text style={styles.personAtribute}>Aluno do IFRS Campus Osório</Text>
+
         </View>
       </Content>
     </Container>
