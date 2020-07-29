@@ -45,7 +45,7 @@ export default function Scheduled() {
         <H1 style={styles.title}>Agendamentos Confirmados</H1>
         {
           !loadComplete ?
-            <ActivityIndicator size='large' color='#529C52' style={{ paddingTop: 25 }}/>
+            <ActivityIndicator size='large' color='#529C52' ssstyle={{ paddingTop: 25 }}/>
             :
             <Content style={{padding: 20}}>
               <ListItem itemDivider style={[styles.calendarBackground, {marginBottom: 5}]}>
