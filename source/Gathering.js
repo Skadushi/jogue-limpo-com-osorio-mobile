@@ -86,14 +86,16 @@ export default function Gathering() {
                       {
                         index === selected ? 
                           <View style={styles.districtsListInsideView} >
-                            <View style={styles.districtsListSelective}>
-                              <Text style={[styles.districtsListTexts, {color: '#1d814c', fontSize: 18, paddingBottom: 0}]}>{item.values[0].key}</Text>
-                              <Text style={styles.districtsListTexts}>{item.values[0].values[0].description}</Text>
-                            </View>
-                            <View>
-                              <Text style={[styles.districtsListTexts, {color: '#1d814c', fontSize: 18, paddingBottom: 0,}]}>{item.values[1].key}</Text>
-                              <Text style={styles.districtsListTexts}>{item.values[1].values[0].description}</Text>
-                            </View>
+
+                            {
+                              item.values.map((itemtypeGuatering,indexTypeGuatering) => {
+                                return(
+                                <View style={indexTypeGuatering == 0 ? styles.districtsListSelective : null}>
+                                  <Text style={[styles.districtsListTexts, {color: '#1d814c', fontSize: 18, paddingBottom: 0}]}>{itemtypeGuatering.key}</Text>
+                                  <Text style={styles.districtsListTexts}>{itemtypeGuatering.values[0].description}</Text>
+                                </View>
+                                )})
+                            }
                           </View>
                           :
                           null
