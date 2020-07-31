@@ -186,10 +186,10 @@ export default function Scheduling() {
       </Content>
       
         
-      <Footer>
+      <Footer style={styles.footerbackground}>
       {
         verifyInputs() ?
-        <FooterTab style={styles.anatomy}>        
+        <FooterTab>        
             {
               loading ?
               <Button full  style={styles.footerButton}>
