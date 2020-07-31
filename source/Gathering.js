@@ -89,7 +89,7 @@ export default function Gathering() {
           </Button>
         </Right>
       </Header>
-      <SafeAreaView style={{flex:1}}>
+      <SafeAreaView style={{flex:1,backgroundColor:'#eaffe3'}}>
           <ScrollView
               refreshControl={
               <RefreshControl
