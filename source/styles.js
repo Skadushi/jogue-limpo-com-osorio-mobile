@@ -11,6 +11,7 @@ const calendarImages = deviceWidth - 60;
 
 export default styles = StyleSheet.create({
   content: {
+    flex:1,
     backgroundColor: secondaryColor
   },
   container: {
@@ -67,9 +68,18 @@ export default styles = StyleSheet.create({
     height: 30,
     color: 'red',
   },
+  buttonCalendar: {
+    backgroundColor: mainColor,
+    borderRadius: 0,
+    padding: 0
+  },
   footerButton: {
     backgroundColor: mainColor,
-    padding: 0
+    padding: 0,
+    borderRadius: 0
+  },
+  footerbackground: {
+    backgroundColor: secondaryColor
   },
   h3s: {
     margin: 10,
@@ -116,7 +126,7 @@ export default styles = StyleSheet.create({
   },
   arrowButtons: {
     color: 'white',
-    fontSize: 17,
+    fontSize: 23,
   },
   homeImageButton: {
     width: 300,

@@ -36,7 +36,7 @@ export default function LawsList({ apiLink }) {
 
       {
 
-        <FlatList
+        <FlatList style={styles.content}
           data={laws}
           renderItem={({ item }) => {
             return (

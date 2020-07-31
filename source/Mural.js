@@ -50,7 +50,7 @@ export default function Mural() {
 
   const keyExtractor = (item) => item._id;
   return (
-    <Container>
+    <Container style={styles.content}>
       <Header style={styles.anatomy} androidStatusBarColor='#529C52'>    
         <Left style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.goBack() }}>

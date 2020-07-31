@@ -37,8 +37,8 @@ export default function CataTreco() {
           <Text style={styles.generalTexts, {fontWeight: 'bold', marginTop: 20}}>Telefone para agendamento: 3663-1947</Text>
         </View>
       </Content>
-      <Footer>
-        <FooterTab style={styles.anatomy}>
+      <Footer style={styles.footerbackground}>
+        <FooterTab>
           <Button full style={styles.footerButton} onPress={() => { navigation.navigate('Scheduling') }}>
             <Text style={styles.footerButtonText}>
               <Icon style={styles.footerButtonText} name='calendar' /> Agendamento

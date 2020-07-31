@@ -139,9 +139,9 @@ export default function Calendar() {
           showModal()
         }
       </Content>
-      <Footer>
-        <FooterTab style={styles.anatomy}>
-          <Button iconLeft style={styles.button} onPress={prevMonth}>
+      <Footer style={styles.footerbackground}>
+        <FooterTab style={{marginBottom: (Platform.OS === 'ios') ? 35 : 0}}>
+          <Button iconLeft style={styles.buttonCalendar} onPress={prevMonth}>
             <Text>
               <Icon name='return-left' style={styles.arrowButtons}/>
             </Text>
@@ -154,7 +154,7 @@ export default function Calendar() {
             <Text style={styles.footerButtonText}>{getFormattedDate()}</Text>
             }
           </Button>
-          <Button iconRight style={styles.button} onPress={nextMonth}>
+          <Button iconRight style={styles.buttonCalendar} onPress={nextMonth}>
             <Text>
               <Icon name='return-right' style={styles.arrowButtons}/>
             </Text>

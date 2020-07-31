@@ -440,10 +440,10 @@ export default function Complaints() {
           </Form>
         </View>
       </Content>
-      <Footer>
+      <Footer style={styles.footerbackground}>
       {
         verifyInputs() ?
-        <FooterTab style={styles.anatomy}>
+        <FooterTab >
             {
               loading ? 
               <Button full  style={styles.footerButton}>

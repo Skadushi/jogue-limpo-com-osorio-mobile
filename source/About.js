@@ -8,7 +8,7 @@ export default function About() {
   const navigation = useNavigation();
   
   return (
-    <Container>
+    <Container style={styles.content}>
       <Header style={styles.anatomy} androidStatusBarColor='#2d914c'>
         <Left style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.goBack() }}>
@@ -16,7 +16,7 @@ export default function About() {
           </Button>
         </Left>
         <Body style={styles.headerBody}>
-          <Title style={{color: 'white', marginLeft:15}}>Sobre o Programa</Title>
+          <Title style={{color: 'white', marginLeft:15}}>Sobre o Aplicativo</Title>
         </Body>
         <Right style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.openDrawer() }}>

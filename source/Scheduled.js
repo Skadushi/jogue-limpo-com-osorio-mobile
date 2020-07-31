@@ -29,7 +29,7 @@ export default function Scheduled() {
   }, []);
 
   return (
-    <Container>
+    <Container style={styles.content}>
       <Header style={styles.anatomy} androidStatusBarColor='#529C52'>
         <Left style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.pop() }}>

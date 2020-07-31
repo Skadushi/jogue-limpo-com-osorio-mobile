@@ -12,7 +12,7 @@ export default function Destination() {
   const navigation = useNavigation();
 
   return (
-    <Container>
+    <Container style={styles.content}>
       <Header hasTabs style={styles.anatomy} androidStatusBarColor='#529C52'>
         <Left style={styles.sideHeaderButtonContainer}>
           <Button transparent onPress={() => { navigation.goBack() }}>
@@ -29,13 +29,13 @@ export default function Destination() {
         </Right>
       </Header>
       <Tabs tabBarUnderlineStyle={styles.tabs} renderTabBar={() => <ScrollableTab style={styles.tab}/>}>
-        <Tab heading='Transbordo' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
+        <Tab style={styles.content} heading='Transbordo' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
           <Transhipment />
         </Tab>
-        <Tab heading='Lixo Eletrônico' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
+        <Tab style={styles.content} heading='Lixo Eletrônico' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
           <Electronic />
         </Tab>
-        <Tab heading='Lâmpadas de Mercúrio' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
+        <Tab style={styles.content} heading='Lâmpadas de Mercúrio' textStyle={styles.tabsText} tabStyle={styles.tab} activeTextStyle={styles.tabsText} activeTabStyle={styles.activeTab}>
           <Mercury />
         </Tab>
       </Tabs>
