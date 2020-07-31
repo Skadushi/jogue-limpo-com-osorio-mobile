@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ImageViewer from 'react-native-image-zoom-viewer';
 import { useNavigation } from 'react-navigation-hooks';
-import { FlatList, View, Modal } from 'react-native';
+import { FlatList, View, Modal, RefreshControl, SafeAreaView, ScrollView } from 'react-native';
 import { Container, Header, Title, Content, Button, Left, Right, Body, Icon, Text, Card, CardItem, H2, Thumbnail, Spinner } from 'native-base';
 import styles from './styles'; 
 import axios from 'axios';
@@ -13,22 +13,35 @@ export default function Mural() {
   const [ visible, setVisible ] = useState(false);
   const [ images, setImages ] = useState([]);
   const [ albums, setAlbums ] = useState([]);
+
   const [fetchingAPI, setFetchingApi] = useState(true);
+  const [requestSucess,setRequestSucess] = useState(true);
   
-  async function getEventsFromApi() {
-  
+  const getEventsFromApi = React.useCallback(async () => {
+
     try{
-      console.log('GETTING ALBUNS FROM API');
+
+      setFetchingApi(true);
+      setRequestSucess(true);
 
       const response = await axios.get(URL_API.muralPhotos);
+
+      if(response.status !== 200){
+        setRequestSucess(false);
+        setFetchingApi(false);
+      }
+
       setAlbums(response.data.result);
      
       setFetchingApi(false);
 
     } catch (error) {
-      console.log(error);
+      console.log('erro em renderizar lista do mural de fotos: ',error);
+      setRequestSucess(false);
+      setFetchingApi(false)
     }
-  }
+
+  },[fetchingAPI]); 
 
   useEffect(() => {
 
@@ -44,8 +57,6 @@ export default function Mural() {
         tempImages.push('http://saude.osorio.rs.gov.br:3003/' + img);
       })
       setImages(tempImages);
-      console.log('images do modal');
-      console.log(images);
   }
 
   const keyExtractor = (item) => item._id;
@@ -66,11 +77,21 @@ export default function Mural() {
           </Button>
         </Right>
       </Header>
+
+      <SafeAreaView style={styles.content}>
+          <ScrollView
+              refreshControl={
+              <RefreshControl
+                refreshing={fetchingAPI}
+                onRefresh={getEventsFromApi}
+              />}
+              >
+
       <Content style={styles.content}>
         {  
           fetchingAPI ? <Spinner color="green"/> :
             albums.length === 0 ? 
-            <Text> Não existem albuns de eventos cadastrados </Text>
+            <Text>{requestSucess ? 'Não existem albuns de eventos cadastrados' : 'Ocorreu um problema no servidor, tente recarregar a página, ou visualizar esses dados mais tarde.'}</Text>
             :
             <View>
               <View style={styles.calendarContainer}>
@@ -127,6 +148,8 @@ export default function Mural() {
             </View>
         }
       </Content>
+      </ScrollView>
+          </SafeAreaView>
     </Container>
   );    
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
-import { ActivityIndicator, View, } from 'react-native';
-import { Container, Header, List, ListItem, Title, Content, Button, H1, Left, Right, Body, Icon, Text } from 'native-base';
+import { ActivityIndicator, View, RefreshControl, SafeAreaView, ScrollView  } from 'react-native';
+import { Container, Header, List, ListItem, Title, Content, Button, H1, Left, Right, Body, Icon, Text, Spinner } from 'native-base';
 import styles from './styles';
 import axios from 'axios';
 import URL_API from './Config/Constants';
@@ -9,20 +9,37 @@ import { shortDate } from './Helper/date';
 
 export default function Scheduled() {
   const navigation = useNavigation();
-  const [ loadComplete, setLoading ] = useState(false);
+  //const [ loadComplete, setLoading ] = useState(false);
   const [ items, setItems ] = useState([]);
+
+  const [fetchingAPI, setFetchingApi] = useState(true);
+  const [requestSucess,setRequestSucess] = useState(true);
   
-  async function getScheduledFromApi() {
-  
+  const getScheduledFromApi = React.useCallback(async () => {
+    
     try {
+
+      setFetchingApi(true);
+      setRequestSucess(true);
      
       const response = await axios.get(URL_API.catatreco);
+
+      if(response.status !== 200){
+        setRequestSucess(false);
+        setFetchingApi(false);
+      }
+
       setItems(response.data);
-      setLoading(true);
+
+      setFetchingApi(false);
+      //setLoading(true);
     } catch (error) {
-      console.log(error);
+      console.log('erro em renderizar lista de cataTreco agendados: ',error);
+      setRequestSucess(false);
+      setFetchingApi(false)
     }
-  }
+
+  },[fetchingAPI]);
 
   useEffect(() => {
     getScheduledFromApi();
@@ -41,11 +58,22 @@ export default function Scheduled() {
         </Body>
         <Right style={styles.sideHeaderButtonContainer} />
       </Header>
+
+      <SafeAreaView style={styles.content}>
+          <ScrollView
+              refreshControl={
+              <RefreshControl
+                refreshing={fetchingAPI}
+                onRefresh={getScheduledFromApi}
+              />}
+              >
+
       <Content style={styles.content}>
         <H1 style={styles.title}>Agendamentos Confirmados</H1>
         {
-          !loadComplete ?
-            <ActivityIndicator size='large' color='#529C52' ssstyle={{ paddingTop: 25 }}/>
+          fetchingAPI ? <Spinner color="green"/> :
+            items.length === 0 ?
+            <Text>{requestSucess ? 'Não existem cataTreco agendados cadastrados' : 'Ocorreu um problema no servidor, tente recarregar a página, ou visualizar esses dados mais tarde.'}</Text>
             :
             <Content style={{padding: 20}}>
               <ListItem itemDivider style={[styles.calendarBackground, {marginBottom: 5}]}>
@@ -74,6 +102,8 @@ export default function Scheduled() {
             </Content>
         }
       </Content>
+      </ScrollView>
+          </SafeAreaView>
     </Container>
   );    
 }
