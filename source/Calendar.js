@@ -140,7 +140,7 @@ export default function Calendar() {
         }
       </Content>
       <Footer style={styles.footerbackground}>
-        <FooterTab style={{marginBottom: (Platform.OS === 'ios') ? 35 : 0}}>
+        <FooterTab>
           <Button iconLeft style={styles.buttonCalendar} onPress={prevMonth}>
             <Text>
               <Icon name='return-left' style={styles.arrowButtons}/>
