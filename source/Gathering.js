@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
-import { ActivityIndicator, StyleSheet, View, Image, Platform, StatusBar, Alert } from 'react-native';
-import { Container, Header, Content, Tabs, Tab, ScrollableTab, Footer, H1, FooterTab, Button, Title, Left, Right, Body, Icon, Text, H3, Badge } from 'native-base';
+import { ActivityIndicator, RefreshControl, SafeAreaView, ScrollView, StyleSheet, View, Image, Platform, StatusBar, Alert } from 'react-native';
+import { Container, Header, Content, Tabs, Tab, ScrollableTab, Footer, H1, FooterTab, Button, Title, Left, Right, Body, Icon, Text, H3, Badge, Spinner } from 'native-base';
 import styles from './styles';
 import axios from 'axios';
 import URL_API from './Config/Constants';
@@ -11,20 +11,39 @@ export default function Gathering() {
   const navigation = useNavigation()
   const [ districts, setDistricts ] = useState([]);
   const [ selected, setSelected ] = useState();
+
+  const [fetchingAPI, setFetchingApi] = useState(true);
+  const [requestSucess,setRequestSucess] = useState(true);
   
-  async function getDistrictsFromApi() {
- 
+  const getDistrictsFromApi = React.useCallback(async () => {
+
     try {
-      const response = await axios.get(URL_API.coleta);  
+
+      setFetchingApi(true);
+      setRequestSucess(true)
+      const response = await axios.get(URL_API.coleta);
+
+      if(response.status !== 200){
+        setRequestSucess(false);
+        setFetchingApi(false);
+      }
      
       setDistricts(group_by(response.data,'neighborhood').map(function (item){
         return {key: item.key,values:group_by(item.values,'type')};
       }));
       
+      setFetchingApi(false);
+
     } catch (error) {
-      console.log(error);
+      console.log('erro em renderizar lista de coletas: ',error);
+      setRequestSucess(false);
+      setFetchingApi(false)
     }
-  }
+
+  },[fetchingAPI]); 
+ 
+    
+  
 
   function group_by (lista, coluna) {
     var colunas = {};
@@ -70,13 +89,26 @@ export default function Gathering() {
           </Button>
         </Right>
       </Header>
+      <SafeAreaView style={{flex:1}}>
+          <ScrollView
+              refreshControl={
+              <RefreshControl
+                refreshing={fetchingAPI}
+                onRefresh={getDistrictsFromApi}
+              />}
+              >
+      
       <Content style={styles.content}>
-        {  
-          districts.length === 0 ? 
-            <ActivityIndicator size='large' color='#529C52' style={{ paddingTop: 25 }}/>
-            :
+        
+      
             <View style={styles.container}>
                 <H1 style={[styles.title, {marginBottom: 5}]}>Selecione seu Bairro</H1>
+                {
+                fetchingAPI ? <Spinner color="green"/> :
+                districts.length === 0 ? 
+                <Text>{requestSucess ? 'Não existem dados cadastrados' : 'Ocorreu um problema no servidor, tente recarregar a página, ou visualizar esses dados mais tarde.'}</Text>
+                :
+                <>
                 {districts.map((item, index) => {
                   return (
                     <View key={index} style={styles.districtsListView}>
@@ -103,9 +135,13 @@ export default function Gathering() {
                     </View>
                   ) 
                 })}
+                </>
+              }
             </View>
-        }
+          
       </Content>
+      </ScrollView>
+          </SafeAreaView>
     </Container>
   );    
 }
