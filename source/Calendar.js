@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
-import { StyleSheet, View, Image, Platform, Modal,StatusBar, ActivityIndicator } from 'react-native';
-import { Container, Header, Title, Footer, FooterTab, Content, Button, H1, Left, Right, Body, Icon, Text, H3, List, ListItem, Card, CardItem, Thumbnail, H2 } from 'native-base';
+import { StyleSheet, View, Image, Platform, Modal,StatusBar, ActivityIndicator, RefreshControl, SafeAreaView, ScrollView } from 'react-native';
+import { Container, Header, Title, Footer, FooterTab, Content, Button, H1, Left, Right, Body, Icon, Text, H3, List, ListItem, Card, CardItem, Thumbnail, H2, Spinner } from 'native-base';
 import styles from './styles';
 import axios from 'axios';
 import URL_API from './Config/Constants';
@@ -14,19 +14,37 @@ export default function Calendar() {
   const [ events, setEvents ] = useState([]);
   const [urlImageModal, seturlImageModal] = useState('');
   const [ month, setMonth ] = useState('');
-  const [ loadComplete, setLoadComplete ] = useState(false);
   const [ current, setCurrent ] = useState(new Date());
 
-  async function getEventsFromApi() {
+  const [fetchingAPI, setFetchingApi] = useState(true);
+  const [requestSucess,setRequestSucess] = useState(true);
+
+  const getEventsFromApi = React.useCallback(async () => {
+
     try {
+
+      setFetchingApi(true);
+      setRequestSucess(true);
+
       const response = await axios.get(URL_API.calendars + `/${current.getFullYear()}/${current.getMonth() + 1}`);
+      
+      if(response.status !== 200){
+        setRequestSucess(false);
+        setFetchingApi(false);
+      }
+      
       setEvents(response.data);
-      setLoadComplete(true);
+
+      setFetchingApi(false);
+      
     } catch (err) {
-      console.log(err);
-      setEvents([]);
+      console.log('erro em renderizar lista de calendario de eventos: ',err);
+      setRequestSucess(false);
+      setFetchingApi(false)
+      setEvents([]);   
     }
-  }
+
+  },[fetchingAPI]); 
 
   useEffect(() => {
     getEventsFromApi();
@@ -90,10 +108,20 @@ export default function Calendar() {
           </Button>
         </Right>
       </Header>
+
+      <SafeAreaView style={styles.content}>
+          <ScrollView
+              refreshControl={
+              <RefreshControl
+                refreshing={fetchingAPI}
+                onRefresh={getEventsFromApi}
+              />}
+              >
+
       <Content style={styles.content}>
         {
-          !loadComplete ?
-            <ActivityIndicator size='large' color='#529C52' style={{ paddingTop: 25 }}/>
+          fetchingAPI ?
+            <Spinner color="green"/>
             :
             <View style={styles.calendarContainer}>
               <H1 style={styles.aboutTitle}>{`Eventos ${getFormattedDate()}`}</H1>
@@ -134,11 +162,14 @@ export default function Calendar() {
                 }
               </View>
             </View>
+            
         }
         {
           showModal()
         }
       </Content>
+      </ScrollView>
+          </SafeAreaView>
       <Footer style={styles.footerbackground}>
         <FooterTab>
           <Button iconLeft style={styles.buttonCalendar} onPress={prevMonth}>
@@ -148,7 +179,7 @@ export default function Calendar() {
           </Button>
           <Button disabled style={styles.footerButton}>
             {
-              !loadComplete ? 
+              !requestSucess ? 
                 <Text style={styles.footerButtonText}>Mês/Ano</Text>
                 :
             <Text style={styles.footerButtonText}>{getFormattedDate()}</Text>
