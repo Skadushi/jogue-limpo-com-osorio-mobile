@@ -120,9 +120,9 @@ export default styles = StyleSheet.create({
   },
   developersImages: {
     width: 400,
-    height: 80,
+    height: 95,
     alignSelf: 'center',
-    margin: 5,
+    margin: 0,
   },
   arrowButtons: {
     color: 'white',

@@ -33,11 +33,11 @@ export default function About() {
           <Text style={styles.generalTexts}>    Salientamos que o Jogue Limpo é um programa de conscientização, não visando à prestação de serviços. O Programa conta com o apoio e o trabalho das Secretarias Municipais, assim como a parceria com empresas e entidades não governamentais através do desenvolvimento de diversos projetos.</Text>
           <Text style={styles.generalTexts}>    Contamos com sua participação para que juntos possamos manter nossa cidade cada vez mais limpa.</Text>
           <View style={styles.aboutPhotoContainer} >
-            <Image source={require('../assets/logo.png')} style={styles.aboutImages} resizeMode='center'/>
-            <Image source={require('../assets/osorio.png')} style={styles.aboutImages} resizeMode='center' />
+            <Image source={require('../assets/logo.png')} style={styles.aboutImages} resizeMode='contain'/>
+            <Image source={require('../assets/osorio.png')} style={styles.aboutImages} resizeMode='contain' />
           </View>
           <View style={styles.developersPhotoContainer} >
-            <Image source={require('../assets/logo_ifrs.png')} style={styles.developersImages} resizeMode='center'/>
+            <Image source={require('../assets/logo_ifrs.gif')} style={styles.developersImages} resizeMode='contain'/>
           </View>
           <H1 style={styles.aboutTitle, {marginTop: 35, marginBottom: 10}}>Equipe envolvida</H1>
           <Text style={styles.personName}>Eduardo Aluísio Cardoso Abrahão</Text>

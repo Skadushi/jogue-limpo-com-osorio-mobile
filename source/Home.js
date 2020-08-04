@@ -27,7 +27,7 @@ export default function Home() {
       <Container style={styles.homeContainer}>
         <View>
           <TouchableOpacity activeOpacity={.7} style={{ marginBottom: 15 }} onPress={() => { navigation.navigate('About') }}>
-            <Image source={require('../assets/logo.png')} style={styles.homeImageButton} resizeMode='center'/>  
+            <Image source={require('../assets/logo.png')} style={styles.homeImageButton} resizeMode='contain'/>  
           </TouchableOpacity>
           <Button iconLeft style={styles.largeButton} onPress={() => { navigation.navigate('CataTreco') }}>
             <Icon name='cart'/>  
