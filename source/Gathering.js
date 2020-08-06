@@ -27,11 +27,27 @@ export default function Gathering() {
         setRequestSucess(false);
         setFetchingApi(false);
       }
-     
-      setDistricts(group_by(response.data,'neighborhood').map(function (item){
+
+      var arrayTemp = response.data;
+      arrayTemp.map(function(item){
+        item.neighborhood = item.neighborhood.toUpperCase();
+      });
+
+      arrayTemp.sort(function (a, b) {
+        if (a.neighborhood > b.neighborhood) {
+          return 1;
+        }
+        if (a.neighborhood < b.neighborhood) {
+          return -1;
+        }
+        return 0;
+      });
+
+      setDistricts(group_by(arrayTemp,'neighborhood').map(function (item){
         return {key: item.key,values:group_by(item.values,'type')};
       }));
-      
+
+      arrayTemp = '';
       setFetchingApi(false);
 
     } catch (error) {
