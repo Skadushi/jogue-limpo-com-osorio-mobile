@@ -135,11 +135,11 @@ export default function Gathering() {
                         index === selected ? 
                           <View style={styles.districtsListInsideView} >
 
-                            {
+                            { //organica seletiva
                               item.values.map((itemtypeGuatering,indexTypeGuatering) => {
                                 return(
                                 <View style={indexTypeGuatering == 0 ? styles.districtsListSelective : null}>
-                                  <Text style={[styles.districtsListTexts, {color: '#1d814c', fontSize: 18, paddingBottom: 0}]}>{itemtypeGuatering.key}</Text>
+                                  <Text style={[styles.districtsListTexts, {color: '#1d814c', fontSize: 18, paddingBottom: 0,fontWeight:'bold'}]}>{itemtypeGuatering.key === 'organica' ? 'Orgânica' : 'Seletiva'}</Text>
                                   <Text style={styles.districtsListTexts}>{itemtypeGuatering.values[0].description}</Text>
                                 </View>
                                 )})
