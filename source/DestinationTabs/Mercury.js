@@ -1,29 +1,29 @@
 import React,  { useState, useEffect } from "react";
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
-import { Content, Accordion, H1, Text, Container } from "native-base";
+import { useNavigation } from 'react-navigation-hooks';
+import { Content, Accordion, H1, Text, Container, Left, Right, Body, Icon, ListItem } from "native-base";
 import styles from '../styles';
+import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
+import axios from 'axios';
+import URL_API from '../Config/Constants';
 
 export default function Mercury({ apiLink }) {
-  const [ loadComplete, setLoading ] = useState(false);
+  const navigation = useNavigation();
+  const {navigate} = useNavigation();
   const [ laws, setLaws ] = useState();
 
-  /*async function getLawsFromApi() {
+  async function getLawsFromApi() {
     try {
-      let response = await fetch(
-        apiLink
-      );
-      let responseJson = await response.json();
-      setLaws(responseJson.laws);
-      setLoading(true);
+      const response = await axios.get(URL_API.leisFederais);
+      setLaws(response.data);
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   }
 
   useEffect(() => {
     getLawsFromApi();
   }, []);
-  */
 
   return (
     <Content style={styles.content}>
@@ -34,22 +34,30 @@ export default function Mercury({ apiLink }) {
         
       </View>
 
-      {
-        /*
-        //texto para ser incluido quando funcionar o accordion das leis pra descarte de mercurio
-        <Text style={styles.generalTexts}>Legislação que define a Logística Reversa de Lâmpadas de Mercúrio:</Text>
+      <View style={styles.accordionContainer}>
+        <FlatList style={styles.content}
+            data={laws}
+            renderItem={({ item }) => {
+            return (
+                item.title === 'Lei da Logística Reversa' ?
+                <TouchableOpacity onPress={() =>  navigate('LawPdfView', { title: item.title, file: item.file })} >
+                <ListItem>
+                  <Left>
+                    <Text style={{ fontSize: 16 }} >{item.title}</Text>
+                  </Left>
+                  <Right>
+                    <Icon type="AntDesign" name="filetext1" style={{ fontSize: 30, color: 'black' }}/>
+                  </Right>
+                </ListItem>
+                </TouchableOpacity>
+              :
+              null          
+              )
+            }}
+            keyExtractor={item => item._id}
+          />
+      </View>
 
-         <Content style={styles.accordionContainer}>
-            {
-              !loadComplete ?
-                <ActivityIndicator size='large' color='#529C52' style={{ paddingTop: 25 }}/>
-                :
-                <Accordion style={styles.accordionComponent} dataArray={laws} headerStyle={styles.accordionHeader} contentStyle={styles.accordionContent}/>
-            }
-          </Content>
-        */
-      }
-     
     </Content>
   );
 }

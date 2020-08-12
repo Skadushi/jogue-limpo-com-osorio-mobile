@@ -17,10 +17,7 @@ export default function LawsList({ apiLink }) {
 
     try {
       const response = await axios.get(apiLink);
-      //a rota filtrada não está funcionando, então para testar use a rota de baixo
-      //const response = await axios.get('http://saude.osorio.rs.gov.br:3003/leis')
       setLaws(response.data);
-      console.log(response.data);
       setLoading(true);
     } catch (error) {
       console.log(error);
