@@ -140,10 +140,10 @@ export default function Calendar() {
                         <CardItem bordered style={{backgroundColor:'#dbfad6'}}>
                           <Body style={{display: 'flex', alignItems: 'center'}} >
                             <TouchableOpacity activeOpacity={.7} style={{display: 'flex', width: '100%'}} onPress={() => {
-                                seturlImageModal('http://saude.osorio.rs.gov.br:3003/'+data.image);
-                                setVisible(true);
+                                seturlImageModal('http://saude.osorio.rs.gov.br:3003/'+data.image)
+                                data.image > 0 ? setVisible(true) : setVisible(false)
                               }} >
-                              <Thumbnail square style={styles.calendarThumbnail} source={{ uri:`http://saude.osorio.rs.gov.br:3003/${data.image}`}}/>  
+                              <Thumbnail square style={styles.calendarThumbnail} source={ data.image > 0 ? { uri:`http://saude.osorio.rs.gov.br:3003/${data.image}`} : require('../assets/Sem_Imagem.jpeg') }/>  
                             </TouchableOpacity>
                           </Body>
                         </CardItem>

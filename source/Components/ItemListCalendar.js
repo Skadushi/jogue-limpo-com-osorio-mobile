@@ -18,12 +18,18 @@ export default function ItemListCalendar({dataText}) {
             <Text style={styles.generalTexts}>{dataText}</Text>
             :
             <View>
-                <Text style={styles.generalTexts}>{dataText.substring(0,maxLenghtDescription) + (dataText.length > maxLenghtDescription ?  "..." :"")}</Text>
-                    <TouchableOpacity activeOpacity={.7} onPress={()=>{
+                <Text style={styles.generalTexts}>{dataText.substring(0,maxLenghtDescription) + (dataText.length > maxLenghtDescription ?  "..." :" ")}</Text>
+                    {
+                        dataText.length > maxLenghtDescription ?
+                        <TouchableOpacity activeOpacity={.7} onPress={()=>{
                             setvisibleText(true);
-                        }}>
-                        <Text style={{color:'#1d814c',textAlign:'center',fontSize:18}}>ver mais</Text>
-                    </TouchableOpacity>
+                            }}>
+                            <Text style={{color:'#1d814c',textAlign:'center',fontSize:18}}>ver mais</Text>
+                        </TouchableOpacity>
+                        :
+                        null
+                    }
+                    
             </View>    
         }
     </View>
