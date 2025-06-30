@@ -1,32 +1,37 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import * as Permissions from 'expo-permissions';
+import { PermissionStatus } from 'expo-permissions';
 import * as IntentLauncher from 'expo-intent-launcher';
 import * as Camera from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import { StyleSheet, View, Platform, StatusBar, Linking, Alert, Image } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H2, CheckBox, Spinner } from 'native-base';
 import { TextInputMask } from 'react-native-masked-text';
-import styles from './styles';
+import styles from '../styles';
 import axios from 'axios';
-import { resizeImages } from './Helper/images';
-import URL_API from './Config/Constants';
-import requestsConfigList from './Config/requestsConfig';
+import { resizeImages } from '../helpers/Helper/images';
+import URL_API from '../config/Config/Constants';
+import requestsConfigList from '../config/Config/requestsConfig';
+
+interface ComplaintImage extends ImagePicker.ImageInfo {
+  id: number;
+}
 
 export default function Complaints() {
   const navigation = useNavigation();
-  const [ incognito, setIncognito ] = useState(false); 
-  const [ selected, setSelected ] = useState("0");
-  const [loading,setLoading] = useState(false);
-  const [ permissionGallery, setPermissionGallery ] = useState("undetermined");
-  const [ permissionCamera, setPermissionCamera ] = useState("undetermined");
-  const [ images, setImages ] = useState([]);
-  const [ imagesID, setImagesID ] = useState(0);
-  const [ name, setName ] = useState('');
-  const [ contact, setContact ] = useState('');
-  const [ address, setAddress ] = useState('');
-  const [ district, setDistrict ] = useState('');
-  const [ description, setDescription ] = useState('');
+  const [incognito, setIncognito] = useState<boolean>(false);
+  const [selected, setSelected] = useState<string>('0');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [permissionGallery, setPermissionGallery] = useState<PermissionStatus>('undetermined' as PermissionStatus);
+  const [permissionCamera, setPermissionCamera] = useState<PermissionStatus>('undetermined' as PermissionStatus);
+  const [images, setImages] = useState<ComplaintImage[]>([]);
+  const [imagesID, setImagesID] = useState<number>(0);
+  const [name, setName] = useState<string>('');
+  const [contact, setContact] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [district, setDistrict] = useState<string>('');
+  const [description, setDescription] = useState<string>('');
 
   async function pickImages(){
     if(images.length > 3){

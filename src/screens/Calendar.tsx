@@ -2,22 +2,28 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, Modal,StatusBar, ActivityIndicator, RefreshControl, SafeAreaView, ScrollView } from 'react-native';
 import { Container, Header, Title, Footer, FooterTab, Content, Button, H1, Left, Right, Body, Icon, Text, H3, List, ListItem, Card, CardItem, Thumbnail, H2, Spinner } from 'native-base';
-import styles from './styles';
+import styles from '../styles';
 import axios from 'axios';
-import URL_API from './Config/Constants';
+import URL_API from '../config/Config/Constants';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ItemListCalendar from './Components/ItemListCalendar';
 
+interface CalendarEvent {
+  title: string;
+  image: number | string;
+  description: string;
+}
+
 export default function Calendar() {
   const navigation = useNavigation();
-  const [ visible, setVisible ] = useState(false);
-  const [ events, setEvents ] = useState([]);
-  const [urlImageModal, seturlImageModal] = useState('');
-  const [ month, setMonth ] = useState('');
-  const [ current, setCurrent ] = useState(new Date());
+  const [visible, setVisible] = useState<boolean>(false);
+  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [urlImageModal, seturlImageModal] = useState<string>('');
+  const [month, setMonth] = useState<string>('');
+  const [current, setCurrent] = useState<Date>(new Date());
 
-  const [fetchingAPI, setFetchingApi] = useState(true);
-  const [requestSucess,setRequestSucess] = useState(true);
+  const [fetchingAPI, setFetchingApi] = useState<boolean>(true);
+  const [requestSucess, setRequestSucess] = useState<boolean>(true);
 
   const getEventsFromApi = React.useCallback(async () => {
 

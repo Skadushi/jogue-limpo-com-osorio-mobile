@@ -2,18 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { ActivityIndicator, View, RefreshControl, SafeAreaView, ScrollView  } from 'react-native';
 import { Container, Header, List, ListItem, Title, Content, Button, H1, Left, Right, Body, Icon, Text, Spinner } from 'native-base';
-import styles from './styles';
+import styles from '../styles';
 import axios from 'axios';
-import URL_API from './Config/Constants';
-import { shortDate } from './Helper/date';
+import URL_API from '../config/Config/Constants';
+import { shortDate } from '../helpers/Helper/date';
+
+interface ScheduleItem {
+  _id: string;
+  name: string;
+  dateToCollect: string;
+}
 
 export default function Scheduled() {
   const navigation = useNavigation();
   //const [ loadComplete, setLoading ] = useState(false);
-  const [ items, setItems ] = useState([]);
+  const [items, setItems] = useState<ScheduleItem[]>([]);
 
-  const [fetchingAPI, setFetchingApi] = useState(true);
-  const [requestSucess,setRequestSucess] = useState(true);
+  const [fetchingAPI, setFetchingApi] = useState<boolean>(true);
+  const [requestSucess, setRequestSucess] = useState<boolean>(true);
   
   const getScheduledFromApi = React.useCallback(async () => {
     

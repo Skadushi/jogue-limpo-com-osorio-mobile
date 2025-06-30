@@ -2,18 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { ActivityIndicator, RefreshControl, SafeAreaView, ScrollView, StyleSheet, View, Image, Platform, StatusBar, Alert } from 'react-native';
 import { Container, Header, Content, Tabs, Tab, ScrollableTab, Footer, H1, FooterTab, Button, Title, Left, Right, Body, Icon, Text, H3, Badge, Spinner } from 'native-base';
-import styles from './styles';
+import styles from '../styles';
 import axios from 'axios';
-import URL_API from './Config/Constants';
+import URL_API from '../config/Config/Constants';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function Gathering() {
   const navigation = useNavigation()
-  const [ districts, setDistricts ] = useState([]);
-  const [ selected, setSelected ] = useState();
+  const [districts, setDistricts] = useState<any[]>([]);
+  const [selected, setSelected] = useState<string | undefined>();
 
-  const [fetchingAPI, setFetchingApi] = useState(true);
-  const [requestSucess,setRequestSucess] = useState(true);
+  const [fetchingAPI, setFetchingApi] = useState<boolean>(true);
+  const [requestSucess, setRequestSucess] = useState<boolean>(true);
   
   const getDistrictsFromApi = React.useCallback(async () => {
 

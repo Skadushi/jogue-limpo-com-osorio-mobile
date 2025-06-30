@@ -3,18 +3,18 @@ import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, StatusBar, Alert, Linking } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Form, Label, Picker, Textarea, Item, Button, Input, Title, Left, Right, Body, Icon, Text, ListItem, H1, Spinner } from 'native-base';
 import axios from 'axios';
-import styles from './styles';
-import URL_API from './Config/Constants';
-import requestsConfigList from './Config/requestsConfig';
+import styles from '../styles';
+import URL_API from '../config/Config/Constants';
+import requestsConfigList from '../config/Config/requestsConfig';
 
 export default function Scheduling() {
 
   const navigation = useNavigation();
-  const [loading,setLoading] = useState(false);
-  const [ name, setName ] = useState('');
-  const [ item, setItem ] = useState('');
-  const [ address, setAddress ] = useState('');
-  const [ district, setDistrict ] = useState('');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [name, setName] = useState<string>('');
+  const [item, setItem] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [district, setDistrict] = useState<string>('');
   
   async function sendRequestToApi() {
     

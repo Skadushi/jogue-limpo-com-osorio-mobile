@@ -2,15 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Button, Title, H1, Left, Right, Body, Icon, Text, ListItem } from 'native-base';
-import styles from './styles';
+import styles from '../styles';
 import axios from 'axios';
-import URL_API from './Config/Constants';
+import URL_API from '../config/Config/Constants';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 
-export default function CataTreco() { 
+interface Law {
+  _id: string;
+  title: string;
+  file: string;
+}
+
+export default function CataTreco() {
   const navigation = useNavigation();
   const {navigate} = useNavigation();
-  const [laws, setLaws] = useState([]);
+  const [laws, setLaws] = useState<Law[]>([]);
 
   async function getLawsFromApi(){
     try {
