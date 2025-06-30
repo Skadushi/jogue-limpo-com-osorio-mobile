@@ -6,11 +6,17 @@ import axios from 'axios';
 import { useNavigation } from 'react-navigation-hooks';
 import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 
-export default function LawsList({ apiLink }) {
-  const [loadComplete, setLoading] = useState(false);
-  const [laws, setLaws] = useState([]);
-  const [selected, setSelected] = useState();
-  const [urlPdf, setUrlPdf] = useState('');
+interface Law {
+  _id: string;
+  title: string;
+  file: string;
+}
+
+export default function LawsList({ apiLink }: { apiLink: string }) {
+  const [loadComplete, setLoading] = useState<boolean>(false);
+  const [laws, setLaws] = useState<Law[]>([]);
+  const [selected, setSelected] = useState<string | undefined>();
+  const [urlPdf, setUrlPdf] = useState<string>('');
   const {navigate} = useNavigation();
 
   async function getLawsFromApi() {

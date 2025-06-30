@@ -3,19 +3,19 @@ import ImageViewer from 'react-native-image-zoom-viewer';
 import { useNavigation } from 'react-navigation-hooks';
 import { FlatList, View, Modal, RefreshControl, SafeAreaView, ScrollView } from 'react-native';
 import { Container, Header, Title, Content, Button, Left, Right, Body, Icon, Text, Card, CardItem, H2, Thumbnail, Spinner } from 'native-base';
-import styles from './styles'; 
+import styles from '../styles'; 
 import axios from 'axios';
-import URL_API from './Config/Constants';
+import URL_API from '../config/Config/Constants';
 import { TouchableOpacity} from 'react-native-gesture-handler';
 
 export default function Mural() {
   const navigation = useNavigation();
-  const [ visible, setVisible ] = useState(false);
-  const [ images, setImages ] = useState([]);
-  const [ albums, setAlbums ] = useState([]);
+  const [visible, setVisible] = useState<boolean>(false);
+  const [images, setImages] = useState<string[]>([]);
+  const [albums, setAlbums] = useState<Array<{ _id: string; title: string; images: string[] }>>([]);
 
-  const [fetchingAPI, setFetchingApi] = useState(true);
-  const [requestSucess,setRequestSucess] = useState(true);
+  const [fetchingAPI, setFetchingApi] = useState<boolean>(true);
+  const [requestSucess, setRequestSucess] = useState<boolean>(true);
   
   const getEventsFromApi = React.useCallback(async () => {
 

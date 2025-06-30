@@ -5,9 +5,13 @@ import styles from '../styles';
 import {Modal} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function ItemListCalendar({dataText}) {
+interface ItemListCalendarProps {
+  dataText: string;
+}
 
-    const [visibleText, setvisibleText] = useState(false);
+export default function ItemListCalendar({ dataText }: ItemListCalendarProps) {
+
+    const [visibleText, setvisibleText] = useState<boolean>(false);
     const maxLenghtDescription = 100;
 
   

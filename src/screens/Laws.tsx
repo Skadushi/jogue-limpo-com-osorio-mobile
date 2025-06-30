@@ -3,10 +3,10 @@ import { AppLoading } from 'expo';
 import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
 import { Container, Header, Content, Tabs, Tab, ScrollableTab, Button, Title, Left, Right, Body, Icon, Text } from 'native-base';
-import styles from './styles';
+import styles from '../styles';
 
-import LawsList from './LawTabs/LawsList';
-import URL_API from './Config/Constants';
+import LawsList from '../tabs/LawTabs/LawsList';
+import URL_API from '../config/Config/Constants';
 
 export default function Laws() {
 

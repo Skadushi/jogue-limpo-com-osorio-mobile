@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
 import { Container, Header, Title, Content, Button, H1, Left, Right, Body, Icon, Text } from 'native-base';
-import styles from './styles';
+import styles from '../styles';
 
 export default function ComplaintsHelp() {
   const navigation = useNavigation();

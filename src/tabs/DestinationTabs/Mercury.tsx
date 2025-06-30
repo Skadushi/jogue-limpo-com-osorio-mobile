@@ -7,10 +7,16 @@ import { TouchableOpacity, FlatList } from 'react-native-gesture-handler';
 import axios from 'axios';
 import URL_API from '../Config/Constants';
 
-export default function Mercury({ apiLink }) {
+interface Law {
+  _id: string;
+  title: string;
+  file: string;
+}
+
+export default function Mercury({ apiLink }: { apiLink: string }) {
   const navigation = useNavigation();
   const {navigate} = useNavigation();
-  const [ laws, setLaws ] = useState();
+  const [laws, setLaws] = useState<Law[] | undefined>();
 
   async function getLawsFromApi() {
     try {

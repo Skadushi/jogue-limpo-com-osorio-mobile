@@ -2,11 +2,11 @@ import React from 'react';
 import { useNavigation } from 'react-navigation-hooks';
 import { StyleSheet, View, Image, Platform, StatusBar } from 'react-native';
 import { Container, Header, Content, Tabs, Tab, ScrollableTab, Button, Title, Left, Right, Body, Icon, Text } from 'native-base';
-import styles from './styles';
+import styles from '../styles';
 
-import Mercury from './DestinationTabs/Mercury';
-import Electronic from './DestinationTabs/Electronic';
-import Transhipment from './DestinationTabs/Transhipment';
+import Mercury from '../tabs/DestinationTabs/Mercury';
+import Electronic from '../tabs/DestinationTabs/Electronic';
+import Transhipment from '../tabs/DestinationTabs/Transhipment';
 
 export default function Destination() {
   const navigation = useNavigation();

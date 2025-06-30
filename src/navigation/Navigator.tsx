@@ -3,22 +3,22 @@ import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 
-import Home from '../Home';
-import About from '../About';
-import CataTreco from '../CataTreco';
+import Home from '../screens/Home';
+import About from '../screens/About';
+import CataTreco from '../screens/CataTreco';
 import SideBar from './Sidebar'; 
-import Laws from '../Laws';
-import Destination from '../Destination';
-import Complaints from '../Complaints';
-import Mural from '../Mural';
-import ComplaintsHelp from '../ComplaintsHelp';
-import Scheduling from '../Scheduling';
-import Calendar from '../Calendar';
-import Gathering from '../Gathering';
+import Laws from '../screens/Laws';
+import Destination from '../screens/Destination';
+import Complaints from '../screens/Complaints';
+import Mural from '../screens/Mural';
+import ComplaintsHelp from '../screens/ComplaintsHelp';
+import Scheduling from '../screens/Scheduling';
+import Calendar from '../screens/Calendar';
+import Gathering from '../screens/Gathering';
 //import Developers from '../Developers';
-import Scheduled from '../Scheduled';
-import CityMap from '../Map/CityMap';
-import LawPdfView from '../LawTabs/LawPdfView';
+import Scheduled from '../screens/Scheduled';
+import CityMap from '../map/Map/CityMap';
+import LawPdfView from '../tabs/LawTabs/LawPdfView';
 
 const Drawer = createDrawerNavigator(
   {
